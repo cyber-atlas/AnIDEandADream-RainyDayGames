@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="309DB@isu.database.windows.net" uuid="a85d6066-95ec-4a6f-b1a3-15a1ad23053f">
+      <database-info product="Microsoft SQL Server" version="12.00.700" jdbc-version="4.2" driver-name="Microsoft JDBC Driver 7.0 for SQL Server" driver-version="7.0.0.0" family="MSSQL" exact-version="12.0.700">
+        <extra-name-characters>$#@</extra-name-characters>
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>jedlicka@isu</user-name>
+      <introspection-schemas>309DB:dbo</introspection-schemas>
+    </data-source>
+  </component>
+</project>
