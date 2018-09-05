@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                     //If there is an app that can resolve our intent, start the activity
                     startActivity(gotoGoogle);
                 }
-                
+
             }
         });
 
