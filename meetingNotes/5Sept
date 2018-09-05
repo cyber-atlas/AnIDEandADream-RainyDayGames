@@ -1,0 +1,44 @@
+
+	Meeting Notes - 5 September 2018
+
+*We are going to meeting notes for everytime we meet, maybe throw some pictures in for funzies
+
+*Discussed the way we will be using branches in Git
+
+	Git Setup
+	---------
+
+Releases Branch - Official code releases, 
+	Releases will be made when the team is happy with where the master branch is.
+	All release code should work well together without error. 
+	The team should be satified with the features at that current state
+Master Branch - Working code branch
+	The code works together, but it may not be ready for a full release yet
+Development Branch - Working untested code '
+	The branch where we push our working features. 
+	The features may not all be fully complete with their subfeatures.
+	The features may work for the person who made it but not necessarily with the rest of the
+		code or for the rest of the people. 
+	The dev branch is always based on the master branch and will usually be ahead of master,
+		never behind.
+Feature Branches - Branches for features of the project
+	This is where the code is being developed for a feature, ie a game, or chat or something
+		of the like. 
+	Each feature may have subfeatures. 
+	May not always be working, but will be functional before it is pushed to the Development
+		branch.
+Subfeature Branches - Sub branches to features
+	This is where things being developed for features will be. Ie CPU for a specific game, 
+		or socketing for a specific game. 
+	This code may or may not be working, but should be working decently before pushed to the respective parent feature. 
+
+	
+//TODO 
+
+*Need to make sure that all of us are adding Trello cards during our experiments
+
+*Alex going to create project skeleton in the git that we will build off of
+
+*Need to set up the branches in Git 
+
+*Need to meet with the TA on 6Sept at 2000
