@@ -28,9 +28,42 @@ public class tictactoe {
 
 		}
 		
+		//printing the board layout
 		public void printBoard(){
-			System.out.println();
+			System.out.println("-------------");
+			
+			for (int i = 0; i < 3; i++){
+				System.out.println("| ");
+				
+				for (int j = 0; j < 3; j++){
+					System.out.println(board[i][j] + " | ");
+				}
+				System.out.println();
+				System.out.println("-------------");
+			}
 		}
+		
+		//checking if the board has any empty squares
+		public boolean isBoardFull(){
+			boolean isFull = true;
+			
+			for(int i = 0; i < 3; i++){
+				for (int j = 0; j < 3; j++){
+					if (board[i][j] = '-'){
+						isFull = false; 
+					}
+				}
+			}
+			return isFull;
+			
+		}
+		
+		//check if the player has won
+		public boolean checkforWin(){
+			return (checkRowsforWin() || checkColumnforWin() || checkDiagonalforWin());
+		}
+		
+		
 		
 		 
 		
