@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    private GameView myGameView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -13,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(myGameView);
     }
 
+    //Handling the user leaving the activity
     @Override
     protected void onPause(){
         super.onPause();
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         myGameView.onPause();
     }
 
+    //Handling the user coming back to the activity after leaving it
     @Override
     protected void onResume(){
         super.onResume();
