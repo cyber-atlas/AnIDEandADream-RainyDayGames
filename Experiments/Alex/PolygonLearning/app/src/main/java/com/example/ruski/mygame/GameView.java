@@ -1,5 +1,6 @@
 package com.example.ruski.mygame;
 
+import android.content.Context;
 import android.opengl.GLSurfaceView;
 
 public class GameView extends GLSurfaceView{
@@ -15,6 +16,8 @@ public class GameView extends GLSurfaceView{
         gameRenderer = new Renderer(context);
 
         setRenderer(gameRenderer);
+
+        //Android Canvas
 
 
     }
