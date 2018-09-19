@@ -1,5 +1,6 @@
 package com.ideandadream.spaceshooter;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -17,6 +18,8 @@ public class GameActivity extends AppCompatActivity {
 
         //adding the gameview to the contentview
         setContentView(gameView);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
     }
 
     //pauses the game when the activity is paused
