@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -111,6 +112,26 @@ public class GameView extends SurfaceView implements Runnable {
        //Causes the thread to begin executing, calls the run of that method
        gameThread.start();
 
+    }
+
+    //Gets the touch from the screen, and tracks the users motion
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent){
+        /**Gets the touch from the user
+         * applies a bitmask to it so
+         * we only deal with the bits we care about
+         */
+        switch  (motionEvent.getAction() & MotionEvent.ACTION_MASK){
+            //When the user presses the screen
+            case MotionEvent.ACTION_UP:
+                //Do something here
+                break;
+            case MotionEvent.ACTION_DOWN:
+                //Do something here
+                break;
+        }
+
+        return true;
     }
 
 

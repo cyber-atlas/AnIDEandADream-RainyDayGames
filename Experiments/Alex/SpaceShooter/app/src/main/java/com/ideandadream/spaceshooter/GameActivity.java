@@ -1,8 +1,10 @@
 package com.ideandadream.spaceshooter;
 
 import android.content.pm.ActivityInfo;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -12,6 +14,13 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Getting the display object
+        Display display = getWindowManager().getDefaultDisplay();
+
+        //Pgetting the screen resolution into point obj
+        Point size = new Point();
+        display.getSize(size);
 
         //initializ the view
         gameView = new GameView(this);
