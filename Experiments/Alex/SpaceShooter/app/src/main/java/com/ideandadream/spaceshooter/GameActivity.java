@@ -15,15 +15,18 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //TODO look more into displays
         //Getting the display object
         Display display = getWindowManager().getDefaultDisplay();
 
-        //Pgetting the screen resolution into point obj
+        //Getting the screen resolution and stores it in a point obj
         Point size = new Point();
         display.getSize(size);
 
-        //initializ the view
-        gameView = new GameView(this);
+        //initialize the view
+//        gameView = new GameView(this);
+       //this time we are
+        gameView = new GameView(this, size.x, size.y);
 
         //adding the gameview to the contentview
         setContentView(gameView);

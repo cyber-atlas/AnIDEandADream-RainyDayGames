@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class GameView extends SurfaceView implements Runnable {
 
     // a volatile variable will guarantee that changes made in one thread will be visible to others
@@ -25,16 +27,22 @@ public class GameView extends SurfaceView implements Runnable {
     private Canvas canvas;
     private SurfaceHolder surfaceHolder;
 
+    //Add list of stars
+    private ArrayList<Star> stars = new ArrayList<>();
+
     //Class constructor
-    public GameView(Context context) {
+    public GameView(Context context, int screenX, int screenY) {
         super(context);
 
         //initialize the player context
-        player = new Player(context);
+//        player = new Player(context);
+        player = new Player(context, screenX, screenY);
 
         //initialize the drawing objects
         surfaceHolder = getHolder();
         paint = new Paint();
+
+        //Adding list of stars
 
     }
 
@@ -124,10 +132,12 @@ public class GameView extends SurfaceView implements Runnable {
         switch  (motionEvent.getAction() & MotionEvent.ACTION_MASK){
             //When the user presses the screen
             case MotionEvent.ACTION_UP:
-                //Do something here
+                //Stopping the boosting when screen is released
+                player.stopBoosting();
                 break;
             case MotionEvent.ACTION_DOWN:
-                //Do something here
+                //boosting the space jet when screen is pressed
+                player.setBoosting();
                 break;
         }
 

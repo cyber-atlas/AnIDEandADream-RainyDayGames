@@ -40,6 +40,12 @@ public class Player {
         //Get the bitmap from the drawable resource
         bitmap  = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
 
+        //Calculate max y
+        maxY = screenY - bitmap.getHeight();
+
+        //top edge's y point is 0  so min y will always be 0
+        minY = 0;
+
         //Set the boosting value to false when itialized
         boosting = false;
     }
