@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--Making it so that the app is fullscreen-->
+    <!--Made it so there is no action bar-->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name = "windowNoTitle">true</item>
+        <item name = "windowActionBar">false</item>
+        <item name = "android:windowFullscreen">true</item>
+        <item name = "android:windowContentOverlay">@null</item>
+    </style>
+
+
+</resources>
