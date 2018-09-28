@@ -1,0 +1,154 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/ad0247539ed1af18b7e709a90d0b0a04/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/2b52231bc208f1f3168ea673aa71d14e/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b9416b5d5c6033420195e843388401b3/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/0d82c1a90270208f68c207617f324766/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/6c4cc084d309b6f860b955fd620c094b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f74593e67421829277717257501c695d/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3b7173223bbe3ce4743d7c25e4ec28d5/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:loader:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9c4645d87b169955a3c587c3c1cc3ddc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:viewpager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f8388cef7b00d8606b977af23d3da69e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/327b58ed0f70f84541006238dc582992/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f8e0866db392aea610eb4dc5d66c408b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9b7537128971d9ab3e792ae205e9ba4c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:customview:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/46e4eabd82ae4c9c28e10d77c9ab0fe4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/38987b590f21a8c8c0f3f0e451aa087e/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/dc2d6cc472528287f9d06fe41bdd2feb/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0c4cd7de58109c4c5ccf5a95fdb55caf/AndroidManifest.xml:17:1-25:12
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/41ac4104612a6e844d5f82070fcd93ac/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/46babd53b5dc04edf93d0eb044fcd587/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:documentfile:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/73e7dd3b1b5e94d2bb4f2defcb5c9dd4/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/ed1d046cfc1431d98e6f0e2b9d5777dc/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:print:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/378430c6574df872208858ac8d3fccf5/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6383974923d813e956cac60b04c53497/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1dc6c9ffbdaf7e1ab6c8b91d050f29ea/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/22a117711251d0f2295d62979299153d/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/3293018b0daee597d6e7f6db73bcfde1/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:interpolator:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/5d1c1a9f495812b40449fd86ac2de158/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+	package
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:3:5-65
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:1-21:12
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:5:5-19:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/2b52231bc208f1f3168ea673aa71d14e/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/2b52231bc208f1f3168ea673aa71d14e/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:22:5-94
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0c4cd7de58109c4c5ccf5a95fdb55caf/AndroidManifest.xml:22:5-23:19
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0c4cd7de58109c4c5ccf5a95fdb55caf/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:22:18-91
+	android:supportsRtl
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:11:9-40
+activity#edu.iastate.misc.proj309_vc_04.vc4_ide_and_a_dream.WelcomeSplashScreen
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:12:19-54
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/ad0247539ed1af18b7e709a90d0b0a04/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/appcompat-v7-28.0.0.aar/ad0247539ed1af18b7e709a90d0b0a04/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/2b52231bc208f1f3168ea673aa71d14e/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/2b52231bc208f1f3168ea673aa71d14e/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b9416b5d5c6033420195e843388401b3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-fragment-28.0.0.aar/b9416b5d5c6033420195e843388401b3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/0d82c1a90270208f68c207617f324766/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-28.0.0.aar/0d82c1a90270208f68c207617f324766/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/6c4cc084d309b6f860b955fd620c094b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-ui-28.0.0.aar/6c4cc084d309b6f860b955fd620c094b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f74593e67421829277717257501c695d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-core-utils-28.0.0.aar/f74593e67421829277717257501c695d/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3b7173223bbe3ce4743d7c25e4ec28d5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-28.0.0.aar/3b7173223bbe3ce4743d7c25e4ec28d5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9c4645d87b169955a3c587c3c1cc3ddc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:loader:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/loader-28.0.0.aar/9c4645d87b169955a3c587c3c1cc3ddc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f8388cef7b00d8606b977af23d3da69e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:viewpager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewpager-28.0.0.aar/f8388cef7b00d8606b977af23d3da69e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/327b58ed0f70f84541006238dc582992/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:coordinatorlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-28.0.0.aar/327b58ed0f70f84541006238dc582992/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f8e0866db392aea610eb4dc5d66c408b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:drawerlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/drawerlayout-28.0.0.aar/f8e0866db392aea610eb4dc5d66c408b/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9b7537128971d9ab3e792ae205e9ba4c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:slidingpanelayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-28.0.0.aar/9b7537128971d9ab3e792ae205e9ba4c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/46e4eabd82ae4c9c28e10d77c9ab0fe4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:customview:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/customview-28.0.0.aar/46e4eabd82ae4c9c28e10d77c9ab0fe4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/38987b590f21a8c8c0f3f0e451aa087e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:swiperefreshlayout:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-28.0.0.aar/38987b590f21a8c8c0f3f0e451aa087e/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/dc2d6cc472528287f9d06fe41bdd2feb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:asynclayoutinflater:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-28.0.0.aar/dc2d6cc472528287f9d06fe41bdd2feb/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/support-compat-28.0.0.aar/7f65e8f341951d06f1cc9045346ea9f3/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0c4cd7de58109c4c5ccf5a95fdb55caf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:versionedparcelable:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/versionedparcelable-28.0.0.aar/0c4cd7de58109c4c5ccf5a95fdb55caf/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/41ac4104612a6e844d5f82070fcd93ac/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cursoradapter:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/cursoradapter-28.0.0.aar/41ac4104612a6e844d5f82070fcd93ac/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/46babd53b5dc04edf93d0eb044fcd587/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/46babd53b5dc04edf93d0eb044fcd587/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/73e7dd3b1b5e94d2bb4f2defcb5c9dd4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:documentfile:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/documentfile-28.0.0.aar/73e7dd3b1b5e94d2bb4f2defcb5c9dd4/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/ed1d046cfc1431d98e6f0e2b9d5777dc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-28.0.0.aar/ed1d046cfc1431d98e6f0e2b9d5777dc/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/378430c6574df872208858ac8d3fccf5/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:print:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/378430c6574df872208858ac8d3fccf5/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6383974923d813e956cac60b04c53497/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.1.aar/6383974923d813e956cac60b04c53497/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1dc6c9ffbdaf7e1ab6c8b91d050f29ea/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-1.1.1.aar/1dc6c9ffbdaf7e1ab6c8b91d050f29ea/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/22a117711251d0f2295d62979299153d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.1.aar/22a117711251d0f2295d62979299153d/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/3293018b0daee597d6e7f6db73bcfde1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/runtime-1.1.1.aar/3293018b0daee597d6e7f6db73bcfde1/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/5d1c1a9f495812b40449fd86ac2de158/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:interpolator:28.0.0] /Users/umaabu/.gradle/caches/transforms-1/files-1.1/interpolator-28.0.0.aar/5d1c1a9f495812b40449fd86ac2de158/AndroidManifest.xml:20:5-44
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		ADDED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/src/main/AndroidManifest.xml

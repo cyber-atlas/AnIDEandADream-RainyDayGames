@@ -1,0 +1,4 @@
+#Thu Sep 27 17:14:57 CDT 2018
+base.0=/Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/FrontEnd/app/build/intermediates/transforms/dexMerger/debug/9
+path.0=classes.dex
+renamed.0=classes.dex
