@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSendReset= (Button) findViewById(R.id.buttonSendReset);
         score = 0;
         textScore = (TextView) findViewById(R.id.textScore);
+        String resultObjScore;
         mQueue = Volley.newRequestQueue(this);
 
 
@@ -67,19 +68,18 @@ public class MainActivity extends AppCompatActivity {
         buttonUpScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                jsonParse();
                 //Increments the score
                 score++;
                 //Sets the text in the score text view to reflect the score
                 textScore.setText("Score: " + score);
-                jsonParse();
             }
         });
 
         buttonSendReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                jsonParse();
                 //TODO post the current score
 
                 //Resets the score to 0
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 //TODO get the high score
                 //TODO reset the text view that has the highscore
                textHighScore.setText("High Score: " + highScore);
-                jsonParse();
+
 
             }
         });
@@ -113,10 +113,10 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject resultObj = response.getJSONObject(i);
                                 /* resultObj : { "name": "requisitions", "id": "PR2" } */
-                                String resultObjid = resultObj.getString("id");
+                                String resultObjScore = resultObj.getString("score");
                                 String resultObjuserid = resultObj.getString("userid");
-                                Log.d("name",resultObjuserid );
-                                Log.d("id",resultObjid );
+                                Log.d("score",resultObjScore);
+                                textHighScore.setText("High Score: " + resultObjScore);
                             }
                         } catch ( JSONException jsone) {
                             Log.e( "JSON EXCEPTION", jsone.getMessage() );
@@ -138,35 +138,6 @@ public class MainActivity extends AppCompatActivity {
         mQueue.add(getRequest);
 
 
-//        JsonArrayRequest request = new JsonArrayRequest((Request.Method.GET, url, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray array = new JSONArray(response);
-//                            println(array.toString());
-//
-////                            for (int i = 0; i < jsonArray.length(); i++) {
-////                                JSONObject employee = jsonArray.getJSONObject(i);
-////
-////                                String firstName = employee.getString("firstname");
-////                                int age = employee.getInt("age");
-////                                String mail = employee.getString("mail");
-////
-////                                mTextViewResult.append(firstName + ", " + String.valueOf(age) + ", " + mail + "\n\n");
-////                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        });
-
-//        mQueue.add(request);
     }
 
 
