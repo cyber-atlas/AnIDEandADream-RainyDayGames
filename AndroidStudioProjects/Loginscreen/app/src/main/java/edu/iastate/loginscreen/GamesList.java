@@ -1,5 +1,7 @@
 package edu.iastate.loginscreen;
 
+import android.os.Bundle;
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,10 +23,16 @@ public class GamesList extends AppCompatActivity {
         StartSnakeGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Tag", "in signup button");
-                //startActivity(new Intent(MainActivity.this, signuppage.class));
-                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
-                GamesList.this.startActivity(StartSnakeIntent);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signup", value);
+                }
+                Intent i = new Intent(GamesList.this, SnakeSplash.class);
+                i.putExtra("userid",extras.getString("userid"));
+                GamesList.this.startActivity(i);
+//                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
+//                GamesList.this.startActivity(StartSnakeIntent);
             }
         });
 

@@ -17,14 +17,20 @@ public class secondpage extends AppCompatActivity {
 
         Button Gamesbutton = findViewById(R.id.GamesButton);
 
-
         Gamesbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Tag", "in signup button");
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signup", value);
+                }
                 //startActivity(new Intent(MainActivity.this, signuppage.class));
-                Intent GamesListIntent = new Intent(secondpage.this, GamesList.class);
-                secondpage.this.startActivity(GamesListIntent);
+//                Intent GamesListIntent = new Intent(secondpage.this, GamesList.class);
+//                secondpage.this.startActivity(GamesListIntent);
+                Intent i = new Intent(secondpage.this, GamesList.class);
+                i.putExtra("userid",extras.getString("userid"));
+                secondpage.this.startActivity(i);
             }
         });
 

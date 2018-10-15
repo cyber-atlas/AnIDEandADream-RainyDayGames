@@ -76,10 +76,14 @@ public class MainActivity extends AppCompatActivity {
                             user = response;
 
                             String email = user.getString("email");
+                            String id = user.getString("id");
                             
                             if (email.equals(em)) {
                                 Log.d("tag", "equals");
-                                startActivity(new Intent(MainActivity.this, secondpage.class));
+                              //  startActivity(new Intent(MainActivity.this, secondpage.class));
+                                Intent i = new Intent(MainActivity.this, secondpage.class);
+                                i.putExtra("userid",id);
+                                startActivity(i);
                             }
                             else {
                                 Log.d("tag", "not connected");

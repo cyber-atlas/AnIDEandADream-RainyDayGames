@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class SnakeSplash extends AppCompatActivity {
 
@@ -19,8 +20,18 @@ public class SnakeSplash extends AppCompatActivity {
             @Override
             public void run() {
                 /* Create an Intent that will start the Menu-Activity. */
-                Intent SnakeMainIntent = new Intent(SnakeSplash.this, SnakeStartup.class);
-                SnakeSplash.this.startActivity(SnakeMainIntent);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signup", value);
+                }
+                Log.d("Tag", "in signup button");
+                Intent i = new Intent(SnakeSplash.this, SnakeStartup.class);
+                i.putExtra("userid",extras.getString("userid"));
+                SnakeSplash.this.startActivity(i);
+
+//                Intent SnakeMainIntent = new Intent(SnakeSplash.this, SnakeStartup.class);
+//                SnakeSplash.this.startActivity(SnakeMainIntent);
                 SnakeSplash.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);

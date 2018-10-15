@@ -27,6 +27,8 @@ public class SnakeEngine {
 
     private GameState currentGameState = GameState.Running;
 
+    int score = 0;
+
     private Coordinate getSnakeHead(){
         return snake.get(0);
     }
@@ -41,7 +43,6 @@ public class SnakeEngine {
 
 
     public void updateDirection(Direction newDirection){
-
 
         if(Math.abs(newDirection.ordinal() - currentDirection.ordinal()) % 2 == 1){
             currentDirection = newDirection;
@@ -78,9 +79,7 @@ public class SnakeEngine {
 
         //SefColusuon
         for(int i = 1; i < snake.size(); i ++){
-//            if(snakeBody.equals(getSnakeHead())) {
-//                continue;
-//            }
+
             if(getSnakeHead().equals(snake.get(i))){
                 currentGameState = GameState.Lost;
                 return;
@@ -91,6 +90,7 @@ public class SnakeEngine {
         Coordinate appleToRemove = null;
         for(Coordinate apple: apples){
             if(getSnakeHead().equals(apple)){
+
                 appleToRemove = apple;
                 increaseTail = true;
             }
@@ -157,6 +157,7 @@ public class SnakeEngine {
         if (increaseTail){
             snake.add(new Coordinate(newX, newY));
             increaseTail = false;
+            score ++;
         }
 
         snake.get(0).setX(snake.get(0).getX() +x);
