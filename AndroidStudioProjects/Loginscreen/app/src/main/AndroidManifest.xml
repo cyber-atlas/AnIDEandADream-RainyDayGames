@@ -25,10 +25,11 @@
         </activity>
         <activity android:name=".secondpage" />
         <activity android:name=".signUp" />
-        <activity android:name=".GamesList" />
-        <activity android:name=".SnakeSplash" />
-        <activity android:name=".SnakeStartup" />
-        <activity android:name=".SnakeMainActivity"></activity>
+        <activity android:name=".Leaderbrd"></activity>
+        <activity android:name=".GamesList"/>
+        <activity android:name=".SnakeMainActivity"/>
+        <activity android:name=".SnakeStartup"/>
+        <activity android:name=".SnakeSplash"/>
     </application>
 
 </manifest>

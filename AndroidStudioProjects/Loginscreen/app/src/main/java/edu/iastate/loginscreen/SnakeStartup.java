@@ -15,6 +15,16 @@ public class SnakeStartup extends AppCompatActivity {
         setContentView(R.layout.activity_snake_startup);
 
         Button StartEasy = findViewById(R.id.Easybtn);
+        final Button Leaderboard = findViewById(R.id.LBoardBtn);
+
+        Leaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent leaderboard = new Intent(SnakeStartup.this, Leaderbrd.class);
+                SnakeStartup.this.startActivity(leaderboard);
+            }
+        });
 
         StartEasy.setOnClickListener(new View.OnClickListener() {
             @Override
