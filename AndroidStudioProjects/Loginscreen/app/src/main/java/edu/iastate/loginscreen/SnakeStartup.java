@@ -20,7 +20,7 @@ public class SnakeStartup extends AppCompatActivity {
         Leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d("tag", "in button");
                 Intent leaderboard = new Intent(SnakeStartup.this, Leaderbrd.class);
                 SnakeStartup.this.startActivity(leaderboard);
             }

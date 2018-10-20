@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import android.util.Log;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONException;
@@ -18,21 +19,22 @@ import java.util.Collections;
 
 public class Leaderbrd extends AppCompatActivity {
 
-    // Array of strings...
+
     private ListView simpleList;
-    private RequestQueue mQueue;
+    private RequestQueue mQueue = null;
     ArrayList<Integer> scorelist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        simpleList = (ListView) findViewById(R.id.simpleListView);
+        simpleList = findViewById(R.id.simpleListView);
         final String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?game=4";
 
         JsonObjectRequest request= new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    Log.d("tag", "in response");
                     JSONObject user;
                     user = response;
 
@@ -49,7 +51,7 @@ public class Leaderbrd extends AppCompatActivity {
                 for(int i = 0; i < 5; i++){
                     shortList.add(scorelist.get(i));
                 }
-                ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(Leaderbrd.this, R.layout.activity_leaderbrd, R.id.simpleListView, shortList);
+                ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(Leaderbrd.this, R.layout.activity_leaderbrd, R.id.simpleListView, shortList);
                 simpleList.setAdapter(arrayAdapter);
             }
         }, new Response.ErrorListener() {
