@@ -23,12 +23,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.secondpage" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.signUp" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.GamesList" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity"></activity>
+=======
+        <activity android:name=".secondpage" />
+        <activity android:name=".signUp" />
+        <activity android:name=".Leaderbrd" />
+        <activity android:name=".GamesList" />
+        <activity android:name=".SnakeMainActivity" />
+        <activity android:name=".SnakeStartup" />
+        <activity android:name=".SnakeSplash" />
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
     </application>
 
 </manifest>
