@@ -1,6 +1,4 @@
-package edu.iastate.loginscreen;
-
-import android.hardware.SensorDirectChannel;
+package edu.iastate.IDE_AND_A_DREAM.Snake;
 
 import java.util.ArrayList;
 import java.util.List;

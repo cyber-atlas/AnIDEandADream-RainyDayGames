@@ -10,10 +10,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SnakeMainActivity"
+        tools:context="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity"
         android:background="#000000">
 
-        <edu.iastate.loginscreen.SnakeView
+        <edu.iastate.IDE_AND_A_DREAM.Snake.SnakeView
             android:id="@+id/snakeView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

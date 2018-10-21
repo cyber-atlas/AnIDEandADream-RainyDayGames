@@ -1,8 +1,7 @@
-package edu.iastate.loginscreen;
+package edu.iastate.IDE_AND_A_DREAM.Login;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +17,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import edu.iastate.loginscreen.R;
+import edu.iastate.IDE_AND_A_DREAM.secondpage;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextViewResult;
     private TextView passcode;
     private RequestQueue mQueue;
+
 
 
     @Override

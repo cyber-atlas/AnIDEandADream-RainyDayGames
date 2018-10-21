@@ -1,10 +1,12 @@
-package edu.iastate.loginscreen;
+package edu.iastate.IDE_AND_A_DREAM.Snake;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import edu.iastate.loginscreen.R;
 
 public class SnakeSplash extends AppCompatActivity {
 

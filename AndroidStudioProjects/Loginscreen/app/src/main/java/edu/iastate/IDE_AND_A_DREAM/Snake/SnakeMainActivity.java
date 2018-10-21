@@ -1,4 +1,4 @@
-package edu.iastate.loginscreen;
+package edu.iastate.IDE_AND_A_DREAM.Snake;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -14,11 +14,9 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import edu.iastate.loginscreen.R;
 
 public class SnakeMainActivity extends AppCompatActivity implements View.OnTouchListener {
 

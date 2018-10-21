@@ -16,19 +16,19 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".secondpage" />
-        <activity android:name=".signUp" />
-        <activity android:name=".GamesList" />
-        <activity android:name=".SnakeSplash" />
-        <activity android:name=".SnakeStartup" />
-        <activity android:name=".SnakeMainActivity"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.secondpage" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.signUp" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.GamesList" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity"></activity>
     </application>
 
 </manifest>
