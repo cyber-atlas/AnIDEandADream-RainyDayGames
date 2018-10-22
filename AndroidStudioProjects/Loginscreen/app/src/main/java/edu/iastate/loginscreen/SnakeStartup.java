@@ -9,20 +9,21 @@ import android.widget.Button;
 
 public class SnakeStartup extends AppCompatActivity {
 
+    Button Leaderboard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snake_startup);
 
         Button StartEasy = findViewById(R.id.Easybtn);
-        final Button Leaderboard = findViewById(R.id.LBoardBtn);
+        Leaderboard = findViewById(R.id.LBoardBtn);
 
         Leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("tag", "in button");
-                Intent leaderboard = new Intent(SnakeStartup.this, Leaderbrd.class);
-                SnakeStartup.this.startActivity(leaderboard);
+                Log.d("tag", "in leaderboard button");
+                Intent leader = new Intent(SnakeStartup.this, Leaderbrd.class);
+                SnakeStartup.this.startActivity(leader);
             }
         });
 
