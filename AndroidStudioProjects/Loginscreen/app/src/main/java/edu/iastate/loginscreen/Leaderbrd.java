@@ -21,7 +21,7 @@ public class Leaderbrd extends AppCompatActivity {
 
 
     private ListView simpleList;
-    private RequestQueue mQueue = null;
+    private RequestQueue mQueue;
     ArrayList<Integer> scorelist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
