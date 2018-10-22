@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#abcdef"
-    tools:context=".MainActivity">
+    tools:context="edu.iastate.IDE_AND_A_DREAM.Login.MainActivity">
 
     <TextView
         android:id="@+id/textView2"

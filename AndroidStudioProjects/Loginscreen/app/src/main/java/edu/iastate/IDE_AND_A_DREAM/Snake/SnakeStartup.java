@@ -1,4 +1,4 @@
-package edu.iastate.loginscreen;
+package edu.iastate.IDE_AND_A_DREAM.Snake;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import edu.iastate.loginscreen.R;
 
 public class SnakeStartup extends AppCompatActivity {
 

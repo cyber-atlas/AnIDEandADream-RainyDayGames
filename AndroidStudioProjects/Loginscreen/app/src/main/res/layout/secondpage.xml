@@ -4,44 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
+    android:background="#ffff66"
+    tools:context="edu.iastate.IDE_AND_A_DREAM.secondpage">
+=======
     tools:context=".secondpage">
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
 
 
     <Button
-        android:id="@+id/GamesButton"
-        android:layout_width="126dp"
-        android:layout_height="51dp"
+        android:id="@+id/button6"
+        android:layout_width="175dp"
+        android:layout_height="93dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
-        android:text="Games"
-        android:textColor="#0000ff"
+        android:layout_marginTop="8dp"
+        android:text="LEADER BOARD"
+        android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.602" />
+
+    <Button
+        android:id="@+id/GamesButton"
+<<<<<<< HEAD
+        android:layout_width="173dp"
+        android:layout_height="84dp"
+=======
+        android:layout_width="126dp"
+        android:layout_height="51dp"
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Games"
+<<<<<<< HEAD
+        android:textColor="@android:color/black"
+=======
+        android:textColor="#0000ff"
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.117" />
 
     <Button
         android:id="@+id/button4"
+<<<<<<< HEAD
+        android:layout_width="173dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+=======
         android:layout_width="131dp"
         android:layout_height="55dp"
         android:layout_marginBottom="356dp"
         android:layout_marginEnd="156dp"
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Profile"
+<<<<<<< HEAD
+        android:textColor="@android:color/black"
+=======
         android:textColor="#0000ff"
+>>>>>>> 5e1c334a4a4cb31efc69f981ee6b13acd339f8f3
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.352" />
 </android.support.constraint.ConstraintLayout>
