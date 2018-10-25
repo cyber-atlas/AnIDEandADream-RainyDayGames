@@ -1,12 +1,15 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake;
 
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import edu.iastate.loginscreen.R;
 
 
-public class SnakeEngine {
+public class SnakeEngine  {
 
     public static final int GameWidth = 28;
     public static final int GameHeight = 42;
@@ -14,7 +17,7 @@ public class SnakeEngine {
     private List<Coordinate> walls = new ArrayList<>();
     private List<Coordinate> snake = new ArrayList<>();
 
-
+    private TextView currentScore;
     private List<Coordinate> apples = new ArrayList<>();
 
     private Random random = new Random();
@@ -38,7 +41,6 @@ public class SnakeEngine {
         AddWalls();
         AddApples();
     }
-
 
     public void updateDirection(Direction newDirection){
 
@@ -155,6 +157,7 @@ public class SnakeEngine {
         if (increaseTail){
             snake.add(new Coordinate(newX, newY));
             increaseTail = false;
+            //SnakeMainActivity.upd
             score ++;
         }
 

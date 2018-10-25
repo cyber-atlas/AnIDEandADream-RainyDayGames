@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +21,8 @@ import edu.iastate.loginscreen.R;
 
 public class SnakeMainActivity extends AppCompatActivity implements View.OnTouchListener {
 
+    private TextView HighScore;
+    private TextView CurrentScore;
 
     private final Handler handler = new Handler();
 
@@ -27,6 +30,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private SnakeView snakeView;
 
     public final long updateDelay = 150;
+    int prevScore = 0;
 
     private RequestQueue mQueue;
     private float prevX, prevY;
@@ -37,6 +41,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snake_main);
 
+        CurrentScore = findViewById(R.id.CurrentScoreTextView);
+        CurrentScore.setText("Current Score: "+prevScore);
         gameEngine = new SnakeEngine();
         gameEngine.initGame();
         mQueue = Volley.newRequestQueue(this);
@@ -55,6 +61,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 gameEngine.Update();
 
                 if (gameEngine.getCurrentGameState() == GameState.Running) {
+                    checkupdateScore();
                     handler.postDelayed(this, updateDelay);
                 }
 
@@ -69,7 +76,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
     private void OnGameLost() {
-        Toast.makeText(this, "You lost,\n Score : " + gameEngine.score, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
         jsonParse();
         Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
         SnakeMainActivity.this.startActivity(EndGame);
@@ -107,6 +114,22 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         }
         return true;
     }
+
+    public void checkupdateScore()
+    {
+        if(prevScore < gameEngine.score)
+        {
+            prevScore = gameEngine.score;
+            updateScore(prevScore);
+        }
+    }
+
+    public void updateScore(int score)
+    {
+        CurrentScore.setText("Current Score: "+ score);
+    }
+
+
 
     public void jsonParse() {
         Bundle extras = getIntent().getExtras();
