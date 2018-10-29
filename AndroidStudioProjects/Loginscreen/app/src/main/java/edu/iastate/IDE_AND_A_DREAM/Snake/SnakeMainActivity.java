@@ -14,9 +14,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import edu.iastate.IDE_AND_A_DREAM.Login.MainActivity;
+import edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen;
 import edu.iastate.loginscreen.R;
 
 /*
@@ -39,6 +47,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private TextView HighScore;
     private TextView CurrentScore;
 
+
     private final Handler handler = new Handler();
 
     private SnakeEngine gameEngine;
@@ -55,18 +64,18 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snake_main);
-
+        HighScore = findViewById(R.id.HighScoreTextView);
         CurrentScore = findViewById(R.id.CurrentScoreTextView);
         CurrentScore.setText("Current Score: "+prevScore);
+
         gameEngine = new SnakeEngine();
         gameEngine.initGame();
         mQueue = Volley.newRequestQueue(this);
 
         snakeView = findViewById(R.id.snakeView);
         snakeView.setOnTouchListener(this);
-
+        get_high_score();
         startUpdateHandler();
-
     }
 
     private void startUpdateHandler() {
@@ -92,7 +101,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     private void OnGameLost() {
         Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
-        jsonParse();
+        send_score();
         Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
         SnakeMainActivity.this.startActivity(EndGame);
     }
@@ -145,8 +154,39 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
 
+    public void get_high_score()
+    {
+        String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?userid=1&game=4";
+        Log.d("msg", "here1");
 
-    public void jsonParse() {
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONArray user ;
+                            user = response;
+                            Log.d("From get highscore", response.toString());
+                            String highscore = user.getJSONObject(0).getString("score");
+                            Log.d("Highscore", highscore);
+                            HighScore.setText("High Score: "+highscore);
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        mQueue.add(request);
+
+    }
+
+
+    public void send_score() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("userid");
@@ -166,7 +206,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             }
         });
         mQueue.add(stringRequest);
-
     }
 
 
