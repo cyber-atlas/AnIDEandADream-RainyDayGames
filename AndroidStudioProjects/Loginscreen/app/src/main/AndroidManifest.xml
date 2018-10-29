@@ -30,11 +30,13 @@
         <activity android:name=".Leaderbrd" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity" />
-        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,8 @@ public class secondpage extends AppCompatActivity {
         setContentView(R.layout.secondpage);
 
         Button Gamesbutton = findViewById(R.id.GamesButton);
+        Button Profilebutton = findViewById(R.id.profilebutton);
+
 
         Gamesbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,10 +30,21 @@ public class secondpage extends AppCompatActivity {
                     String value = extras.getString("userid");
                     Log.d("Message from Signup", value);
                 }
-                //startActivity(new Intent(MainActivity.this, signuppage.class));
-//                Intent GamesListIntent = new Intent(secondpage.this, GamesList.class);
-//                secondpage.this.startActivity(GamesListIntent);
                 Intent i = new Intent(secondpage.this, GamesList.class);
+                i.putExtra("userid",extras.getString("userid"));
+                secondpage.this.startActivity(i);
+            }
+        });
+
+        Profilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signup", value);
+                }
+                Intent i = new Intent(secondpage.this, UserProfile.class);
                 i.putExtra("userid",extras.getString("userid"));
                 secondpage.this.startActivity(i);
             }
