@@ -77,14 +77,16 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject user;
                             user = response;
 
+                            String username = user.getString("username");
                             String email = user.getString("email");
                             String id = user.getString("id");
                             
                             if (email.equals(em)) {
                                 Log.d("tag", "equals");
                               //  startActivity(new Intent(MainActivity.this, secondpage.class));
-                                Intent i = new Intent(MainActivity.this, secondpage.class);
+                                Intent i = new Intent(MainActivity.this, WelcomeSplashScreen.class);
                                 i.putExtra("userid",id);
+                                i.putExtra("username",username);
                                 startActivity(i);
                             }
                             else {

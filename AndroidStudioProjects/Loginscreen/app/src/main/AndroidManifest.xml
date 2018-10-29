@@ -29,8 +29,12 @@
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash" />
         <activity android:name=".Leaderbrd" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
-        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen"></activity>
 
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
