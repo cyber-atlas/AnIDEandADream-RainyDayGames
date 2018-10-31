@@ -9,30 +9,34 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="143dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="22dp"
+        android:layout_width="185dp"
+        android:layout_height="107dp"
         android:layout_marginTop="36dp"
-        android:text="Welcome! "
+        android:layout_marginBottom="22dp"
+        android:gravity="center"
+        android:text="Welcome! Please sign in to continue."
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="#FF0000"
+        android:textColor="@android:color/black"
+        android:textStyle="bold|italic"
+        app:fontFamily="@font/amethysta"
         app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="1.0" />
 
 
     <EditText
         android:id="@+id/email"
         android:layout_width="251dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="340dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="68dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="340dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -41,7 +45,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.959" />
+        app:layout_constraintVertical_bias="0.842" />
 
     <EditText
         android:id="@+id/password"
@@ -66,25 +70,25 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="84dp"
+        android:layout_marginBottom="8dp"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/signup"
-        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <Button
         android:id="@+id/signup"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="59dp"
-        android:layout_marginRight="59dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
         android:text="Sign-up"
         app:layout_constraintBaseline_toBaselineOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent" />

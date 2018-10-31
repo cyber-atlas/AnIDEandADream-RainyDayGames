@@ -29,7 +29,7 @@ public class signUp extends AppCompatActivity {
         final TextView email = findViewById(R.id.email);
         final TextView password = findViewById(R.id.password);
         final TextView userID = findViewById(R.id.userID);
-        final Button button = findViewById(R.id.button);
+        Button button = findViewById(R.id.SignUpButton);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +37,6 @@ public class signUp extends AppCompatActivity {
                 final String Email = email.getText().toString();
                 final String passcode = password.getText().toString();
                 final String UserID = userID.getText().toString();
-
 
                 Response.Listener<String> responselistener = new Response.Listener<String>() {
                     @Override
@@ -47,26 +46,19 @@ public class signUp extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                startActivity(new Intent(signUp.this, MainActivity.class));
-                                //Intent intent = new Intent(signUp.this, MainActivity.class);
-                                //signUp.this.startActivity(intent);
-
+                              //  startActivity(new Intent(signUp.this, MainActivity.class));
+                                Intent intent = new Intent(signUp.this, MainActivity.class);
+                                signUp.this.startActivity(intent);
                             }
                             else{
                                 AlertDialog.Builder builder = new AlertDialog.Builder(signUp.this);
                                 builder.setMessage("Register Failed");
-                                        //.setNavigateButton("Retry", null);
-                                        //.create();
-                                        //.show();
-
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-
 
                 RegisterRequest registerRequest = new RegisterRequest(Email, passcode, UserID, responselistener);
                 RequestQueue queue = Volley.newRequestQueue(signUp.this);
