@@ -15,42 +15,75 @@ import edu.iastate.loginscreen.R;
 
 public class SnakeStartup extends AppCompatActivity {
 
+    Button Easy;
+    Button Medium;
+    Button Hard;
     Button Leaderboard;
+    int EasyLevel = 300;
+    int MediumLevel = 150;
+    int HardLevel = 50;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snake_startup);
 
-        Button StartEasy = findViewById(R.id.Easybtn);
+        Easy = findViewById(R.id.Easybtn);
+        Medium = findViewById(R.id.Mediumbtn);
+        Hard = findViewById(R.id.Hardbtn);
         Leaderboard = findViewById(R.id.LBoardBtn);
 
         Leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("tag", "in leaderboard button");
                 Intent leader = new Intent(SnakeStartup.this, Leaderbrd.class);
                 SnakeStartup.this.startActivity(leader);
             }
         });
 
-        StartEasy.setOnClickListener(new View.OnClickListener() {
+        Easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
                     String value = extras.getString("userid");
-                    Log.d("Message from Signup", value);
                 }
-                Log.d("Tag", "in signup button");
                 Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
                 i.putExtra("userid",extras.getString("userid"));
+                i.putExtra("level", EasyLevel);
                 SnakeStartup.this.startActivity(i);
 
-               // Log.d("Tag", "in signup button");
-                //startActivity(new Intent(MainActivity.this, signuppage.class));
-//                Intent StartSnakeGameIntent = new Intent(SnakeStartup.this, SnakeMainActivity.class);
-//                SnakeStartup.this.startActivity(StartSnakeGameIntent);
+            }
+        });
+        Medium.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                }
+                Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
+                i.putExtra("userid",extras.getString("userid"));
+                i.putExtra("level", MediumLevel);
+                SnakeStartup.this.startActivity(i);
+
+            }
+        });
+        Hard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                }
+                Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
+                i.putExtra("userid",extras.getString("userid"));
+                i.putExtra("level", HardLevel);
+                SnakeStartup.this.startActivity(i);
+
             }
         });
 

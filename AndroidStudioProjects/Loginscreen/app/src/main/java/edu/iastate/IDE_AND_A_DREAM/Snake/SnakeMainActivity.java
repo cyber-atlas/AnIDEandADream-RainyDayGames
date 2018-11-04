@@ -52,8 +52,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     private SnakeEngine gameEngine;
     private SnakeView snakeView;
-
-    public final long updateDelay = 150;
+    int HiScore;
+    int updateDelay;
     int prevScore = 0;
 
     private RequestQueue mQueue;
@@ -71,6 +71,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         gameEngine = new SnakeEngine();
         gameEngine.initGame();
         mQueue = Volley.newRequestQueue(this);
+
+        Bundle extras = getIntent().getExtras();
+        int value = extras.getInt("level");
+        updateDelay = value;
+        Log.d("Update Valley",String.valueOf(updateDelay));
 
         snakeView = findViewById(R.id.snakeView);
         snakeView.setOnTouchListener(this);
@@ -100,9 +105,17 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
     private void OnGameLost() {
-        Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
+        if(gameEngine.score > HiScore)
+        {
+            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
+        }
         send_score();
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
         Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
+        EndGame.putExtra("userid",value);
         SnakeMainActivity.this.startActivity(EndGame);
     }
 
@@ -156,9 +169,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     public void get_high_score()
     {
-        String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?userid=1&game=4";
-        Log.d("msg", "here1");
-
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?userid="+value+"&game=4";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -169,6 +182,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                             user = response;
                             Log.d("From get highscore", response.toString());
                             String highscore = user.getJSONObject(0).getString("score");
+                            HiScore = Integer.parseInt(highscore);
                             Log.d("Highscore", highscore);
                             HighScore.setText("High Score: "+highscore);
                         } catch (JSONException e1) {
@@ -197,7 +211,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
