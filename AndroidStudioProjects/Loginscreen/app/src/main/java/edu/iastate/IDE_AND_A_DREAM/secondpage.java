@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
+import edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup;
 import edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main;
+import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
 public class secondpage extends AppCompatActivity {
@@ -22,22 +24,30 @@ public class secondpage extends AppCompatActivity {
         setContentView(R.layout.secondpage);
 
         Button Gamesbutton = findViewById(R.id.GamesButton);
+        Button Leaderboard = findViewById(R.id.button6);
        Profilebutton = findViewById(R.id.profilebutton);
 
 
-        Gamesbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    String value = extras.getString("userid");
-                    Log.d("Message from Signup", value);
-                }
-                Intent i = new Intent(secondpage.this, GamesList.class);
-                i.putExtra("userid",extras.getString("userid"));
-                secondpage.this.startActivity(i);
-            }
-        });
+       Leaderboard.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent leader = new Intent(secondpage.this, Leaderbrd.class);
+               secondpage.this.startActivity(leader);
+               }
+       });
+               Gamesbutton.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       Bundle extras = getIntent().getExtras();
+                       if (extras != null) {
+                           String value = extras.getString("userid");
+                           Log.d("Message from Signup", value);
+                       }
+                       Intent i = new Intent(secondpage.this, GamesList.class);
+                       i.putExtra("userid", extras.getString("userid"));
+                       secondpage.this.startActivity(i);
+                   }
+               });
 
         Profilebutton.setOnClickListener(new View.OnClickListener() {
             @Override
