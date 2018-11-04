@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
+import edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main;
 import edu.iastate.loginscreen.R;
 
 public class secondpage extends AppCompatActivity {
 
+
+    Button Profilebutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,7 @@ public class secondpage extends AppCompatActivity {
         setContentView(R.layout.secondpage);
 
         Button Gamesbutton = findViewById(R.id.GamesButton);
-        Button Profilebutton = findViewById(R.id.profilebutton);
+       Profilebutton = findViewById(R.id.profilebutton);
 
 
         Gamesbutton.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +47,7 @@ public class secondpage extends AppCompatActivity {
                     String value = extras.getString("userid");
                     Log.d("Message from Signup", value);
                 }
-                Intent i = new Intent(secondpage.this, UserProfile.class);
+                Intent i = new Intent(secondpage.this, User_Profile_Main.class);
                 i.putExtra("userid",extras.getString("userid"));
                 secondpage.this.startActivity(i);
             }

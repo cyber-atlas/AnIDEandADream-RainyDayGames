@@ -3,6 +3,7 @@
     package="edu.iastate.loginscreen">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +37,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.EditUserName" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.ChangePassword"></activity>
     </application>
 
 </manifest>

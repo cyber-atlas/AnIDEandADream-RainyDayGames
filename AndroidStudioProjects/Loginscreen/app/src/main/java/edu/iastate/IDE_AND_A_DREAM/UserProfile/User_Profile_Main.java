@@ -1,9 +1,10 @@
-package edu.iastate.IDE_AND_A_DREAM;
+package edu.iastate.IDE_AND_A_DREAM.UserProfile;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -17,17 +18,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.iastate.IDE_AND_A_DREAM.Login.MainActivity;
-import edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen;
 import edu.iastate.loginscreen.R;
 
-public class UserProfile extends AppCompatActivity {
+public class User_Profile_Main extends AppCompatActivity {
 
     private TextView Email;
-    private TextView Password;
     private TextView Username;
     private RequestQueue mQueue;
-    Button UpdateInfo;
+    Button Update_Username ;
+    Button Update_Password;
 
 
     @Override
@@ -36,15 +35,40 @@ public class UserProfile extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
 
-        Email = findViewById(R.id.editTextEmail);
-        Password = findViewById(R.id.editTextPassword);
-        Username = findViewById(R.id.editTextUsername);
-        UpdateInfo = findViewById(R.id.Update_Info);
+        Email = findViewById(R.id.Email_View);
+        //Password = findViewById(R.id.editTextPassword);
+        Username = findViewById(R.id.Username_view);
+        Update_Username = findViewById(R.id.Edit_Username);
+        Update_Password = findViewById(R.id.Change_pwd);
+
         mQueue = Volley.newRequestQueue(this);
 
-
+        Update_Username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent EUserName = new Intent(User_Profile_Main.this, EditUserName.class);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signin", value);
+                }
+                EUserName.putExtra("userid",extras.getString("userid"));
+                User_Profile_Main.this.startActivity(EUserName);
+            }
+        });
+        Update_Password.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent CPassword = new Intent(User_Profile_Main.this, ChangePassword.class);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signin", value);
+                }
+                CPassword.putExtra("userid",extras.getString("userid"));
+                User_Profile_Main.this.startActivity(CPassword);
+            }
+        });
         populate_profile();
-
     }
 
     public void populate_profile()
@@ -58,7 +82,6 @@ public class UserProfile extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         try {
                             JSONObject user;
                             user = response;
@@ -73,7 +96,6 @@ public class UserProfile extends AppCompatActivity {
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
