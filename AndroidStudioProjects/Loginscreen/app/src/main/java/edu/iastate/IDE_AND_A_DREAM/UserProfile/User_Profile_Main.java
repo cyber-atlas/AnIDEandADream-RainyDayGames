@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -152,7 +153,7 @@ public class User_Profile_Main extends AppCompatActivity {
             Uri selectedImage = data.getData();
             ProfilePicture.setImageURI(selectedImage);
         }
-
+        Toast.makeText(getApplication(), "Picture Updated", Toast.LENGTH_SHORT).show();
 
     }
 
