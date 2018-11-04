@@ -62,19 +62,19 @@ public class ChangePassword extends AppCompatActivity {
         //http://proj309-vc-04.misc.iastate.edu:8080/edit?id=1&old_username=+""+&new_username="";
         String OldPassword = Old_Password.getText().toString();
         String NewPassword = New_Password.getText().toString();
-        String URL = "http://proj309-vc-04.misc.iastate.edu:8080/edit?id="+value+"&old_password="+OldPassword+"&new_password="+NewPassword;
+        String URL = "http://proj309-vc-04.misc.iastate.edu:8080/users/edit?id="+value+"&old_password="+OldPassword+"&new_password="+NewPassword;
         Log.d("Post_URL",URL);
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Toast.makeText(getApplication(), "Password Updated", Toast.LENGTH_SHORT).show();
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        mQueue.add(stringRequest);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplication(), "Password Updated", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mQueue.add(stringRequest);
     }
 }

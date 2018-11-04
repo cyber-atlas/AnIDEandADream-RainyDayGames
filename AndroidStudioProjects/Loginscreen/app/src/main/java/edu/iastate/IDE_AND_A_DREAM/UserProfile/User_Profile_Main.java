@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import edu.iastate.IDE_AND_A_DREAM.secondpage;
 
 import edu.iastate.loginscreen.R;
 
@@ -32,10 +33,9 @@ public class User_Profile_Main extends AppCompatActivity {
     private RequestQueue mQueue;
     Button Update_Username ;
     Button Update_Password;
-
+    Button Exit_Profile;
 
     ImageView ProfilePicture;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,13 +48,15 @@ public class User_Profile_Main extends AppCompatActivity {
         Username = findViewById(R.id.Username_view);
         Update_Username = findViewById(R.id.Edit_Username);
         Update_Password = findViewById(R.id.Change_pwd);
+        Exit_Profile = findViewById(R.id.Exit_Btn);
+
 
         ProfilePicture = (ImageView)findViewById(R.id.Profile_Pic_view);
 
 
 
         mQueue = Volley.newRequestQueue(this);
-
+        populate_profile();
         ProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +91,19 @@ public class User_Profile_Main extends AppCompatActivity {
                 User_Profile_Main.this.startActivity(CPassword);
             }
         });
-        populate_profile();
+        Exit_Profile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent Exit = new Intent(User_Profile_Main.this, secondpage.class);
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signin", value);
+                }
+                Exit.putExtra("userid",extras.getString("userid"));
+                User_Profile_Main.this.startActivity(Exit);
+            }
+        });
+
     }
 
     public void populate_profile()

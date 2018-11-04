@@ -105,12 +105,12 @@ public class EditUserName extends AppCompatActivity {
 
         //http://proj309-vc-04.misc.iastate.edu:8080/edit?id=1&old_username=+""+&new_username="";
         String Oldusername = OldUsername.getText().toString();
-        String URL = "http://proj309-vc-04.misc.iastate.edu:8080/edit?id="+value+"&old_username="+Oldusername+"&new_username="+NewUsername.getText().toString();
+        String URL = "http://proj309-vc-04.misc.iastate.edu:8080/users/edit?id="+value+"&old_username="+Oldusername+"&new_username="+NewUsername.getText().toString();
         //Log.d("Post_URL",URL);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplication(), "Username Updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Username Updated, Exit Profile to see changes.", Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
