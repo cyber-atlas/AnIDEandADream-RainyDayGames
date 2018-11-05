@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import edu.iastate.IDE_AND_A_DREAM.Leaderboards.LeaderboardList;
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
 import edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup;
 import edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main;
@@ -31,8 +32,10 @@ public class secondpage extends AppCompatActivity {
        Leaderboard.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent leader = new Intent(secondpage.this, Leaderbrd.class);
-               secondpage.this.startActivity(leader);
+                    Intent listpage = new Intent(secondpage.this, LeaderboardList.class);
+                    secondpage.this.startActivity(listpage);
+                   //Intent leader = new Intent(secondpage.this, Leaderbrd.class);
+                   //secondpage.this.startActivity(leader);
                }
        });
                Gamesbutton.setOnClickListener(new View.OnClickListener() {

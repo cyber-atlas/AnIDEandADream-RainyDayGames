@@ -40,7 +40,11 @@
 
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.EditUserName" />
-        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.ChangePassword"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.ChangePassword" />
+        <activity
+            android:name="edu.iastate.IDE_AND_A_DREAM.Leaderboards.LeaderboardList"
+            android:label="@string/title_activity_leaderboard_list"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
