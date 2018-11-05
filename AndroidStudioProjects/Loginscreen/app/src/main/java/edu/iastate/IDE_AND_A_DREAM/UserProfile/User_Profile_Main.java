@@ -22,6 +22,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import edu.iastate.IDE_AND_A_DREAM.Login.MainActivity;
 import edu.iastate.IDE_AND_A_DREAM.secondpage;
 
 import edu.iastate.loginscreen.R;
@@ -35,6 +37,7 @@ public class User_Profile_Main extends AppCompatActivity {
     Button Update_Username ;
     Button Update_Password;
     Button Exit_Profile;
+    Button Logout;
 
     ImageView ProfilePicture;
 
@@ -50,6 +53,7 @@ public class User_Profile_Main extends AppCompatActivity {
         Update_Username = findViewById(R.id.Edit_Username);
         Update_Password = findViewById(R.id.Change_pwd);
         Exit_Profile = findViewById(R.id.Exit_Btn);
+        Logout = findViewById(R.id.logout);
 
 
         ProfilePicture = (ImageView)findViewById(R.id.Profile_Pic_view);
@@ -66,7 +70,15 @@ public class User_Profile_Main extends AppCompatActivity {
             }
         });
 
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent leaveApp = new Intent(User_Profile_Main.this, MainActivity.class);
+                User_Profile_Main.this.startActivity(leaveApp);
+                Toast.makeText(getApplication(), "Successfully Logged out! Please play again!", Toast.LENGTH_SHORT).show();
 
+            }
+        });
         Update_Username.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
