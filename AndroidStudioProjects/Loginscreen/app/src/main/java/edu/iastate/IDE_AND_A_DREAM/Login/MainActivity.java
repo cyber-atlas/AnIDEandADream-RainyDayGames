@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -73,17 +74,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
 
+                        if(response == null){
+                            Toast.makeText(getApplication(), "You are a liar", Toast.LENGTH_SHORT).show();
+
+                        }
+
                         try {
                             JSONObject user;
                             user = response;
 
+
                             String username = user.getString("username");
                             String email = user.getString("email");
                             String id = user.getString("id");
-                            
+
+
                             if (email.equals(em)) {
                                 Log.d("tag", "equals");
-                              //  startActivity(new Intent(MainActivity.this, secondpage.class));
                                 Intent i = new Intent(MainActivity.this, WelcomeSplashScreen.class);
                                 i.putExtra("userid",id);
                                 i.putExtra("username",username);
@@ -93,13 +100,17 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("tag", "not connected");
                             }
                         } catch (JSONException e1) {
+
                             e1.printStackTrace();
+
                         }
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplication(), "The password or email you entered is incorrect", Toast.LENGTH_SHORT).show();
+
                 error.printStackTrace();
             }
         });
