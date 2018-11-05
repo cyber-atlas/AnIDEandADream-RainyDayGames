@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import edu.iastate.IDE_AND_A_DREAM.Leaderboards.LeaderboardList;
+import edu.iastate.IDE_AND_A_DREAM.Messaging.Messaging;
+import edu.iastate.IDE_AND_A_DREAM.Messaging.MessagingMainActivity;
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
 import edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup;
 import edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main;
@@ -18,6 +20,7 @@ public class secondpage extends AppCompatActivity {
 
 
     Button Profilebutton;
+    Button Chat_room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,16 @@ public class secondpage extends AppCompatActivity {
         Button Gamesbutton = findViewById(R.id.GamesButton);
         Button Leaderboard = findViewById(R.id.button6);
        Profilebutton = findViewById(R.id.profilebutton);
+       Chat_room = findViewById(R.id.messaging);
 
+
+        Chat_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent ChatRoom = new Intent(secondpage.this, MessagingMainActivity.class);
+                secondpage.this.startActivity(ChatRoom);
+            }
+        });
 
        Leaderboard.setOnClickListener(new View.OnClickListener() {
            @Override

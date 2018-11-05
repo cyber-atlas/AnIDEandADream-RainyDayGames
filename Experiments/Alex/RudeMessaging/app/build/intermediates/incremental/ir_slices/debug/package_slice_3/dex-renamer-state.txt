@@ -1,0 +1,4 @@
+#Mon Nov 05 13:32:54 CST 2018
+base.0=/Users/umaabu/Documents/Classes/Com S 309/VC_4_AnIDEandadream/Experiments/Alex/RudeMessaging/app/build/intermediates/transforms/dexMerger/debug/3
+path.0=classes.dex
+renamed.0=classes.dex
