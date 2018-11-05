@@ -154,7 +154,6 @@ public class User_Profile_Main extends AppCompatActivity {
             ProfilePicture.setImageURI(selectedImage);
         }
         Toast.makeText(getApplication(), "Picture Updated", Toast.LENGTH_SHORT).show();
-
     }
 
 }
