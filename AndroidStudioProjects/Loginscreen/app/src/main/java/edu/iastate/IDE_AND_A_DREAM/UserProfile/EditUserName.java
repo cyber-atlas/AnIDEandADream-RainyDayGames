@@ -115,7 +115,7 @@ public class EditUserName extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "Could not update, try again later", Toast.LENGTH_SHORT).show();
             }
         });
         mQueue.add(stringRequest);
