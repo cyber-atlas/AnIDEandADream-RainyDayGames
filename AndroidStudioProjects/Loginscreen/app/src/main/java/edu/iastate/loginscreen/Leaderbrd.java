@@ -58,11 +58,15 @@ public class Leaderbrd extends AppCompatActivity {
 
 
                         ArrayList<Integer> shortList = new ArrayList<>();
-                        for(int i = 0; i < 5; i++){
+                        for(int i = 0; i < 10; i++){
                             shortList.add(scorelist.get(i));
                         }
-                        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<Integer>(Leaderbrd.this, R.layout.activity_leaderbrd, R.id.Leaders, shortList);
-                        simpleList.setAdapter(arrayAdapter);
+
+                    ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(Leaderbrd.this, R.layout.activity_text_view, shortList);
+                    ListView listView = findViewById(R.id.simpleListView);
+                    listView.setAdapter(adapter);
+
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
