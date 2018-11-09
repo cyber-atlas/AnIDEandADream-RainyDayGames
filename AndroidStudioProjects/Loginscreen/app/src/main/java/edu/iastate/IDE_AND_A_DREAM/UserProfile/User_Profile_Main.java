@@ -17,9 +17,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,6 +40,8 @@ public class User_Profile_Main extends AppCompatActivity {
     Button Update_Password;
     Button Exit_Profile;
     Button Logout;
+    String Role;
+    String Rolename;
 
     ImageView ProfilePicture;
 
@@ -119,13 +123,74 @@ public class User_Profile_Main extends AppCompatActivity {
 
     }
 
+
+
+    public String get_role()
+    {
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        String result1 = "1";
+        String result2 = "Admin";
+        String URL = "http://proj309-vc-04.misc.iastate.edu:8080/role?userid="+value;
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            JSONArray user ;
+                            user = response;
+                            Log.d("From get highscore", response.toString());
+                            Role = user.getJSONObject(0).getString("roleid");
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request);
+
+
+        String URL2 = "http://proj309-vc-04.misc.iastate.edu:8080/roletypes?id="+Role;
+
+        JsonObjectRequest request2 = new JsonObjectRequest(Request.Method.GET, URL, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject user;
+                            user = response;
+
+                             Rolename = user.getString("title");
+
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+
+        mQueue.add(request2);
+
+        return Rolename;
+    }
+
     public void populate_profile()
     {
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");
 
         String URL = "http://proj309-vc-04.misc.iastate.edu:8080/users?id="+value;
-
+        get_role();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -139,7 +204,7 @@ public class User_Profile_Main extends AppCompatActivity {
                             String id = user.getString("id");
 
                             Email.setText(email);
-                            Username.setText(username);
+                            Username.setText(username+ " is a " + Rolename);
 
                         } catch (JSONException e1) {
                             e1.printStackTrace();
