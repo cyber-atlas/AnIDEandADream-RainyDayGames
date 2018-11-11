@@ -1,5 +1,5 @@
 package edu.iastate.IDE_AND_A_DREAM;
-
+ 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
