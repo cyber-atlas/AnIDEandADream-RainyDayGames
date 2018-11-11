@@ -15,7 +15,7 @@ android-build:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Android_test/gradlew
   tags:
-   - androidbuild
+   - android_tag
   script:
     - cd /AndroidStudioProjects/Loginscreen
     - ./gradlew assemble
@@ -31,7 +31,7 @@ unitTests:
     - export GRADLE_USER_HOME=`pwd`/.gradle
     - chmod +x ./Android_test/gradlew
   tags:
-   - androidtest
+   - android_tag
   script:
     - cd Android_test
     - ./gradlew test
