@@ -1,6 +1,7 @@
 package iastate.cs309.server.Users;
 
 import iastate.cs309.server.Roles.RoleType;
+import iastate.cs309.server.Roles.RoleTypeRepository;
 import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     UserRepository repo;
+
+    @Autowired
+    RoleTypeRepository roleRepo;
 
     PasswordEncoder passwordEncoder;
 
@@ -44,6 +48,10 @@ public class UserService {
             repo.save(user);
             return true;
         }
+    }
+
+    public Optional<RoleType> getRoleType(Integer role_id){
+        return roleRepo.findByRoleid(role_id);
     }
 
     public static boolean isAdminRole(User user) {

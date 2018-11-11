@@ -29,7 +29,7 @@ public class RudeEndpoint {
             synchronized (endpoint) {
                 try {
                     endpoint.session.getBasicRemote().
-                            sendText(message.getFrom() + ":" + message.getContent());
+                            sendText(message.getFrom() + ": " + message.getContent());
                 } catch (IOException e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
@@ -47,7 +47,7 @@ public class RudeEndpoint {
                         //Find the target and send the message to them.
                         if (endpoint.session.getId() == toId) {
                             endpoint.session.getBasicRemote().
-                                    sendText(msg.getFrom() + ":" + msg.getContent());
+                                    sendText(msg.getFrom() + "->" + msg.getTo() + ": " + msg.getContent());
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -56,7 +56,7 @@ public class RudeEndpoint {
                 }
             });
             //Duplicate message for sender's chat log
-            session.getBasicRemote().sendText(msg.getTo() + "~" + msg.getFrom() + ": " + msg.getContent());
+            session.getBasicRemote().sendText(msg.getFrom() + "->" + msg.getTo() + ": " + msg.getContent());
         } catch (IOException e) {
             logger.info("Exception: " + e.getMessage().toString());
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class RudeEndpoint {
             String[] from = message.split(" ");
             msg.setTo(from[1]);
             //update message content to remove syntactic keywords
-            msg.setContent(message.replaceFirst("\\(" + from[0] + ")","").replaceFirst("("+from[1]+")",""));
+            msg.setContent(message.replaceFirst("(/whisper\\s+)","").replaceFirst("("+from[1]+"\\s+)",""));
             sendMessageToAnotherUser(session, msg); //todo:implement private messaging
         }else {
             //msg.save(); //todo: determine if we want to preserve message contents

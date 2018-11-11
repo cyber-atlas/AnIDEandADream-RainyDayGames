@@ -1,5 +1,6 @@
 package iastate.cs309.server.Users;
 
+import iastate.cs309.server.Roles.Role;
 import iastate.cs309.server.Roles.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,10 +78,46 @@ __/\\\\\\\\\\\\\_________/\\\\\__________/\\\\\\\\\\\____/\\\\\\\\\\\\\\\_______
         _\///___________________\/////_________\///////////___________\///__________________\///________\///__\///////////////__________\//////______\/////////_____\///////////////____\///////////___________\///__________\///////////_____
         */
 
+
+    //Used to update a users the password. Can be used by any user on themselves.
+    @Transactional
+    @RequestMapping(method = RequestMethod.POST, path = "/edit", params = {"id", "username", "new_role_id"})
+    public ResponseEntity updateUserRoleById(@RequestParam Integer id, @RequestParam String username, @RequestParam Integer new_role_id) {
+        Optional<User> requestingUser = repo.findById(id);
+        Optional<User> toBeModifiedUser = repo.findDistinctFirstByUsernameIgnoreCase(username);
+        Optional<RoleType> roleToBecome = svc.getRoleType(new_role_id);
+        if (requestingUser.isPresent()
+                && toBeModifiedUser.isPresent()
+                && roleToBecome.isPresent()) {
+            if (svc.isAdminRole(requestingUser.get())) {
+                List<RoleType> tmp = new ArrayList<>();
+                tmp.add(roleToBecome.get());
+                toBeModifiedUser.get().setRoles(tmp);
+            }
+            return new ResponseEntity(HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
+    //Used to update a users the password. Can be used by any user on themselves.
+    @Transactional
+    @RequestMapping(method = RequestMethod.POST, path = "/edit", params = {"id", "old_password", "new_password"})
+    public ResponseEntity updatePasswordById(@RequestParam Integer id, @RequestParam String old_password, @RequestParam String new_password) {
+        //Requesting user will be present if the old_password matches
+        Optional<User> requestingUser = passwordCompare(repo.findById(id), old_password);
+        if (requestingUser.isPresent()) {
+            if (svc.updatePassword(old_password, new_password, requestingUser.get()))
+                return new ResponseEntity(HttpStatus.OK);
+            else
+                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
     //Used to remove offending username of an inappropriate variety. Can be used by any user on themselves or by any admin on any other user.
     @Transactional
     @RequestMapping(method = RequestMethod.POST, path = "/edit", params = {"id", "old_username", "new_username"})
-    public void updateUsernameById(@RequestParam Integer id, @RequestParam String old_username, @RequestParam String new_username) {
+    public ResponseEntity updateUsernameById(@RequestParam Integer id, @RequestParam String old_username, @RequestParam String new_username) {
         Optional<User> requestingUser = repo.findById(id);
         Optional<User> toBeModifiedUser = repo.findDistinctFirstByUsernameIgnoreCase(old_username);
         if (requestingUser.isPresent()
@@ -87,8 +125,12 @@ __/\\\\\\\\\\\\\_________/\\\\\__________/\\\\\\\\\\\____/\\\\\\\\\\\\\\\_______
             if (requestingUser.get().equals(toBeModifiedUser.get()) || svc.isAdminRole(requestingUser.get())) {
                 toBeModifiedUser.get().setUsername(new_username);
                 repo.save(toBeModifiedUser.get());
+                return new ResponseEntity(HttpStatus.OK);
+            } else {
+                return new ResponseEntity(HttpStatus.UNAUTHORIZED);
             }
         }
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @Transactional

@@ -16,7 +16,7 @@ public class RoleTypeController {
     RoleTypeRepository repo;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<RoleType> getAllScores() {
+    public List<RoleType> getAllRoleTypes() {
         List<RoleType> results = repo.findAll();
         return results;
     }
