@@ -41,7 +41,7 @@ android-build:
   tags:
    - android_tag
   script:
-    - cd /AndroidStudioProjects/Loginscreen
+    - cd ./AndroidStudioProjects/Loginscreen
     - ./gradlew assemble
   artifacts:
     paths:
