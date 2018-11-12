@@ -68,9 +68,9 @@ unitTests:
   stage: androidtest
   before_script:
     - export GRADLE_USER_HOME=`pwd`/.gradle
-    - chmod +x ./Android_test/gradlew
+    - chmod +x ./AndroidStudioProjects/Loginscreen/gradlew
   tags:
    - android_tag
   script:
-    - cd Android_test
+    - cd ./AndroidStudioProjects/Loginscreen
     - ./gradlew test
