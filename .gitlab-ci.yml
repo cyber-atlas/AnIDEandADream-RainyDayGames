@@ -39,7 +39,7 @@ auto-deploy:
   script:
     - cd Backend/server
     - ./gradlew build
-    - sudo mv build/libs/*.jar /home/jedlicka/server/target/spring-demo.jar
+    - sudo mv build/libs/*.jar /target/spring-demo.jar
     - sudo systemctl stop system-spring-demo
     - sudo systemctl start system-spring-demo
  
