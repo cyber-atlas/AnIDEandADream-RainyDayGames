@@ -1,32 +1,32 @@
 # Stages of pipeline, should match with stage tag inside each job.
 # Each stages executes in sequence, if previous job fails, then all the preceeding jobs are skipped.
 stages:
-  - gradlebuild
-  - gradletest
+  # - gradlebuild
+  # - gradletest
   - androidbuild
   - androidtest
     
-gradle-build:
-  stage: gradlebuild
-  before_script:
-    - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
-    - chmod +x Backend/server/gradlew
-  tags:
-    - shell
-  script:
-    - cd Backend/server
-    - ./gradlew assemble
+# gradle-build:
+#   stage: gradlebuild
+#   before_script:
+#     - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
+#     - chmod +x Backend/server/gradlew
+#   tags:
+#     - shell
+#   script:
+#     - cd Backend/server
+#     - ./gradlew assemble
 	
-gradle-test:
-  stage: gradletest
-  before_script:
-    - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
-    - chmod +x Backend/server/gradlew
-  tags:
-    - shell
-  script:
-    - cd Backend/server
-    - ./gradlew test
+# gradle-test:
+#   stage: gradletest
+#   before_script:
+#     - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
+#     - chmod +x Backend/server/gradlew
+#   tags:
+#     - shell
+#   script:
+#     - cd Backend/server
+#     - ./gradlew test
 	
 # To build android projects
 # Notice that we cd into Android_test folder which contains all Android files before building apk.    
@@ -41,7 +41,7 @@ android-build:
   tags:
    - android_tag
   script:
-    - cd ./AndroidStudioProjects/Loginscreen
+    - cd AndroidStudioProjects/Loginscreen
     - ./gradlew assemble
   artifacts:
     paths:
