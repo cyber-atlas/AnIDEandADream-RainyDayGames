@@ -28,6 +28,20 @@ gradle-test:
     - cd Backend/server
     - ./gradlew test
 
+autoDeploy:
+  stage: auto-deploy
+  before_script:
+    - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
+    - chmod +x Backend/server/gradlew
+  tags:
+    - shell
+  script:
+    - cd Backend/server
+    - ./gradlew build
+    - sudo mv build/libs/*.jar /home/jedlicka/server/target/spring-demo.jar
+    - sudo stystemctl stop systemd-spring-demo
+    - sudo stystemctl start systemd-spring-demo
+ 
 # To build android projects
 # Notice that we cd into Android_test folder which contains all Android files before building apk.    
 # Ensure the tag matches with the tag created for Android runner
