@@ -3,6 +3,7 @@
 stages:
   - gradlebuild
   - gradletest
+  - autodeploy
   - androidbuild
   - androidtest
     
@@ -28,8 +29,8 @@ gradle-test:
     - cd Backend/server
     - ./gradlew test
 
-autoDeploy:
-  stage: auto-deploy
+auto-deploy:
+  stage: autodeploy
   before_script:
     - export GRADLE_USER_HOME=`pwd`/Backend/server/.gradle
     - chmod +x Backend/server/gradlew
