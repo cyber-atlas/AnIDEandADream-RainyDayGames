@@ -13,11 +13,11 @@ public class Tile {
         this.tileType = tileType;
     }
 
-    public Coordinate getPosCoordinate() {
+    public Coordinate getCoordinate() {
         return posCoordinate;
     }
 
-    public void setPosCoordinate(Coordinate posCoordinate) {
+    public void setCoordinate(Coordinate posCoordinate) {
         this.posCoordinate = posCoordinate;
     }
 

@@ -9,7 +9,7 @@ import java.util.Random;
 public class Map {
     private static final int width = 42;
     private static final int height = 42;
-    private TileType[][] map;
+    private TileType[][] map; //could convert to tile object
     private List<Snake> pileOfSnakes = new ArrayList<>();
     private Random psudo = new Random();
 
@@ -79,41 +79,32 @@ public class Map {
     private void drawSnake() {
         for (Snake snake :
                 pileOfSnakes) {
-            List<Coordinate> p = snake.dumpLocation();
+            List<Tile> p = snake.getSnek();
             for (int seg = 0; seg < p.size(); seg++) {
-                Coordinate segSnek = p.get(seg);
-                int segX = segSnek.getX();
-                int segY = segSnek.getY();
+                Tile segSnek = p.get(seg);
+                int segX = segSnek.getCoordinate().getX();
+                int segY = segSnek.getCoordinate().getY();
 
                 if (isOnMap(segX, segY)) {
                     switch (map[segX][segY]) {
                         case Nothing:
-                            updateSnakeTile(segX,segY,seg);
+                            updateSnakeTile(segX, segY, seg);
                             break;
                         case Apple:
                             snake.feed();
-                            updateSnakeTile(segX,segY,seg);
+                            updateSnakeTile(segX, segY, seg);
                             break;
                         case Wall:
                         case SnakeHead:
                         case SnakeTail:
-                            //todo: kill snake
+                            //also tell the client he died
+                            snake.endSnake();
                     }
                 } else {
-                    //todo: snake is off map
+                    snake.endSnake();
                 }
-
-
             }
         }
-    }
-
-    //wrapper for map
-    private void updateSnakeTile(int x, int y, int seg) {
-        if (seg == 0)
-            updateTile(x, y, TileType.SnakeHead);
-        else
-            updateTile(x, y, TileType.SnakeTail);
     }
 
     private boolean isOnMap(int x, int y) {
@@ -127,5 +118,13 @@ public class Map {
         if (isOnMap(x, y)) {
             map[x][y] = tileType;
         }
+    }
+
+    //wrapper for map
+    private void updateSnakeTile(int x, int y, int seg) {
+        if (seg == 0)
+            updateTile(x, y, TileType.SnakeHead);
+        else
+            updateTile(x, y, TileType.SnakeTail);
     }
 }
