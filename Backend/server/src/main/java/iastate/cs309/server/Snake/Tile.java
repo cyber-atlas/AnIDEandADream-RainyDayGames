@@ -4,21 +4,21 @@ import iastate.cs309.server.Snake.SnakeEnums.TileType;
 
 public class Tile {
 
-    private Coordinate posCoordinate;
+    private Coordinate coordinate;
 
     private TileType tileType;
 
     public Tile(Coordinate coordinate, TileType tileType) {
-        this.posCoordinate = coordinate;
+        this.coordinate = coordinate;
         this.tileType = tileType;
     }
 
     public Coordinate getCoordinate() {
-        return posCoordinate;
+        return coordinate;
     }
 
-    public void setCoordinate(Coordinate posCoordinate) {
-        this.posCoordinate = posCoordinate;
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
     }
 
     public TileType getTileType() {

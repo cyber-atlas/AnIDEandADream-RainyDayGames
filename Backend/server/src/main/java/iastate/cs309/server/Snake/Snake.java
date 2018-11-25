@@ -3,38 +3,41 @@ package iastate.cs309.server.Snake;
 import iastate.cs309.server.Snake.SnakeEnums.Direction;
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
 
-import java.lang.invoke.SwitchPoint;
 import java.util.ArrayList;
 
 public class Snake {
-
     public static final int spawnHeight = 5;
-    private ArrayList<Tile> snek = new ArrayList<>();
+    private ArrayList<Tile> snake = new ArrayList<>();
+    private String name;
     private Direction dir;
 
     private Direction queuedDir;
 
     private Boolean justAte;
 
-    public void Snake(Coordinate startingLocation) {
+    public Snake(String name, Coordinate startingLocation) {
         dir = Direction.North;
-
+        this.name = name;
         for (int offset = 0; offset <= spawnHeight; offset++) {
             switch (offset) {
                 case 0:
-                    snek.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeHead));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeHead));
                     break;
                 case spawnHeight:
-                    snek.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.Nothing)); // paint a trail of nothing behind the snake
+                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.Nothing)); // paint a trail of nothing behind the snake
                     break;
                 default:
-                    snek.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeTail));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeTail));
             }
         }
     }
 
-    public ArrayList<Tile> getSnek() {
-        return snek;
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Tile> getSnake() {
+        return snake;
     }
 
     public void feed() {
@@ -47,7 +50,7 @@ public class Snake {
         dir = queuedDir;
         shuffleTowardHead();
 
-        Coordinate head = snek.get(0).getCoordinate();
+        Coordinate head = snake.get(0).getCoordinate();
         switch (dir) {
             case North:
                 head.setY(head.getY() + 1);
@@ -64,12 +67,12 @@ public class Snake {
         }
     }
 
-    public int endSnake(){
-        for (Tile t:
-             snek) {
+    public int endSnake() {
+        for (Tile t :
+                snake) {
             t.setTileType(TileType.Apple);
         }
-        return snek.size();
+        return snake.size();
     }
 
     public void updateDirection(Direction nextDir) {
@@ -92,12 +95,12 @@ public class Snake {
     private void shuffleTowardHead() {
         //Move each body part from tail to head
         if (justAte) {
-            snek.add(new Tile (new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first
+            snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first
             justAte = false;
         }
-        for (int seg = snek.size() - 1; seg > 0; seg--) {
-            Coordinate bodyPart = snek.get(seg).getCoordinate();
-            Coordinate nextBodyPart = snek.get(seg + 1).getCoordinate();
+        for (int seg = snake.size() - 1; seg > 0; seg--) {
+            Coordinate bodyPart = snake.get(seg).getCoordinate();
+            Coordinate nextBodyPart = snake.get(seg + 1).getCoordinate();
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }

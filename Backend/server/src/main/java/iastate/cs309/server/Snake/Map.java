@@ -6,22 +6,55 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Map {
+public class Map implements Runnable{
     private static final int width = 42;
     private static final int height = 42;
     private TileType[][] map; //could convert to tile object
     private List<Snake> pileOfSnakes = new ArrayList<>();
     private Random psudo = new Random();
 
+    public void run(){
+        //Todo: implement better solution, this is temporary crap!
+        long lastLoopTime = System.nanoTime();
+        final int TARGET_FPS = 2;
+        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        long lastFpsTime = 0;
+        while(true) {
+            long now = System.nanoTime();
+            long updateLength = now - lastLoopTime;
+            lastLoopTime = now;
+            double delta = updateLength / ((double) OPTIMAL_TIME);
+
+            lastFpsTime += updateLength;
+            if (lastFpsTime >= 1000000000) {
+                lastFpsTime = 0;
+            }
+
+            this.update();
+
+            try {
+                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public synchronized void update() {
+        if (readyToSpawnFood()) spawnFood();
+        drawSnake();
+    }
+
     public void Map() {
         map = new TileType[width][height];
         drawBorders();
     }
 
-    public void addSnake()
+    public void addSnake(Snake snake) {
+        pileOfSnakes.add(snake);
+    }
 
     //finds a place with a contiguous snake sized spawn area
-    private Coordinate findSnakeSpawn() {
+    public Coordinate findSnakeSpawn() {
         int dartX = psudo.nextInt() % width;
         // pad the top and bottom snake heights to prevent spawning into a wall 1 move after spawning
         int dartY = psudo.nextInt() % (height - (2 * Snake.spawnHeight)) + Snake.spawnHeight;
@@ -56,6 +89,10 @@ public class Map {
         return count;
     }
 
+    private boolean readyToSpawnFood() {
+        return countTiles(TileType.Apple) < pileOfSnakes.size() * 3;
+    }
+
     private void spawnFood() {
         //Throw a random dart at the gameboard; put food there if you didn't poke a thing
         int dartX = psudo.nextInt() % width;
@@ -79,26 +116,27 @@ public class Map {
     private void drawSnake() {
         for (Snake snake :
                 pileOfSnakes) {
-            List<Tile> p = snake.getSnek();
+            List<Tile> p = snake.getSnake();
             for (int seg = 0; seg < p.size(); seg++) {
-                Tile segSnek = p.get(seg);
-                int segX = segSnek.getCoordinate().getX();
-                int segY = segSnek.getCoordinate().getY();
+                Tile snakeTile = p.get(seg);
+                int segX = snakeTile.getCoordinate().getX();
+                int segY = snakeTile.getCoordinate().getY();
 
                 if (isOnMap(segX, segY)) {
                     switch (map[segX][segY]) {
                         case Nothing:
-                            updateSnakeTile(segX, segY, seg);
+                            updateTile(snakeTile);
                             break;
                         case Apple:
                             snake.feed();
-                            updateSnakeTile(segX, segY, seg);
+                            updateTile(snakeTile);
                             break;
                         case Wall:
                         case SnakeHead:
                         case SnakeTail:
-                            //also tell the client he died
-                            snake.endSnake();
+                            //kill the snake if its head is in another block
+                            if (seg == 0)
+                                snake.endSnake();
                     }
                 } else {
                     snake.endSnake();
@@ -107,10 +145,23 @@ public class Map {
         }
     }
 
+
     private boolean isOnMap(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height)
             return true;
         return false;
+    }
+
+    private boolean isOnMap(Coordinate coord) {
+        if (coord.getX() >= 0 && coord.getY() >= 0 && coord.getX() < width && coord.getY() < height)
+            return true;
+        return false;
+    }
+
+    private void updateTile(Tile tile) {
+        if (isOnMap(tile.getCoordinate())) {
+            map[tile.getCoordinate().getX()][tile.getCoordinate().getY()] = tile.getTileType();
+        }
     }
 
     //wrapper for map
@@ -118,13 +169,5 @@ public class Map {
         if (isOnMap(x, y)) {
             map[x][y] = tileType;
         }
-    }
-
-    //wrapper for map
-    private void updateSnakeTile(int x, int y, int seg) {
-        if (seg == 0)
-            updateTile(x, y, TileType.SnakeHead);
-        else
-            updateTile(x, y, TileType.SnakeTail);
     }
 }
