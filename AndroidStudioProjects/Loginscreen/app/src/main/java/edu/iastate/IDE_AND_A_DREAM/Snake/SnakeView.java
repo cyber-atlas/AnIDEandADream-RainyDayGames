@@ -56,6 +56,9 @@ public class SnakeView extends View{
                         case Apple:
                             mPaint.setColor(Color.WHITE);
                             break;
+                        case Monster:
+                            mPaint.setColor(Color.MAGENTA);
+                            break;
                     }
                     canvas.drawCircle(x * tileSizeX +tileSizeX /2f + circleSize/ 2,y * tileSizeY +tileSizeY /2f + circleSize/ 2, circleSize, mPaint);
 
