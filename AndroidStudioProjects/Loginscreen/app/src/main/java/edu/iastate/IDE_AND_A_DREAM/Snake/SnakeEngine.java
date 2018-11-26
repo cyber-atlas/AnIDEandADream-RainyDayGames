@@ -132,6 +132,10 @@ public class SnakeEngine  {
         for (Coordinate wall: walls){
             map[wall.getX()][wall.getY()] = TileType.Wall;
         }
+
+        for ( Coordinate mon : monster){
+            map[mon.getX()][mon.getY()] = TileType.Monster;
+        }
         return map;
     }
 
