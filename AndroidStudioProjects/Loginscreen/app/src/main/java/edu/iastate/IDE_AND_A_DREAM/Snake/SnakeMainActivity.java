@@ -54,6 +54,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private SnakeView snakeView;
     int HiScore;
     int updateDelay;
+    int numMon;
     int prevScore = 0;
 
     private RequestQueue mQueue;
@@ -74,6 +75,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
         Bundle extras = getIntent().getExtras();
         int value = extras.getInt("level");
+        int monsterVal = extras.getInt("monsters");
+        numMon = monsterVal;
         updateDelay = value;
         Log.d("Update Valley",String.valueOf(updateDelay));
 

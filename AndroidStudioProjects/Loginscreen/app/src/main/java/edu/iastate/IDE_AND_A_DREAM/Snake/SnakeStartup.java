@@ -52,6 +52,7 @@ public class SnakeStartup extends AppCompatActivity {
                 Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
                 i.putExtra("userid",extras.getString("userid"));
                 i.putExtra("level", EasyLevel);
+                i.putExtra("monsters", 3);
                 SnakeStartup.this.startActivity(i);
 
             }
@@ -67,6 +68,8 @@ public class SnakeStartup extends AppCompatActivity {
                 Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
                 i.putExtra("userid",extras.getString("userid"));
                 i.putExtra("level", MediumLevel);
+                i.putExtra("monsters", 6);
+
                 SnakeStartup.this.startActivity(i);
 
             }
@@ -82,6 +85,9 @@ public class SnakeStartup extends AppCompatActivity {
                 Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
                 i.putExtra("userid",extras.getString("userid"));
                 i.putExtra("level", HardLevel);
+                i.putExtra("monsters", 3);
+                i.putExtra("monsters", 10);
+
                 SnakeStartup.this.startActivity(i);
 
             }

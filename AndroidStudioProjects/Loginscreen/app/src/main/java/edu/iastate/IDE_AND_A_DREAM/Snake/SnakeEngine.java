@@ -23,6 +23,7 @@ public class SnakeEngine  {
     private List<Coordinate> apples = new ArrayList<>();
 
     private Random random = new Random();
+    private Random monNum = new Random();
 
     private boolean increaseTail = false;
 
@@ -191,9 +192,10 @@ public class SnakeEngine  {
     }
 
     private void AddMonster(){
-        monster.add(new Coordinate(10, 10));
-        monster.add(new Coordinate(17, 30));
-        monster.add(new Coordinate(3, 4));
+
+        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
+        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
+        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
     }
 
     private void AddApples(){
