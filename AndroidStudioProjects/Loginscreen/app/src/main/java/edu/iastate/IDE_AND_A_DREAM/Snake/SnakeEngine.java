@@ -14,8 +14,10 @@ public class SnakeEngine  {
     public static final int GameWidth = 28;
     public static final int GameHeight = 42;
 
+
     private List<Coordinate> walls = new ArrayList<>();
     private List<Coordinate> snake = new ArrayList<>();
+    private List<Coordinate> monster = new ArrayList<>();
 
     private TextView currentScore;
     private List<Coordinate> apples = new ArrayList<>();
@@ -40,6 +42,7 @@ public class SnakeEngine  {
         Addsnake();
         AddWalls();
         AddApples();
+        AddMonster();
     }
 
     public void updateDirection(Direction newDirection){
@@ -75,6 +78,11 @@ public class SnakeEngine  {
             }
         }
 
+        for(Coordinate x : monster){
+            if(snake.get(0).equals(x)){
+                currentGameState = GameState.Lost;
+            }
+        }
 
 
         //SefColusuon
@@ -178,6 +186,11 @@ public class SnakeEngine  {
         snake.add(new Coordinate(2,7));
     }
 
+    private void AddMonster(){
+        monster.add(new Coordinate(10, 10));
+        monster.add(new Coordinate(17, 30));
+        monster.add(new Coordinate(3, 4));
+    }
 
     private void AddApples(){
         Coordinate coordinate = null;
