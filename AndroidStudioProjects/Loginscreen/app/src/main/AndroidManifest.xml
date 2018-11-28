@@ -43,6 +43,14 @@
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.UserProfile.ChangePassword" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Messaging.MessagingMainActivity" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Messaging.Messaging" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle.GameActivity"></activity>
         <activity
             android:name="edu.iastate.IDE_AND_A_DREAM.Leaderboards.LeaderboardList"
             android:label="@string/title_activity_leaderboard_list"

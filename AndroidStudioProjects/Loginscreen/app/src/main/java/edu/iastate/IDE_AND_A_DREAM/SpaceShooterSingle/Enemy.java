@@ -7,6 +7,9 @@ import android.graphics.Rect;
 
 import java.util.Random;
 
+import edu.iastate.loginscreen.R;
+
+
 public class Enemy {
 
     //Enemy Bitmap

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_singleshooter_main);
 
         //setting the orientation to landscape
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
@@ -29,12 +29,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //add a click listener to the play button
         buttonPlay.setOnClickListener(this);
-
     }
 
     @Override
     public void onClick(View v){
-
        //Start the game activity that we define
        startActivity(new Intent(this, GameActivity.class));
 

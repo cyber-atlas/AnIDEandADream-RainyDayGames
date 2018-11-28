@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle.MainActivity;
+
+
 import edu.iastate.loginscreen.R;
 
 public class GamesList extends AppCompatActivity {
@@ -20,6 +23,7 @@ public class GamesList extends AppCompatActivity {
         setContentView(R.layout.activity_games_list);
 
         Button StartSnakeGame = findViewById(R.id.SnakeGame);
+        Button SpaceShooter = findViewById(R.id.spaceShooter);
 
         StartSnakeGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +40,23 @@ public class GamesList extends AppCompatActivity {
 //                GamesList.this.startActivity(StartSnakeIntent);
             }
         });
+
+        SpaceShooter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle extras = getIntent().getExtras();
+                if (extras != null) {
+                    String value = extras.getString("userid");
+                    Log.d("Message from Signup", value);
+                }
+                Intent i = new Intent(GamesList.this, MainActivity.class);
+                i.putExtra("userid",extras.getString("userid"));
+                GamesList.this.startActivity(i);
+//                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
+//                GamesList.this.startActivity(StartSnakeIntent);
+            }
+        });
+
 
     }
 }
