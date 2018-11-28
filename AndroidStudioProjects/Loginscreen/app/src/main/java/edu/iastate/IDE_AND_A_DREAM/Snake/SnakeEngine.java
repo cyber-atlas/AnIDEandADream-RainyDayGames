@@ -39,11 +39,11 @@ public class SnakeEngine  {
 
     public SnakeEngine(){}
 
-    public void initGame(){
+    public void initGame(int monst){
         Addsnake();
         AddWalls();
         AddApples();
-        AddMonster();
+        AddMonster( monst);
     }
 
     public void updateDirection(Direction newDirection){
@@ -191,11 +191,11 @@ public class SnakeEngine  {
         snake.add(new Coordinate(2,7));
     }
 
-    private void AddMonster(){
-
-        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
-        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
-        monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
+    public void AddMonster(int num){
+        for (int i = 0; i < num; i++)
+        {
+            monster.add(new Coordinate(1 + monNum.nextInt(GameWidth - 2), 1 + monNum.nextInt(GameHeight - 2)));
+        }
     }
 
     private void AddApples(){

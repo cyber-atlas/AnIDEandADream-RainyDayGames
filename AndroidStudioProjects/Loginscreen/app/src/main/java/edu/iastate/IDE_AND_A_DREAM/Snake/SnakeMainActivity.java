@@ -69,15 +69,18 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         CurrentScore = findViewById(R.id.CurrentScoreTextView);
         CurrentScore.setText("Current Score: "+prevScore);
 
-        gameEngine = new SnakeEngine();
-        gameEngine.initGame();
-        mQueue = Volley.newRequestQueue(this);
 
         Bundle extras = getIntent().getExtras();
         int value = extras.getInt("level");
         int monsterVal = extras.getInt("monsters");
         numMon = monsterVal;
         updateDelay = value;
+
+        gameEngine = new SnakeEngine();
+        gameEngine.initGame(numMon);
+        mQueue = Volley.newRequestQueue(this);
+
+
         Log.d("Update Valley",String.valueOf(updateDelay));
 
         snakeView = findViewById(R.id.snakeView);
