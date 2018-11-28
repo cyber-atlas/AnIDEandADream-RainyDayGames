@@ -6,20 +6,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Map implements Runnable{
+public class Map implements Runnable {
     private static final int width = 42;
     private static final int height = 42;
     private TileType[][] map; //could convert to tile object
     private List<Snake> pileOfSnakes = new ArrayList<>();
-    private Random psudo = new Random();
+    private transient Random psudo = new Random();
 
-    public void run(){
+    public Map() {
+        map = new TileType[width][height];
+        drawStarterMap();
+    }
+
+    public void run() {
         //Todo: implement better solution, this is temporary crap!
         long lastLoopTime = System.nanoTime();
-        final int TARGET_FPS = 2;
-        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        final int TARGET_FPS = 1;
+        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS; //nanoseconds per second / target fps
         long lastFpsTime = 0;
-        while(true) {
+        while (true) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
@@ -33,6 +38,12 @@ public class Map implements Runnable{
             this.update();
 
             try {
+                SnakeEndpoint.broadcastMap();
+            } catch (Exception e) {
+
+            }
+
+            try {
                 Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
             } catch (Exception e) {
             }
@@ -41,12 +52,11 @@ public class Map implements Runnable{
 
     public synchronized void update() {
         if (readyToSpawnFood()) spawnFood();
-        drawSnake();
-    }
-
-    public void Map() {
-        map = new TileType[width][height];
-        drawBorders();
+        for (Snake snake :
+                pileOfSnakes) {
+            snake.slither();
+        }
+        drawSnakes();
     }
 
     public void addSnake(Snake snake) {
@@ -55,9 +65,9 @@ public class Map implements Runnable{
 
     //finds a place with a contiguous snake sized spawn area
     public Coordinate findSnakeSpawn() {
-        int dartX = psudo.nextInt() % width;
+        int dartX = Math.abs(psudo.nextInt()) % width;
         // pad the top and bottom snake heights to prevent spawning into a wall 1 move after spawning
-        int dartY = psudo.nextInt() % (height - (2 * Snake.spawnHeight)) + Snake.spawnHeight;
+        int dartY = Math.abs(psudo.nextInt()) % (height - (2 * Snake.spawnHeight)) + Snake.spawnHeight;
 
         if (isNTallNothing(dartX, dartY, Snake.spawnHeight))
             return new Coordinate(dartX, dartY);
@@ -68,7 +78,7 @@ public class Map implements Runnable{
 
     private boolean isNTallNothing(int x, int y, int n) {
         for (int i = 0; i < n; i++) {
-            if (!map[x][y + i].equals(TileType.Nothing))
+            if (isOnMap(x, y + i) && map[x][y + i] != TileType.Nothing)
                 return false;
         }
         return true;
@@ -95,25 +105,27 @@ public class Map implements Runnable{
 
     private void spawnFood() {
         //Throw a random dart at the gameboard; put food there if you didn't poke a thing
-        int dartX = psudo.nextInt() % width;
-        int dartY = psudo.nextInt() % height;
+        int dartX = Math.abs(psudo.nextInt()) % width;
+        int dartY = Math.abs(psudo.nextInt()) % height;
         if (map[dartX][dartY].equals(TileType.Nothing)) {
             map[dartX][dartY] = TileType.Apple;
         }
     }
 
     //Simple border maximizing playable area
-    private void drawBorders() {
+    private void drawStarterMap() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (x == 0 || y == 0 || x == width - 1 || y == height - 1) {
                     updateTile(x, y, TileType.Wall);
+                } else {
+                    updateTile(x, y, TileType.Nothing);
                 }
             }
         }
     }
 
-    private void drawSnake() {
+    private void drawSnakes() {
         for (Snake snake :
                 pileOfSnakes) {
             List<Tile> p = snake.getSnake();

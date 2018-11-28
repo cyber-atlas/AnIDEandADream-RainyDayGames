@@ -22,21 +22,28 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class SnakeEndpoint {
     private static Set<SnakeEndpoint> snakeEndpoints
             = new CopyOnWriteArraySet<>();
-    private static Logger logger = LoggerFactory.getLogger(iastate.cs309.server.Chat.RudeEndpoint.class);
+    private static Logger logger = LoggerFactory.getLogger(iastate.cs309.server.Snake.SnakeEndpoint.class);
+    private static HashBiMap<String, String> users = HashBiMap.create();
+    private static HashMap<String, Snake> sessionSnakes = new HashMap<>();
+    private static Map map = new Map();
+    private static Gson gson = new Gson();
     private Session session;
-    private HashMap<String, Snake> sessionSnakes = new HashMap<>();
-    private Map map = new Map();
-    private Gson gson = new Gson();
     private boolean isRunning;
 
-    private void broadcast(Message message)
-            throws IOException, EncodeException {
-
+    public static void broadcastMap(){
         snakeEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {
                     endpoint.session.getBasicRemote().
                             sendText(gson.toJson(map));
+
+                    //send the snakes to client, they may get score for when snake dies.
+//                    for (Snake snake :
+//                            sessionSnakes.values()) {
+//                        endpoint.session.getBasicRemote().
+//                                sendText(gson.toJson(snake));
+//                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
@@ -44,6 +51,48 @@ public class SnakeEndpoint {
             }
         });
     }
+
+
+    private static void broadcast(Message message) {
+
+        snakeEndpoints.forEach(endpoint -> {
+            synchronized (endpoint) {
+                try {
+                    endpoint.session.getBasicRemote().
+                            sendText(message.getFrom() + ": " + message.getContent());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    logger.error(e.getMessage());
+                }
+            }
+        });
+    }
+
+    private static void sendMessageToAnotherUser(Session session, Message msg) {
+        try {
+            String toId = users.inverse().get(msg.getTo());
+            snakeEndpoints.forEach(endpoint -> {
+                synchronized (endpoint) {
+                    try {
+                        //Find the target and send the message to them.
+                        if (endpoint.session.getId() == toId) {
+                            endpoint.session.getBasicRemote().
+                                    sendText(msg.getFrom() + "->" + msg.getTo() + ": " + msg.getContent());
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        logger.error(e.getMessage());
+                    }
+                }
+            });
+            //Duplicate message for sender's chat log
+            session.getBasicRemote().sendText(msg.getFrom() + "->" + msg.getTo() + ": " + msg.getContent());
+        } catch (IOException e) {
+            logger.info("Exception: " + e.getMessage().toString());
+            e.printStackTrace();
+        }
+    }
+
 
     public Map getMap() {
         return map;
@@ -80,10 +129,10 @@ public class SnakeEndpoint {
             throws IOException, EncodeException {
 
         //Todo: this but in json
-        //format: username dir <N/S/E/W>
+        //format: dir <N/S/E/W>
         if (message.contains("dir")) {
             String[] parts = message.split("\\s");
-            switch (parts[2]) {
+            switch (parts[1]) {
                 case "N":
                     sessionSnakes.get(session.getId()).updateDirection(Direction.North);
                     break;
@@ -102,15 +151,16 @@ public class SnakeEndpoint {
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
-        sessionSnakes.get(session.getId()).endSnake();
+        if (sessionSnakes.get(session.getId()) != null)
+            sessionSnakes.get(session.getId()).endSnake();
         snakeEndpoints.remove(this);
 
 
-        if (sessionSnakes.size()==0)
-        {
+        if (sessionSnakes.size() == 0) {
             //cleanup the game
-        };
-        //broadcast(message);
+        }
+        ;
+        //broadcastMap(message);
     }
 
     @OnError
@@ -118,7 +168,6 @@ public class SnakeEndpoint {
         logger.error(session.toString());
         logger.error(throwable.getMessage());
     }
-
 }
 
 
