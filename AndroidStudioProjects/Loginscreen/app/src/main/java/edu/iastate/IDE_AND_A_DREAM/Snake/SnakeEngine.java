@@ -152,7 +152,6 @@ public class SnakeEngine  {
         for (int y = 0; y < GameHeight; y++) {
             walls.add(new Coordinate(0,y));
             walls.add(new Coordinate(GameWidth-1,y));
-
         }
     }
 
