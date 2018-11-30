@@ -149,11 +149,12 @@ public class Map implements Runnable {
                     if (seg == 0) {
                         switch (map[segX][segY]) {
                             case Nothing:
-                                    updateTile(snakeTile);
+                                updateTile(snakeTile);
                                 break;
                             case Apple:
                                 snake.feed();
-                                    updateTile(snakeTile);
+                                updateTile(new Tile(snakeTile.getCoordinate(),TileType.Nothing));
+                                updateTile(snakeTile);
                                 break;
                             case Wall:
                             case SnakeHead:

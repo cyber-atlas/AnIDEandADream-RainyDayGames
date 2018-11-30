@@ -38,6 +38,23 @@ public class Snake {
         }
     }
 
+    private static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
+        ArrayList<Tile> outSnake = new ArrayList<>();
+        for (int i = 0; i < inSnake.size(); i++) {
+            Coordinate curCoord = inSnake.get(i).getCoordinate();
+            int endTail = inSnake.size() - 1;
+            if (i == 0)
+                outSnake.add(new Tile(curCoord, TileType.SnakeHead));
+            else if (i == endTail)
+                outSnake.add(new Tile(curCoord, TileType.Nothing)); // paint a trail of nothing behind the snake
+            else
+                outSnake.add(new Tile(curCoord, TileType.SnakeTail));
+        }
+        return outSnake;
+    }
+
+
+
     public String getName() {
         return name;
     }
@@ -114,6 +131,7 @@ public class Snake {
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }
+        snake = snakeFix(snake);
     }
 
     public void respawn(Coordinate spawn) {
