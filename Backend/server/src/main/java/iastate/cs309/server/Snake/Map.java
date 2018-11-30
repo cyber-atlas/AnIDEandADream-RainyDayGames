@@ -159,8 +159,8 @@ public class Map implements Runnable {
                             case SnakeHead:
                             case SnakeTail:
                                 //kill the snake if its head is in another block
-                                if (seg == 0)
-                                    snake.endSnake();
+                                snake.endSnake();
+                                updateTile(snakeTile);
                         }
                     } else {
                         updateTile(snakeTile);
@@ -205,5 +205,13 @@ public class Map implements Runnable {
             if (isOnMap(x, y) && map[x][y] != TileType.Wall)
                 updateTile(x, y, TileType.Apple);
         }
+    }
+
+    public void reset() {
+        for (Snake snake :
+                pileOfSnakes) {
+            snake.endSnake();
+        }
+        drawStarterMap();
     }
 }

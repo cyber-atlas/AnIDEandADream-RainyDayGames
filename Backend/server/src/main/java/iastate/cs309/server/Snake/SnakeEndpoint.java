@@ -181,10 +181,9 @@ public class SnakeEndpoint {
             sessionSnakes.get(session.getId()).endSnake();
         snakeEndpoints.remove(this);
 
-
-//        if (sessionSnakes.size() == 0) {
-//            //cleanup the game
-//        }
+        if (sessionSnakes.size() == 0) {
+            map.reset();
+        }
         ;
         //broadcastMap(message);
     }
