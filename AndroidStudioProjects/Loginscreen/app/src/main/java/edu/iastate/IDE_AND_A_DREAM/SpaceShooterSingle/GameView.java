@@ -95,7 +95,8 @@ public class GameView extends SurfaceView implements Runnable {
         isOver = false;
 
         score = 0;
-        crashes = 0;
+        //The max number of allowed crashes
+        crashes = 5;
 
     }
 
@@ -113,33 +114,23 @@ public class GameView extends SurfaceView implements Runnable {
 
     private void update() {
 
-//        tester = false;
         player.setShooting(false);
 
         //update the player position
         player.update();
 
         //Sets the blast outside of the screen
-        blast.setX(-300);
-        blast.setY(-300);
-
+        blast.setX(-500);
+        blast.setY(-500);
 
         //Updating all of the stars based on the player's speed
         for (Star s : stars) {
             s.update(player.getSpeed());
         }
 
-        //flag is true when asteroids just enters the screen
-//        if(enemies.getX()==screenX)
-
         //updating the enemy coordinate based on player speed
         for (int i = 0; i < numEnemies; i++) {
             enemies[i].update(player.getSpeed());
-            //flag is true when asteroids just enters the screen
-//            if(enemies[i].getX()==screenX){
-//                flag == true;
-//            }
-
 
             //if collision with player occurs
             if (Rect.intersects(player.getDetectCollision(), enemies[i].getDetectCollision())) {
@@ -152,7 +143,11 @@ public class GameView extends SurfaceView implements Runnable {
                 enemies[i].setX(-500);
 
                 //Increment the crashes
-                crashes++;
+                crashes--;
+                //If the user goes below 0 remaining crashes the game is over
+                if (crashes < 0) {
+                    isOver = true;
+                }
             }
         }
 
@@ -197,9 +192,6 @@ public class GameView extends SurfaceView implements Runnable {
                 canvas.drawColor(Color.RED);
 //                canvas.drawColor(Color.BLACK);
             }
-            //after we change the screen, change the tester
-//            tester = false;
-
 
             //TODO might be a good idea to make these different colors
             //Drawing all white stars at their location and size
@@ -214,8 +206,6 @@ public class GameView extends SurfaceView implements Runnable {
             paint.setTextSize(42);
             canvas.drawText("Crashes :" + crashes, 100, 42, paint);
             canvas.drawText("Score:" + score,442 , 42, paint);
-
-
 
             //Drawing the player
             canvas.drawBitmap(
@@ -248,6 +238,19 @@ public class GameView extends SurfaceView implements Runnable {
                 //Update the shot
                 paint.setColor(Color.GREEN);
                 canvas.drawRect(shot.getShotRect(), paint);
+            }
+
+
+            //draw game Over when the game is over
+            if(isOver){
+                paint.setTextSize(150);
+                paint.setTextAlign(Paint.Align.CENTER);
+
+                int yPos=(int) ((canvas.getHeight() / 2) - ((paint.descent() + paint.ascent()) / 2));
+                canvas.drawText("Game Over",canvas.getWidth()/2,yPos,paint);
+
+                //Done playing
+                playing = false;
             }
 
 
@@ -305,47 +308,14 @@ public class GameView extends SurfaceView implements Runnable {
          * applies a bitmask to it so
          * we only deal with the bits we care about
          */
-//        switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-//
-//            //When the user presses the screen
-//            case MotionEvent.ACTION_UP:
-//                //Stopping the boosting when screen is released
-//                player.stopBoosting();
-//                break;
-//            case MotionEvent.ACTION_DOWN:
-//
-//                if (motionEvent.getX() > screenX / 3) {
-//
-//                    tester = true;
-//                    player.setShooting(true);
-//
-//                    Log.d("motion shooting touch ", String.valueOf(player.isShooting()));
-//                    break;
-//                }
-//
-//                //boosting the space jet when screen is pressed
-//                player.setBoosting();
-//
-//                player.setShooting(false);
-//                tester = false;
-//                Log.d("Tester working?", String.valueOf(tester));
-//
-//                break;
-//        }
 
         return true;
     }
-    /**
-     private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
-    @Override
-    public boolean onDoubleTap(MotionEvent e) {
 
-    return false;
-    }
-
-    });
-
-     **/
+/**Gets the touch from the user
+         * applies a bitmask to it so
+         * we only deal with the bits we care about
+         */
 
     void touchLogic(MotionEvent m) {
 
@@ -372,6 +342,10 @@ public class GameView extends SurfaceView implements Runnable {
             int maskedAction = m.getActionMasked();
             int actionIndex = m.getActionIndex();
 
+         /**Gets the touch from the user
+         * applies a bitmask to it so
+         * we only deal with the bits we care about
+         */
             //TODO for some reason the game crashes when the buttons are mashed or something
             switch (maskedAction) {
 
