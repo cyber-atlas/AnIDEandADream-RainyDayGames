@@ -2,10 +2,9 @@ package edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.ImageButton;
 
 import edu.iastate.loginscreen.R;
@@ -15,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Image button is just a button that has an image and changes color
     private ImageButton buttonPlay;
+    private ImageButton buttonScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //getting the play button
         buttonPlay  = (ImageButton) findViewById(R.id.buttonPlay);
+        buttonScore = (ImageButton) findViewById(R.id.buttonScore);
 
         //add a click listener to the play button
         buttonPlay.setOnClickListener(this);

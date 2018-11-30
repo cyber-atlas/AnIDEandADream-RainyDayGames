@@ -19,6 +19,8 @@ public class LeaderboardList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard_list);
         Button Snake = findViewById(R.id.Snake);
+        Button Snakepp = findViewById(R.id.snakeplus);
+        Button Shooter = findViewById(R.id.shooter);
 
        Snake.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -27,6 +29,23 @@ public class LeaderboardList extends AppCompatActivity {
                 LeaderboardList.this.startActivity(leader);
             }
         });
+
+        Snakepp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent leader = new Intent(LeaderboardList.this, SnakeppLeaderboard.class);
+                LeaderboardList.this.startActivity(leader);
+            }
+        });
+
+        Shooter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent leader = new Intent(LeaderboardList.this, ShooterLeaderboard.class);
+                LeaderboardList.this.startActivity(leader);
+            }
+        });
+
     }
 
 

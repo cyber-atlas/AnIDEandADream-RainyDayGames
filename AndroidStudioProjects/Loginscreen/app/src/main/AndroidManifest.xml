@@ -55,6 +55,8 @@
             android:name="edu.iastate.IDE_AND_A_DREAM.Leaderboards.LeaderboardList"
             android:label="@string/title_activity_leaderboard_list"
             android:theme="@style/AppTheme" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Leaderboards.ShooterLeaderboard"></activity>
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Leaderboards.SnakeppLeaderboard"></activity>
         <activity android:name="edu.iastate.TextView"></activity>
     </application>
 
