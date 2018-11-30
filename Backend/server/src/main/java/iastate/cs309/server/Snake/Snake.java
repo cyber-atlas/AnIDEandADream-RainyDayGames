@@ -27,13 +27,13 @@ public class Snake {
         for (int offset = 0; offset <= spawnHeight; offset++) {
             switch (offset) {
                 case 0:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeHead));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.SnakeHead));
                     break;
                 case spawnHeight:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.Nothing)); // paint a trail of nothing behind the snake
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.Nothing)); // paint a trail of nothing behind the snake
                     break;
                 default:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeTail));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.SnakeTail));
             }
         }
     }
