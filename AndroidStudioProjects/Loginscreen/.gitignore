@@ -32,9 +32,9 @@ gen/
 out/
 
 # Gradle files
-.gradle
-.gradle/
-build/
+#.gradle
+#.gradle/
+#build/
 
 # Signing files
 .signing/
