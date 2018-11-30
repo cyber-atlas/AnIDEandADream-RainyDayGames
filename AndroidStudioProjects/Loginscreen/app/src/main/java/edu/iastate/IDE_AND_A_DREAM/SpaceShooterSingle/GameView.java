@@ -52,6 +52,8 @@ public class GameView extends SurfaceView implements Runnable {
     private boolean isOver;
     //TODO make work for blaster
 //    private Button btnShoot;
+    private int score;
+    private int crashes;
 
     //    private ArrayList<Rect> shotsList = new ArrayList<>();
     private LinkedList<Shots> shotsList = new LinkedList<>();
@@ -91,7 +93,9 @@ public class GameView extends SurfaceView implements Runnable {
         this.screenX = screenX;
         numMisses = 0;
         isOver = false;
-//
+
+        score = 0;
+        crashes = 0;
 
     }
 
@@ -146,6 +150,9 @@ public class GameView extends SurfaceView implements Runnable {
 
                 //move enemies outside the left edge
                 enemies[i].setX(-500);
+
+                //Increment the crashes
+                crashes++;
             }
         }
 
@@ -167,6 +174,8 @@ public class GameView extends SurfaceView implements Runnable {
                 if (Rect.intersects(shot.getDetectCollision(), enemies[i].getDetectCollision())){
                     shot.setLive(false);
                     enemies[i].setX(-500);
+                    //Increment score
+                    score++;
                 }
             }
 
@@ -199,8 +208,13 @@ public class GameView extends SurfaceView implements Runnable {
             for (Star s : stars) {
                 paint.setStrokeWidth(s.getStarWidth());
                 canvas.drawPoint(s.getX(), s.getY(), paint);
-
             }
+
+            //Draws the score and the oopsies on screen
+            paint.setTextSize(42);
+            canvas.drawText("Crashes :" + crashes, 100, 42, paint);
+            canvas.drawText("Score:" + score,442 , 42, paint);
+
 
 
             //Drawing the player
