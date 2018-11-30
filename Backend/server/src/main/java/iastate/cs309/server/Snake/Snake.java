@@ -79,11 +79,11 @@ public class Snake {
     }
 
     public void endSnake() {
+        isAlive = false;
         for (Tile t :
                 snake) {
             t.setTileType(TileType.Apple);
         }
-        isAlive = false;
         score = snake.size();
     }
 

@@ -16,6 +16,7 @@ INSERT IGNORE INTO scores VALUES (4, 2, 1, 11, CURRENT_TIME());
 INSERT IGNORE INTO scores VALUES (5, 2, 1, 10, CURRENT_TIME());
 INSERT IGNORE INTO scores VALUES (6, 2, 3, 1, CURRENT_TIME());
 INSERT IGNORE INTO scores VALUES (7, 5, 3, 1, CURRENT_TIME());
+INSERT IGNORE INTO scores VALUES (8, 5, 3, 1, CURRENT_TIME());
 
 INSERT IGNORE INTO role_types VALUES (1, 'Free User', 'Free users are served ads after playing a game');
 INSERT IGNORE INTO role_types VALUES (2, 'Premium User', 'Premium users arent served ads after playing a game');
