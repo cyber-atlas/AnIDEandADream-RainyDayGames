@@ -4,6 +4,7 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import iastate.cs309.server.Chat.Message;
 import iastate.cs309.server.Snake.SnakeEnums.Direction;
+import iastate.cs309.server.Snake.SnakeEnums.TileType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -26,8 +27,8 @@ public class SnakeEndpoint {
     private static HashMap<String, Snake> sessionSnakes = new HashMap<>();
     private static Map map = new Map();
     private static Gson gson = new Gson();
+    private static boolean isRunning = false;
     private Session session;
-    private static boolean isRunning;
 
     public static void broadcastMap() {
         snakeEndpoints.forEach(endpoint -> {
@@ -49,7 +50,7 @@ public class SnakeEndpoint {
         snakeEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
                 try {
-                    if (!sessionSnakes.containsKey(endpoint.session)) {
+                    if (!sessionSnakes.containsKey(endpoint.session.getId())) {
                         endpoint.session.getBasicRemote().
                                 sendText(message.getFrom() + ": " + message.getContent());
                     }
@@ -118,7 +119,6 @@ public class SnakeEndpoint {
             message.setFrom(username);
             message.setContent("Connected!");
             broadcast(message);
-
         }
         logger.info(username + " connected");
     }
@@ -128,26 +128,32 @@ public class SnakeEndpoint {
             throws IOException, EncodeException {
         //format: dir <N/S/E/W>
         if (sessionSnakes.containsKey(session.getId())) {
+            Snake ourSnake = sessionSnakes.get(session.getId());
             if (message.contains("dir")) {
                 String[] parts = message.split("\\s");
                 switch (parts[1].toLowerCase()) {
                     case "n":
-                    case "N":
-                        sessionSnakes.get(session.getId()).updateDirection(Direction.North);
+                    case "u":
+                        ourSnake.updateDirection(Direction.North);
                         break;
                     case "s":
-                    case "S":
-                        sessionSnakes.get(session.getId()).updateDirection(Direction.South);
+                    case "d":
+                        ourSnake.updateDirection(Direction.South);
                         break;
                     case "e":
-                    case "E":
-                        sessionSnakes.get(session.getId()).updateDirection(Direction.East);
+                    case "l":
+                        ourSnake.updateDirection(Direction.East);
                         break;
                     case "w":
-                    case "W":
-                        sessionSnakes.get(session.getId()).updateDirection(Direction.West);
+                    case "r":
+                        ourSnake.updateDirection(Direction.West);
                         break;
                 }
+            } else if (message.contains("respawn")) {
+                //kill the snake if its not dead already, and replace its lifeless soul with apples :)
+                //ourSnake.endSnake();
+                //map.appleBomb(ourSnake.getSnake());
+                ourSnake.desireRespawn = true;
             }
         } else {
             Message msg = new Message();
@@ -176,9 +182,9 @@ public class SnakeEndpoint {
         snakeEndpoints.remove(this);
 
 
-        if (sessionSnakes.size() == 0) {
-            //cleanup the game
-        }
+//        if (sessionSnakes.size() == 0) {
+//            //cleanup the game
+//        }
         ;
         //broadcastMap(message);
     }

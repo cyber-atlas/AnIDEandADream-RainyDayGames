@@ -1,6 +1,8 @@
 package iastate.cs309.server.Snake;
 
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Random;
 public class Map implements Runnable {
     private static final int width = 42;
     private static final int height = 42;
+    private static Logger logger = LoggerFactory.getLogger(Map.class);
     private TileType[][] map; //could convert to tile object
     private List<Snake> pileOfSnakes = new ArrayList<>();
     private transient Random psudo = new Random();
@@ -39,11 +42,13 @@ public class Map implements Runnable {
             try {
                 SnakeEndpoint.broadcastMap();
             } catch (Exception e) {
+                logger.error(e.getMessage());
             }
 
             try {
                 Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
             } catch (Exception e) {
+                logger.error(e.getMessage());
             }
         }
     }
@@ -52,7 +57,12 @@ public class Map implements Runnable {
         if (readyToSpawnFood()) spawnFood();
         for (Snake snake :
                 pileOfSnakes) {
-            snake.slither();
+            if (snake.desireRespawn) {
+                appleBomb(snake.getSnake());
+                snake.respawn(findSnakeSpawn());
+            } else {
+                snake.slither();
+            }
         }
         drawSnakes();
     }
@@ -110,7 +120,9 @@ public class Map implements Runnable {
         }
     }
 
-    //Simple border maximizing playable area
+    /**
+     * Creates the base map by filling edges with walls, and replacing the rest with a Nothing tile.
+     */
     private void drawStarterMap() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -123,7 +135,7 @@ public class Map implements Runnable {
         }
     }
 
-    private void drawSnakes() {
+    public void drawSnakes() {
         for (Snake snake :
                 pileOfSnakes) {
             List<Tile> p = snake.getSnake();
@@ -133,39 +145,43 @@ public class Map implements Runnable {
                 int segY = snakeTile.getCoordinate().getY();
 
                 if (isOnMap(segX, segY)) {
-                    switch (map[segX][segY]) {
-                        case Nothing:
-                            updateTile(snakeTile);
-                            break;
-                        case Apple:
-                            snake.feed();
-                            updateTile(snakeTile);
-                            break;
-                        case Wall:
-                        case SnakeHead:
-                        case SnakeTail:
-                            //kill the snake if its head is in another block
-                            if (seg == 0)
-                                snake.endSnake();
+                    //only consider interactions with the head of the snake
+                    if (seg == 0) {
+                        switch (map[segX][segY]) {
+                            case Nothing:
+                                updateTile(snakeTile);
+                                break;
+                            case Apple:
+                                snake.feed();
+                                updateTile(snakeTile);
+                                break;
+                            case Wall:
+                            case SnakeHead:
+                            case SnakeTail:
+                                //kill the snake if its head is in another block
+                                if (seg == 0)
+                                    snake.endSnake();
+                        }
+                    } else {
+                        updateTile(snakeTile);
                     }
                 } else {
+                    //cheaters get the boot
                     snake.endSnake();
                 }
             }
         }
     }
 
-
     private boolean isOnMap(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height)
             return true;
+        logger.info("~~off map coordinate was accessed~~");
         return false;
     }
 
     private boolean isOnMap(Coordinate coord) {
-        if (coord.getX() >= 0 && coord.getY() >= 0 && coord.getX() < width && coord.getY() < height)
-            return true;
-        return false;
+        return isOnMap(coord.getX(), coord.getY());
     }
 
     private void updateTile(Tile tile) {
@@ -178,6 +194,16 @@ public class Map implements Runnable {
     private void updateTile(int x, int y, TileType tileType) {
         if (isOnMap(x, y)) {
             map[x][y] = tileType;
+        }
+    }
+
+    public void appleBomb(List<Tile> area) {
+        for (Tile t :
+                area) {
+            int x = t.getCoordinate().getX();
+            int y = t.getCoordinate().getY();
+            if (isOnMap(x, y) && map[x][y] != TileType.Wall)
+                updateTile(x, y, TileType.Apple);
         }
     }
 }
