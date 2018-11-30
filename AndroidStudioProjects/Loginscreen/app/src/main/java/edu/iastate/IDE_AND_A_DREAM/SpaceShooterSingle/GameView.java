@@ -20,7 +20,7 @@ import java.util.ListIterator;
 
 public class GameView extends SurfaceView implements Runnable {
 
-//    public Rect btn;
+    //    public Rect btn;
     // a volatile variable will guarantee that changes made in one thread will be visible to others
     //Used to keep track if the game is playing or not
     volatile boolean playing;
@@ -53,7 +53,7 @@ public class GameView extends SurfaceView implements Runnable {
     //TODO make work for blaster
 //    private Button btnShoot;
 
-//    private ArrayList<Rect> shotsList = new ArrayList<>();
+    //    private ArrayList<Rect> shotsList = new ArrayList<>();
     private LinkedList<Shots> shotsList = new LinkedList<>();
 
 
@@ -149,28 +149,28 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
 
-         ListIterator<Shots> iter = shotsList.listIterator(0);
+        ListIterator<Shots> iter = shotsList.listIterator(0);
 
-            if (shotsList.isEmpty()) {
-                return;
+        if (shotsList.isEmpty()) {
+            return;
+        }
+        while (iter.hasNext()){
+            Shots shot = iter.next();
+            //Update the shot
+            shot.update();
+            if(shot.getLive() == false) {
+                iter.remove();
+                continue;
             }
-            while (iter.hasNext()){
-                Shots shot = iter.next();
-                //Update the shot
-                shot.update();
-                if(shot.getLive() == false) {
-                    iter.remove();
-                    continue;
+            //check if intersects with enemies
+            for(int i = 0; i< numEnemies;i++) {
+                if (Rect.intersects(shot.getDetectCollision(), enemies[i].getDetectCollision())){
+                    shot.setLive(false);
+                    enemies[i].setX(-500);
                 }
-                //check if intersects with enemies
-                for(int i = 0; i< numEnemies;i++) {
-                    if (Rect.intersects(shot.getDetectCollision(), enemies[i].getDetectCollision())){
-                        shot.setLive(false);
-                        enemies[i].setX(-500);
-                    }
-                }
+            }
 
-            }
+        }
 
     }
 
@@ -321,33 +321,36 @@ public class GameView extends SurfaceView implements Runnable {
 
         return true;
     }
-/**
-    private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
+    /**
+     private GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.OnGestureListener() {
+    @Override
+    public boolean onDoubleTap(MotionEvent e) {
 
-            return false;
-        }
+    return false;
+    }
 
     });
 
- **/
+     **/
 
     void touchLogic(MotionEvent m) {
 
 //        //TODO Trying with a for loop
 //        //The number of pointers-always >=1
         int pointerCount = m.getPointerCount();
-    Log.d("PointerCount", String.valueOf(pointerCount));
+
+        Log.d("PointerCount", String.valueOf(pointerCount));
         //get pointer index from the event
 //        int pointerIndex = m.getActionIndex();
 
+
         //TODO print pointer count and see how that changes based on the presses/lifting of fingers
         //Loops through all of the pointers
+        //TODO for some reason this loop only runs once....
         for (int i = 0; i < pointerCount; i++) {
 
-            int x = (int) m.getX(i);
-            int y = (int) m.getY(i);
+//            int x = (int) m.getX(i);
+//            int y = (int) m.getY(i);
 
             //get the pointer ID
             int pointerID = m.getPointerId(i);
@@ -357,7 +360,6 @@ public class GameView extends SurfaceView implements Runnable {
 
             //TODO for some reason the game crashes when the buttons are mashed or something
             switch (maskedAction) {
-//                if (cont)
 
                 case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_POINTER_DOWN:
@@ -380,29 +382,35 @@ public class GameView extends SurfaceView implements Runnable {
 //                        Log.d("motion shooting touch ", String.valueOf(player.isShooting()));
                         break;
                     }
-                    //boosting the space jet when screen is pressed
-                    player.setBoosting();
+                    else {
+                        //boosting the space jet when screen is pressed
+                        player.setBoosting();
 
-                    //The next 2 lines might not be needed anymore since I deal with them in draw
+                        //The next 2 lines might not be needed anymore since I deal with them in draw
 //                    player.setShooting(false);
 //                    tester = false;
 //                    Log.d("Tester working?", String.valueOf(tester));
-                    break;
+                        break;
+                    }
 
-                //When they lift their finger up, then stop boosting
-                //TODO I think that it stopping the boosting when the right side is lifted...
-                //TODO might need to find a better way to deal with these actions
+                    //When they lift their finger up, then stop boosting
+                    //TODO I think that it stopping the boosting when the right side is lifted...
+                    //TODO might need to find a better way to deal with these actions
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_POINTER_UP:
-                    Log.d("PointerID in ActionUp", String.valueOf(pointerID));
+//                    Log.d("PointerID in ActionUp", String.valueOf(pointerID));
+                    Log.d("PointerID in ActionUp", String.valueOf(actionIndex));
 //                    Log.d("PointerID less than 3", String.valueOf(m.getX(pointerID) < screenX / 3));
 //                    Log.d("PointerID coordinates", String.valueOf(m.getX(pointerID)));
-                    if (m.getX(pointerID) < screenX / 3) {
-                        Log.d("pointer inside if", String.valueOf(m.getX(pointerID)) + "," + String.valueOf(screenX));
+//                    if (m.getX(pointerID) < screenX / 3) {
+                    if (m.getX(actionIndex) < screenX / 3) {
+//                        Log.d("pointer inside if", String.valueOf(m.getX(pointerID)) + "," + String.valueOf(screenX));
+                        Log.d("pointer inside if", String.valueOf(m.getX(actionIndex)) + "," + String.valueOf(screenX));
                         player.stopBoosting();
                         break;
                     }
-                    if (m.getX(pointerID) > screenX / 3) {
+//                    if (m.getX(pointerID) > screenX / 3) {
+                    if (m.getX(actionIndex) > screenX / 3) {
                         tester = false;
                         break;
                     }
@@ -411,24 +419,6 @@ public class GameView extends SurfaceView implements Runnable {
             }
         }
 
-        /**
-        private void shotsUpdate () {
-
-//        (shotsList.getFirst());
-            ListIterator<Shots> iter = shotsList.listIterator(0);
-
-
-            if (shotsList.isEmpty()) {
-                return;
-            }
-            while (iter.hasNext()){
-                Shots shot = iter.next();
-
-            }
-
-
-        }
-         **/
     }
 
 
