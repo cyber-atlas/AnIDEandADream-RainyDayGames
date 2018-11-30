@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import edu.iastate.IDE_AND_A_DREAM.Leaderboards.ShooterLeaderboard;
 import edu.iastate.loginscreen.R;
 
 
@@ -28,14 +29,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonPlay  = (ImageButton) findViewById(R.id.buttonPlay);
         buttonScore = (ImageButton) findViewById(R.id.buttonScore);
 
-        //add a click listener to the play button
+        //add a click listener to the play and high score buttons
         buttonPlay.setOnClickListener(this);
+        buttonScore.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v){
        //Start the game activity that we define
-       startActivity(new Intent(this, GameActivity.class));
-
+        if(v == buttonPlay) {
+            startActivity(new Intent(this, GameActivity.class));
+        }
+        //Open the leader board
+        if(v == buttonScore){
+            startActivity(new Intent(this,ShooterLeaderboard.class));
+        }
     }
 }
