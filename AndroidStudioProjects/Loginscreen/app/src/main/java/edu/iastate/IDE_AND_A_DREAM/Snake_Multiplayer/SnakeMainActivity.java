@@ -1,9 +1,14 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,12 +31,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.java_websocket.client.WebSocketClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.InputStream;
+import java.util.List;
 
+import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Map;
+
+
+import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Snake;
 import edu.iastate.loginscreen.R;
 
 /*
@@ -52,8 +65,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     private TextView HighScore;
     private TextView CurrentScore;
+    private Gson gson;
 
-
+    private WebSocketClient ws;
     private final Handler handler = new Handler();
 
     private SnakeEngine gameEngine;
@@ -75,6 +89,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         CurrentScore = findViewById(R.id.CurrentScoreTextView);
         CurrentScore.setText("Current Score: "+prevScore);
 
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("M/d/yy hh:mm a");
+        gson = gsonBuilder.create();
 
         Bundle extras = getIntent().getExtras();
         int value = extras.getInt("level");
@@ -86,13 +103,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         gameEngine.initGame(numMon);
         mQueue = Volley.newRequestQueue(this);
 
-
-        Log.d("Update Valley",String.valueOf(updateDelay));
-        //StartSnakeMultiplayer();
         snakeView = findViewById(R.id.snakeViewM);
         snakeView.setOnTouchListener(this);
+        getGetMapFromAPI();
         get_high_score();
-        startUpdateHandler();
+        //startUpdateHandler();
     }
 
     private void startUpdateHandler() {
@@ -105,48 +120,85 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                     checkupdateScore();
                     handler.postDelayed(this, updateDelay);
                 }
-
                 if (gameEngine.getCurrentGameState() == GameState.Lost) {
-                    OnGameLost();
+                    //OnGameLost();
                 }
-                snakeView.setSnakeViewMap(gameEngine.getmap());
-                snakeView.invalidate();
-
             }
         }, updateDelay);
     }
 
-    public String getDataFromAsset(Context context)
+    public void UpdateGameMap(String data)
     {
-        String json = null;
+        JSONObject snakejsonobj;
+        Map snake_map;
         try {
-            InputStream is = context.getAssets().open("map.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
+            snakejsonobj = new JSONObject(data);
+            Log.d("json to string", snakejsonobj.toString());
+            snake_map = gson.fromJson(snakejsonobj.toString(),Map.class);
+            Log.d("name", snake_map.getSnakes().get(0).getName());
+            List<Snake> pileOfSnakes = snake_map.getSnakes();
+            for(Snake snake : pileOfSnakes)
+            {
+                if(snake.getName() == "vamsi" && !snake.isAlive())
+                {
+                    int score = snake.getScore();
+                    OnGameLost(score);
+                    break;
+                }
+            }
+            snakeView.setSnakeViewMap(snake_map.getMap());
+            snakeView.invalidate();
+
+        } catch (Throwable t) {
+            Log.e("My App", "Could not parse malformed JSON: \"" + data + "\"");
+            t.printStackTrace();
         }
-        return json;
     }
 
-    public void StartSnakeMultiplayer()
+    public void getGetMapFromAPI()
     {
-        String data = getDataFromAsset(getApplicationContext());
-        Log.d("Object", data);
+        final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/snake/vamsi/true";
+        try {
+            Draft[] drafts = {new Draft_6455()};
+            ws = new WebSocketClient(new URI(serverAddy), drafts[0]) {
+                @Override
+                public void onOpen(ServerHandshake serverHandshake) {
+                    Log.d("OPEN", "run() returned: " + "is connecting");
+                }
+                @Override
+                public void onMessage(final String message) {
+                    Log.d("", "run() returned: " + message);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            UpdateGameMap(message);
+                        }
+                    });
+                }
+                @Override
+                public void onClose(int code, String reason, boolean remote) {
+                    Log.d("CLOSE", "OnClose() returned: " + reason);
+                }
+                @Override
+                public void onError(Exception e) {
+                    Log.d("Exception:", e.toString());
+                }
+            };
+        }
+        catch (URISyntaxException e){
+            Log.d("Excpetion: ", e.getMessage());
+            e.printStackTrace();
+        }
+        ws.connect();
     }
 
-
-    private void OnGameLost() {
-        if(gameEngine.score > HiScore)
-        {
-            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
-        }
+    private void OnGameLost(int score) {
+//        if(gameEngine.score > HiScore)
+//        {
+//            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
+//        }else {
+//            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
+//        }
         send_score();
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");
@@ -161,7 +213,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             case MotionEvent.ACTION_DOWN:
                 prevX = event.getX();
                 prevY = event.getY();
-
 
                 break;
             case MotionEvent.ACTION_UP:
@@ -216,10 +267,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                         try {
                             JSONArray user ;
                             user = response;
-                            Log.d("From get highscore", response.toString());
                             String highscore = user.getJSONObject(0).getString("score");
                             HiScore = Integer.parseInt(highscore);
-                            Log.d("Highscore", highscore);
                             HighScore.setText("High Score: "+highscore);
                         } catch (JSONException e1) {
                             e1.printStackTrace();

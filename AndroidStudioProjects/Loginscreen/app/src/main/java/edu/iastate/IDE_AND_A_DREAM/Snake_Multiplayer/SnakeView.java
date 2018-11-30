@@ -15,7 +15,6 @@ public class SnakeView extends View{
 
     private TileType SnakeViewMap[][];
 
-
     public SnakeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
@@ -23,10 +22,6 @@ public class SnakeView extends View{
     public void setSnakeViewMap(TileType[][] map){
         this.SnakeViewMap = map;
     }
-
-
-    String olamide = "Opadokun" ;
-
 
     @Override
     protected void onDraw(Canvas canvas) {

@@ -1,6 +1,10 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object;
 
 
+import android.util.Log;
+
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +18,11 @@ public class Map {
 
     private static final int width = 42;
     private static final int height = 42;
+
+    @SerializedName("map")
     private TileType[][] map; //could convert to tile object
+
+    @SerializedName("pileOfSnakes")
     private List<Snake> pileOfSnakes = new ArrayList<>();
     private transient Random psudo = new Random();
 
@@ -23,6 +31,15 @@ public class Map {
         //drawStarterMap();
     }
 
+    public TileType[][] getMap()
+    {
+        return this.map;
+    }
+
+    public List<Snake> getSnakes()
+    {
+        return  pileOfSnakes;
+    }
 
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
@@ -145,6 +162,14 @@ public class Map {
     private void updateTile(int x, int y, TileType tileType) {
         if (isOnMap(x, y)) {
             map[x][y] = tileType;
+        }
+    }
+
+    public void tos()
+    {
+        for(int i = 0; i < pileOfSnakes.size(); i++)
+        {
+            Log.d("snake",pileOfSnakes.toString());
         }
     }
 

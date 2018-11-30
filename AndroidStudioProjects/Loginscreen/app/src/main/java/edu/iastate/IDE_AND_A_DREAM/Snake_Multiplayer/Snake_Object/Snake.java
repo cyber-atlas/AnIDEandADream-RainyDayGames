@@ -1,5 +1,7 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object;
 
+import com.google.gson.annotations.SerializedName;
+
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Direction;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.TileType;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Coordinate;
@@ -8,6 +10,7 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Coordinate;
 import java.util.ArrayList;
 
 public class Snake {
+
     public static final int spawnHeight = 5;
     private ArrayList<Tile> snake = new ArrayList<>();
     private String name;
@@ -44,6 +47,16 @@ public class Snake {
 
     public String getName() {
         return name;
+    }
+
+    public int getScore()
+    {
+        return score;
+    }
+
+    public boolean isAlive()
+    {
+        return isAlive;
     }
 
     public ArrayList<Tile> getSnake() {
