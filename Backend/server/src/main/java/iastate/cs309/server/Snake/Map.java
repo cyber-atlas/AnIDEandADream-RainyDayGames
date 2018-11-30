@@ -19,7 +19,6 @@ public class Map implements Runnable {
     }
 
     public void run() {
-        //Todo: implement better solution, this is temporary crap!
         long lastLoopTime = System.nanoTime();
         final int TARGET_FPS = 1;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS; //nanoseconds per second / target fps
@@ -40,7 +39,6 @@ public class Map implements Runnable {
             try {
                 SnakeEndpoint.broadcastMap();
             } catch (Exception e) {
-
             }
 
             try {

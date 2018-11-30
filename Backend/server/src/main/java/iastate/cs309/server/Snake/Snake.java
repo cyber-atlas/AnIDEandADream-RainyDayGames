@@ -4,7 +4,6 @@ import iastate.cs309.server.Snake.SnakeEnums.Direction;
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class Snake {
     public static final int spawnHeight = 5;
