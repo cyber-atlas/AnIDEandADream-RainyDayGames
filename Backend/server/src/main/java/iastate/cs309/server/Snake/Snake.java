@@ -62,10 +62,10 @@ public class Snake {
                 Coordinate head = snake.get(0).getCoordinate();
                 switch (dir) {
                     case North:
-                        head.setY(head.getY() + 1);
+                        head.setY(head.getY() - 1);
                         break;
                     case South:
-                        head.setY(head.getY() - 1);
+                        head.setY(head.getY() + 1);
                         break;
                     case East:
                         head.setX(head.getX() + 1);
@@ -100,7 +100,6 @@ public class Snake {
         //Don't immediately set dir, otherwise people could spam up/down and kill themselves
         queuedDir = nextDir;
     }
-
 
     private void shuffleTowardHead() {
         //Move each body part from tail to head

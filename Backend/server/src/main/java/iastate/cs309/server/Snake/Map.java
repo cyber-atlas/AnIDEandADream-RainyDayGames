@@ -149,21 +149,23 @@ public class Map implements Runnable {
                     if (seg == 0) {
                         switch (map[segX][segY]) {
                             case Nothing:
-                                updateTile(snakeTile);
+                                    updateTile(snakeTile);
                                 break;
                             case Apple:
                                 snake.feed();
-                                updateTile(snakeTile);
+                                    updateTile(snakeTile);
                                 break;
                             case Wall:
                             case SnakeHead:
                             case SnakeTail:
                                 //kill the snake if its head is in another block
                                 snake.endSnake();
-                                updateTile(snakeTile);
+                                //if (!isWall(snakeTile.getCoordinate()))
+                                //    updateTile(snakeTile);
                         }
                     } else {
-                        updateTile(snakeTile);
+                        if (!isWall(snakeTile.getCoordinate()))
+                            updateTile(snakeTile);
                     }
                 } else {
                     //cheaters get the boot
@@ -184,6 +186,13 @@ public class Map implements Runnable {
         return isOnMap(coord.getX(), coord.getY());
     }
 
+    private boolean isWall(Coordinate coord) {
+        if (isOnMap(coord)) {
+            return map[coord.getX()][coord.getY()].equals(TileType.Wall);
+        }
+        return true;
+    }
+
     private void updateTile(Tile tile) {
         if (isOnMap(tile.getCoordinate())) {
             map[tile.getCoordinate().getX()][tile.getCoordinate().getY()] = tile.getTileType();
@@ -202,7 +211,7 @@ public class Map implements Runnable {
                 area) {
             int x = t.getCoordinate().getX();
             int y = t.getCoordinate().getY();
-            if (isOnMap(x, y) && map[x][y] != TileType.Wall)
+            if (isOnMap(x, y) && !isWall(t.getCoordinate()))
                 updateTile(x, y, TileType.Apple);
         }
     }
