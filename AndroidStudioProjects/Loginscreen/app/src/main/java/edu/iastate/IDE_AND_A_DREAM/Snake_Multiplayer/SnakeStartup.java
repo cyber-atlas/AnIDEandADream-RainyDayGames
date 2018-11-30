@@ -23,7 +23,7 @@ public class SnakeStartup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_snake_startup);
+        setContentView(R.layout.activity_snakemulti_startup);
 
         Easy = findViewById(R.id.Easybtn);
         Medium = findViewById(R.id.Mediumbtn);
@@ -54,41 +54,8 @@ public class SnakeStartup extends AppCompatActivity {
 
             }
         });
-        Medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    String value = extras.getString("userid");
-                }
-                Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
-                i.putExtra("userid",extras.getString("userid"));
-                i.putExtra("level", MediumLevel);
-                i.putExtra("monsters", 6);
 
-                SnakeStartup.this.startActivity(i);
-
-            }
-        });
-        Hard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Bundle extras = getIntent().getExtras();
-                if (extras != null) {
-                    String value = extras.getString("userid");
-                }
-                Intent i = new Intent(SnakeStartup.this, SnakeMainActivity.class);
-                i.putExtra("userid",extras.getString("userid"));
-                i.putExtra("level", HardLevel);
-                i.putExtra("monsters", 3);
-                i.putExtra("monsters", 10);
-
-                SnakeStartup.this.startActivity(i);
-
-            }
-        });
 
     }
 }

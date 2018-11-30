@@ -26,9 +26,6 @@ public class SnakeView extends View{
     }
 
 
-    String olamide = "Opadokun" ;
-
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

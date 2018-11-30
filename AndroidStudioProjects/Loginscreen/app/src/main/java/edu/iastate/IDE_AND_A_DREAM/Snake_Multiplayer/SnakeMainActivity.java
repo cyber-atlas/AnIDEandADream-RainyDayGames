@@ -1,7 +1,16 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import android.content.Intent;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
 import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,6 +30,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.InputStream;
+
 import edu.iastate.loginscreen.R;
 
 /*
@@ -36,7 +47,6 @@ import edu.iastate.loginscreen.R;
     \  \::/       \  \:\        \  \:\                 \  \:\        \  \::/       \  \::/
      \__\/         \__\/         \__\/                  \__\/         \__\/         \__\/
  */
-
 
 public class SnakeMainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -60,7 +70,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_snake_main);
+        setContentView(R.layout.activity_snakemulti_main);
         HighScore = findViewById(R.id.HighScoreTextView);
         CurrentScore = findViewById(R.id.CurrentScoreTextView);
         CurrentScore.setText("Current Score: "+prevScore);
@@ -78,8 +88,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
 
         Log.d("Update Valley",String.valueOf(updateDelay));
-
-        snakeView = findViewById(R.id.snakeView);
+        //StartSnakeMultiplayer();
+        snakeView = findViewById(R.id.snakeViewM);
         snakeView.setOnTouchListener(this);
         get_high_score();
         startUpdateHandler();
@@ -105,6 +115,30 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             }
         }, updateDelay);
     }
+
+    public String getDataFromAsset(Context context)
+    {
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open("map.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    public void StartSnakeMultiplayer()
+    {
+        String data = getDataFromAsset(getApplicationContext());
+        Log.d("Object", data);
+    }
+
 
     private void OnGameLost() {
         if(gameEngine.score > HiScore)

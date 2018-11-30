@@ -16,7 +16,7 @@ public class SnakeSplash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_snake_splash);
+        setContentView(R.layout.activity_snakemulti_splash);
 
         new Handler().postDelayed(new Runnable(){
             @Override

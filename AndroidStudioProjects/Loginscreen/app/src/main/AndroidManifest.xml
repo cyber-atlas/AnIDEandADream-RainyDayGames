@@ -32,6 +32,13 @@
         <activity android:name=".Leaderbrd" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity" />
+
+
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeStartup" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeMainActivity" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash" />
+
+
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen" />
 
         <meta-data

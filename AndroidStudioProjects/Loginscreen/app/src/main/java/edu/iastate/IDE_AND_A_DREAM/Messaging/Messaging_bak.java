@@ -50,7 +50,7 @@ public class Messaging_bak extends ListActivity implements View.OnClickListener 
     ListView listViewList;
 
     //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
-    int clickCounter=0;
+  //  int clickCounter=0;
 
     @Override
     public void onCreate(Bundle icicle) {
