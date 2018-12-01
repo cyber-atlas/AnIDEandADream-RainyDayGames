@@ -131,13 +131,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 i++;
                 if(snake.getName().equalsIgnoreCase(uname) && snake.isAliveDebug().equalsIgnoreCase("false"))
                 {
-                    Log.d("Found it and is dead", uname);
                     OnGameLost();
                 }
             }
-
-            //Log.d("current snake name", currentSnake.getName());
-
             snakeView.setSnakeViewMap(snake_map.getMap());
             snakeView.invalidate();
         } catch (Throwable t) {
@@ -152,6 +148,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         Log.d("CDA", "onBackPressed Called");
         OnGameLost();
     }
+
 
     public void getGetMapFromAPI()
     {

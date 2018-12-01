@@ -44,7 +44,6 @@ public class SnakeStartup extends AppCompatActivity {
         Easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
                     String value = extras.getString("userid");
