@@ -133,7 +133,7 @@ public class Snake {
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }
-        snake = snakeFix(snake);
+        snakeFix(snake);
     }
 
     public void respawn(Coordinate spawn) {
