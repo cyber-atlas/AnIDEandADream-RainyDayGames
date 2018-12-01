@@ -177,8 +177,10 @@ public class SnakeEndpoint {
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
-        if (sessionSnakes.get(session.getId()) != null)
+        if (sessionSnakes.get(session.getId()) != null){
             sessionSnakes.get(session.getId()).endSnake();
+            sessionSnakes.remove(session.getId());
+        }
         snakeEndpoints.remove(this);
 
         if (sessionSnakes.size() == 0) {
