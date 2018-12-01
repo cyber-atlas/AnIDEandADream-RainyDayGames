@@ -21,8 +21,8 @@ gradle-build:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
-      - build
-      - .gradle
+      - Backend/server/build
+      - Backend/server/.gradle
 
 gradle-test:
   stage: gradletest
@@ -38,8 +38,8 @@ gradle-test:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
-      - build
-      - .gradle
+      - Backend/server/build
+      - Backend/server/.gradle
 
 
 auto-deploy:
@@ -59,8 +59,8 @@ auto-deploy:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
-      - build
-      - .gradle
+      - Backend/server/build
+      - Backend/server/.gradle
  
 # To build android projects
 # Notice that we cd into Android_test folder which contains all Android files before building apk.    
