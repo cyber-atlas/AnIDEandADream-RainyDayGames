@@ -1,11 +1,9 @@
 package iastate.cs309.server.Snake;
 
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
-import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +84,11 @@ public class Map implements Runnable {
 
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
+    }
+
+    private void killSnake(Snake snake) {
+        appleBomb(snake.getSnake());
+        snake.endSnake();
     }
 
     //finds a place with a contiguous snake sized spawn area
@@ -202,8 +205,7 @@ public class Map implements Runnable {
                                 case SnakeHead:
                                 case SnakeTail:
                                     //kill the snake if its head is in another block
-                                    appleBomb(snake.getSnake());
-                                    snake.endSnake();
+                                    killSnake(snake);
                                     //if (!isWall(snakeTile.getCoordinate()))
                                     //    updateTile(snakeTile);
                             }
@@ -213,7 +215,7 @@ public class Map implements Runnable {
                         }
                     } else {
                         //cheaters get the boot
-                        snake.endSnake();
+                        killSnake(snake);
                     }
                 }
             }

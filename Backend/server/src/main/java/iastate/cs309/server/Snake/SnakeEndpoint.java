@@ -177,8 +177,10 @@ public class SnakeEndpoint {
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
-        if (sessionSnakes.get(session.getId()) != null){
-            sessionSnakes.get(session.getId()).endSnake();
+        Snake ssnake = sessionSnakes.get(session.getId());
+        if (ssnake!= null){
+            map.appleBomb(ssnake.getSnake());
+            ssnake.endSnake();
             sessionSnakes.remove(session.getId());
         }
         snakeEndpoints.remove(this);
@@ -194,6 +196,7 @@ public class SnakeEndpoint {
     public void onError(Session session, Throwable throwable) {
         logger.error(session.toString());
         logger.error(throwable.getMessage());
+        map.reset();
     }
 }
 

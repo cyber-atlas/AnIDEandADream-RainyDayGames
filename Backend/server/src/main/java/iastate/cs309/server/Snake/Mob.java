@@ -17,7 +17,7 @@ public class Mob extends Snake {
     public void slither() {
         if (isAlive) {
             //pop directional queue
-            Integer iDir = Math.abs(psudo.nextInt()) % 6;
+            Integer iDir = Math.abs(psudo.nextInt()) % 5;
             shuffleTowardHead();
 
             //Need a second check to isalive because shuffle could kill the snake

@@ -76,7 +76,6 @@ public class Snake {
             //Need a second check to isalive because shuffle could kill the snake
             if (isAlive) {
                 moveHead(dir);
-
             }
         }
     }
