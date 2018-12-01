@@ -66,6 +66,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     private TextView HighScore;
     private TextView CurrentScore;
+    private TextView Personalbest;
+    private TextView CurrentPlayers;
     private Gson gson;
 
     private WebSocketClient ws;
@@ -89,6 +91,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         setContentView(R.layout.activity_snakemulti_main);
         HighScore = findViewById(R.id.HighScoreTextView);
         CurrentScore = findViewById(R.id.CurrentScoreTextView);
+        Personalbest = findViewById(R.id.personalbest);
+        CurrentPlayers = findViewById(R.id.currentplayers);
+
         CurrentScore.setText("Current Score: "+prevScore);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -108,8 +113,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
         snakeView = findViewById(R.id.snakeViewM);
         snakeView.setOnTouchListener(this);
+        get_personal_best();
         getGetMapFromAPI();
-        get_high_score();
+
     }
 
     public void UpdateGameMap(String data)
@@ -119,14 +125,15 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         try {
             snakejsonobj = new JSONObject(data);
             snake_map = gson.fromJson(snakejsonobj.toString(),Map.class);
-           // Log.d("name", snake_map.getSnakes().get(0).getName());
             String uname = globaluser.getUsername();
             int snakeScore = 0;
             List<Snake> snakesinmap = snake_map.getSnakes();
-            int i = 0;
+            int i = 1;
             int HighestScore = 0;
+            String players = "Players On Line: "+"\n";
             for(Snake snake: snakesinmap)
             {
+                players += i+". "+snake.getName()+"\n";
                 if(snake.getScore() > HighestScore) {
                     HighestScore = snake.getScore();
                     String hname = snake.getName();
@@ -138,14 +145,14 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                     snakeScore = snake.getScore();
                 }
                 updateScore(snakeScore);
-
-                Log.d("no", String.valueOf(i));
-                Log.d("name",snake.getName());
-                Log.d("is alive", snake.isAliveDebug());
+                CurrentPlayers.setText(players);
+//                Log.d("no", String.valueOf(i));
+//                Log.d("name",snake.getName());
+//                Log.d("is alive", snake.isAliveDebug());
                 i++;
                 if(snake.getName().equalsIgnoreCase(uname) && snake.isAliveDebug().equalsIgnoreCase("false"))
                 {
-                    OnGameLost();
+                    OnGameLost(snakeScore);
                 }
             }
             snakeView.setSnakeViewMap(snake_map.getMap());
@@ -160,9 +167,12 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     public void onBackPressed() {
         ws.close();
         Log.d("CDA", "onBackPressed Called");
-        OnGameLost();
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
+        EndGame.putExtra("userid",value);
+        SnakeMainActivity.this.startActivity(EndGame);
     }
-
 
     public void getGetMapFromAPI()
     {
@@ -203,15 +213,15 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         ws.connect();
     }
 
-    private void OnGameLost() {
-//        if(gameEngine.score > HiScore)
-//        {
-//            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
-//        }else {
-//            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
-//        }
+    private void OnGameLost(int score) {
+        if(score > HiScore)
+        {
+            Toast.makeText(this, "New High Score: "+score+" Good Job", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Score: " + score, Toast.LENGTH_LONG).show();
+        }
         ws.close();
-        send_score();
+        send_score(score);
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");
         Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
@@ -225,7 +235,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             case MotionEvent.ACTION_DOWN:
                 prevX = event.getX();
                 prevY = event.getY();
-
                 break;
             case MotionEvent.ACTION_UP:
                 float newX = event.getX();
@@ -256,12 +265,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
     public void updateHighScore(int score, String name) {HighScore.setText("High Score:\n"+name+ " "+ score ); }
 
-
-    public void get_high_score()
+    public void get_personal_best()
     {
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");
-        String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?userid="+value+"&game=4";
+        String url = "http://proj309-vc-04.misc.iastate.edu:8080/scores?userid="+value+"&game=6";
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONArray>() {
@@ -272,8 +280,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                             user = response;
                             String highscore = user.getJSONObject(0).getString("score");
                             HiScore = Integer.parseInt(highscore);
-
-                           // HighScore.setText("High Score: "+highscore);
+                            Personalbest.setText("Personal Best: "+highscore);
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
@@ -288,15 +295,14 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     }
 
-
-    public void send_score() {
+    public void send_score(int score) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("userid");
             Log.d("Final User ID", value);
         }
 
-        String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+ extras.getString("userid")+"&game=6&score="+ gameEngine.score;
+        String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+extras.getString("userid")+"&game=6&score="+ score;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

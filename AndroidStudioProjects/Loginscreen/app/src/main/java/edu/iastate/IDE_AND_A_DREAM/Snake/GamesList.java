@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeMainActivity;
+import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeStartup;
 import edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle.MainActivity;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash;
 
@@ -16,8 +18,6 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash;
 import edu.iastate.loginscreen.R;
 
 public class GamesList extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,6 @@ public class GamesList extends AppCompatActivity {
                 Intent i = new Intent(GamesList.this, edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash.class);
                 i.putExtra("userid",extras.getString("userid"));
                 GamesList.this.startActivity(i);
-//                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
-//                GamesList.this.startActivity(StartSnakeIntent);
             }
         });
 
@@ -55,8 +53,6 @@ public class GamesList extends AppCompatActivity {
                 Intent i = new Intent(GamesList.this, MainActivity.class);
                 i.putExtra("userid",extras.getString("userid"));
                 GamesList.this.startActivity(i);
-//                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
-//                GamesList.this.startActivity(StartSnakeIntent);
             }
         });
 
@@ -71,12 +67,18 @@ public class GamesList extends AppCompatActivity {
                 Intent i = new Intent(GamesList.this, edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash.class);
                 i.putExtra("userid",extras.getString("userid"));
                 GamesList.this.startActivity(i);
-//                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
-//                GamesList.this.startActivity(StartSnakeIntent);
             }
         });
-
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent BackToHome = new Intent(GamesList.this, edu.iastate.IDE_AND_A_DREAM.secondpage.class);
+        BackToHome.putExtra("userid",value);
+        GamesList.this.startActivity(BackToHome);
+    }
+
 }
