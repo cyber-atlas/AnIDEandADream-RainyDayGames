@@ -56,8 +56,9 @@ public class Map implements Runnable {
     }
 
     public void update() {
-        if (readyToSpawnFood()) spawnFood();
-        if (readyToDespawnFood()) {
+        int foodCount = countTiles(TileType.Apple);
+        if (readyToSpawnFood(foodCount)) spawnFood();
+        if (readyToDespawnFood(foodCount)) {
             Optional<Tile> t = findTile(TileType.Apple);
 
             if (t.isPresent()) {
@@ -150,17 +151,17 @@ public class Map implements Runnable {
         return count;
     }
 
-    private boolean readyToSpawnFood() {
-        return countTiles(TileType.Apple) < foodMath(1);
+    private boolean readyToSpawnFood(int appleCount) {
+        return appleCount < foodMath(1);
     }
 
-    private boolean readyToDespawnFood() {
-        return countTiles(TileType.Apple) > foodMath(3);
+    private boolean readyToDespawnFood(int appleCount) {
+        return appleCount > foodMath(3);
     }
 
     private int foodMath(int mFactor) {
         final int baseFoodAmount = 3;
-        return baseFoodAmount + ((countTiles(TileType.SnakeTail) / (pileOfSnakes.size() + 1)) * mFactor);
+        return baseFoodAmount + ((pileOfSnakes.size() + 1) * mFactor);
     }
 
     private void spawnFood() {

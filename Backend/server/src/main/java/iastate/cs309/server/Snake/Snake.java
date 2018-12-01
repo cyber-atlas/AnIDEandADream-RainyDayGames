@@ -38,19 +38,17 @@ public class Snake {
         }
     }
 
-    protected static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
-        ArrayList<Tile> outSnake = new ArrayList<>();
+    protected static void snakeFix(ArrayList<Tile> inSnake) {
         for (int i = 0; i < inSnake.size(); i++) {
-            Coordinate curCoord = inSnake.get(i).getCoordinate();
+            Tile curTile = inSnake.get(i);
             int endTail = inSnake.size() - 1;
             if (i == 0)
-                outSnake.add(new Tile(curCoord, TileType.SnakeHead));
+                curTile.setTileType(TileType.SnakeHead);
             else if (i == endTail)
-                outSnake.add(new Tile(curCoord, TileType.Nothing)); // paint a trail of nothing behind the snake
+                curTile.setTileType( TileType.Nothing); // paint a trail of nothing behind the snake
             else
-                outSnake.add(new Tile(curCoord, TileType.SnakeTail));
+                curTile.setTileType( TileType.SnakeTail);
         }
-        return outSnake;
     }
 
 
