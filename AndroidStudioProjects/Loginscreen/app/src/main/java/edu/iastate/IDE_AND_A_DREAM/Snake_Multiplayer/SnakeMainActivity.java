@@ -41,6 +41,7 @@ import org.json.JSONException;
 import java.io.InputStream;
 import java.util.List;
 
+import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Map;
 
 
@@ -68,6 +69,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private Gson gson;
 
     private WebSocketClient ws;
+    User globaluser;
     private final Handler handler = new Handler();
 
     private SnakeEngine gameEngine;
@@ -93,6 +95,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
         gson = gsonBuilder.create();
 
+        globaluser =  (User)getApplicationContext();
         Bundle extras = getIntent().getExtras();
         int value = extras.getInt("level");
         int monsterVal = extras.getInt("monsters");
@@ -107,24 +110,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         snakeView.setOnTouchListener(this);
         getGetMapFromAPI();
         get_high_score();
-        //startUpdateHandler();
-    }
-
-    private void startUpdateHandler() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                gameEngine.Update();
-
-                if (gameEngine.getCurrentGameState() == GameState.Running) {
-                    checkupdateScore();
-                    handler.postDelayed(this, updateDelay);
-                }
-                if (gameEngine.getCurrentGameState() == GameState.Lost) {
-                    //OnGameLost();
-                }
-            }
-        }, updateDelay);
     }
 
     public void UpdateGameMap(String data)
@@ -133,19 +118,13 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         Map snake_map;
         try {
             snakejsonobj = new JSONObject(data);
-            Log.d("json to string", snakejsonobj.toString());
             snake_map = gson.fromJson(snakejsonobj.toString(),Map.class);
             Log.d("name", snake_map.getSnakes().get(0).getName());
-            List<Snake> pileOfSnakes = snake_map.getSnakes();
-            for(Snake snake : pileOfSnakes)
-            {
-                if(snake.getName() == "vamsi" && !snake.isAlive())
-                {
-                    int score = snake.getScore();
-                    OnGameLost(score);
-                    break;
-                }
-            }
+            //String uname = globaluser.getUsername();
+            List<Snake> snakesinmap = snake_map.getSnakes();
+
+            //Snake currentSnake = snake_map.current_snake(globaluser.getUsername());
+
             snakeView.setSnakeViewMap(snake_map.getMap());
             snakeView.invalidate();
 
@@ -155,9 +134,21 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        ws.close();
+        Log.d("CDA", "onBackPressed Called");
+        OnGameLost();
+//        Intent setIntent = new Intent(Intent.ACTION_MAIN);
+//        setIntent.addCategory(Intent.CATEGORY_HOME);
+//        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(setIntent);
+    }
+
     public void getGetMapFromAPI()
     {
-        final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/snake/vamsi/true";
+        final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/snake/"+globaluser.getUsername()+"/true";
+        Log.d("url", serverAddy);
         try {
             Draft[] drafts = {new Draft_6455()};
             ws = new WebSocketClient(new URI(serverAddy), drafts[0]) {
@@ -171,6 +162,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            Log.d("Map object", message);
                             UpdateGameMap(message);
                         }
                     });
@@ -192,7 +184,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         ws.connect();
     }
 
-    private void OnGameLost(int score) {
+    private void OnGameLost() {
 //        if(gameEngine.score > HiScore)
 //        {
 //            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
@@ -219,19 +211,17 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 float newX = event.getX();
                 float newY = event.getY();
 
-                //ueabu where user swipe
-
                 if(Math.abs(newX - prevX) > Math.abs(newY - prevY)){
                     if(newX > prevX){
-                        gameEngine.updateDirection(Direction.East);
+                        ws.send("dir e");
                     }else{
-                        gameEngine.updateDirection(Direction.West);
+                        ws.send("dir w");
                     }
                 }else{
                     if(newY > prevY){
-                        gameEngine.updateDirection(Direction.South);
+                        ws.send("dir s");
                     }else{
-                        gameEngine.updateDirection(Direction.North);
+                        ws.send("dir n");
                     }
                 }
                 break;
@@ -306,6 +296,5 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         });
         mQueue.add(stringRequest);
     }
-
 
 }

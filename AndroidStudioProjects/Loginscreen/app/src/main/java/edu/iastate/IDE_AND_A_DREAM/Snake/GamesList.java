@@ -36,7 +36,7 @@ public class GamesList extends AppCompatActivity {
                     String value = extras.getString("userid");
                     Log.d("Message from Signup", value);
                 }
-                Intent i = new Intent(GamesList.this, SnakeSplash.class);
+                Intent i = new Intent(GamesList.this, edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash.class);
                 i.putExtra("userid",extras.getString("userid"));
                 GamesList.this.startActivity(i);
 //                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);
@@ -68,7 +68,7 @@ public class GamesList extends AppCompatActivity {
                     String value = extras.getString("userid");
                     Log.d("Message from Signup", value);
                 }
-                Intent i = new Intent(GamesList.this, SnakeSplash.class);
+                Intent i = new Intent(GamesList.this, edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash.class);
                 i.putExtra("userid",extras.getString("userid"));
                 GamesList.this.startActivity(i);
 //                Intent StartSnakeIntent = new Intent(GamesList.this, SnakeSplash.class);

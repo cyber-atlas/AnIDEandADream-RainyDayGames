@@ -14,7 +14,6 @@ public class SnakeEngine  {
     public static final int GameWidth = 28;
     public static final int GameHeight = 42;
 
-
     //JSONArray Js =
 
     private List<Coordinate> walls = new ArrayList<>();

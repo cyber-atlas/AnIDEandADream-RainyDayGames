@@ -24,6 +24,8 @@ public class Map {
 
     @SerializedName("pileOfSnakes")
     private List<Snake> pileOfSnakes = new ArrayList<>();
+
+
     private transient Random psudo = new Random();
 
     public Map() {
@@ -41,9 +43,25 @@ public class Map {
         return  pileOfSnakes;
     }
 
+
+    public Snake current_snake(String name)
+    {
+        for(Snake snake: pileOfSnakes)
+        {
+            if(snake.getName() == name)
+            {
+                return snake;
+            }
+        }
+        return null;
+    }
+
+
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
     }
+
+
 
     //finds a place with a contiguous snake sized spawn area
     public Coordinate findSnakeSpawn() {

@@ -94,4 +94,14 @@ public class SnakeStartup extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent BackToList = new Intent(SnakeStartup.this, GamesList.class);
+        BackToList.putExtra("userid",value);
+        SnakeStartup.this.startActivity(BackToList);
+    }
 }

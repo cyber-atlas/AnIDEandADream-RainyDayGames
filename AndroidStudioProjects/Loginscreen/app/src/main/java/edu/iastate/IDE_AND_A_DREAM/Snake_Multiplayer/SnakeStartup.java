@@ -4,9 +4,11 @@ package edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
 import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
@@ -55,7 +57,15 @@ public class SnakeStartup extends AppCompatActivity {
             }
         });
 
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent BackToList = new Intent(SnakeStartup.this, GamesList.class);
+        BackToList.putExtra("userid",value);
+        SnakeStartup.this.startActivity(BackToList);
     }
 }

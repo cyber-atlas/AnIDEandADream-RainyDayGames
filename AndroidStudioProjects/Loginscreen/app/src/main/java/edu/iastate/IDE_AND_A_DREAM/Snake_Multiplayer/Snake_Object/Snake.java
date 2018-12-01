@@ -59,6 +59,15 @@ public class Snake {
         return isAlive;
     }
 
+    public String isAliveDebug()
+    {
+        if(isAlive)
+        {
+            return "true";
+        }
+        return "false";
+    }
+
     public ArrayList<Tile> getSnake() {
         return snake;
     }
