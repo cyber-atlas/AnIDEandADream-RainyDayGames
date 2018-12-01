@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Snake {
     public static final int spawnHeight = 5;
     public transient Boolean desireRespawn;
-    private ArrayList<Tile> snake = new ArrayList<>();
-    private String name;
-    private Direction dir;
-    private Direction queuedDir;
-    private Boolean justAte;
-    private Boolean isAlive;
-    private int score;
+    protected ArrayList<Tile> snake = new ArrayList<>();
+    protected String name;
+    protected Direction dir;
+    protected Direction queuedDir;
+    protected Boolean justAte;
+    protected Boolean isAlive;
+    protected int score;
 
     public Snake(String name, Coordinate startingLocation) {
         this.queuedDir = Direction.North;
@@ -38,7 +38,7 @@ public class Snake {
         }
     }
 
-    private static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
+    protected static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
         ArrayList<Tile> outSnake = new ArrayList<>();
         for (int i = 0; i < inSnake.size(); i++) {
             Coordinate curCoord = inSnake.get(i).getCoordinate();
@@ -118,7 +118,7 @@ public class Snake {
         queuedDir = nextDir;
     }
 
-    private void shuffleTowardHead() {
+    protected void shuffleTowardHead() {
         //Move each body part from tail to head
         if (justAte) {
             snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first

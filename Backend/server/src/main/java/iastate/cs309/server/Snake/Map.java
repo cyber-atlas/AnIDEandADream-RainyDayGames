@@ -19,6 +19,7 @@ public class Map implements Runnable {
     public Map() {
         map = new TileType[width][height];
         drawStarterMap();
+        spawnMob();
     }
 
     public void run() {
@@ -65,6 +66,11 @@ public class Map implements Runnable {
             }
         }
         drawSnakes();
+    }
+
+    //i was watching the office and wanted to implement something mindless while doing it
+    private void spawnMob(){
+        pileOfSnakes.add(new Mob("mob0",findSnakeSpawn()));
     }
 
     public void addSnake(Snake snake) {
