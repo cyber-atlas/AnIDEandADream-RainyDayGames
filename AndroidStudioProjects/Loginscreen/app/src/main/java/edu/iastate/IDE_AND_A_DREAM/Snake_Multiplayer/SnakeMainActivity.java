@@ -204,12 +204,12 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
     private void OnGameLost() {
-        if(gameEngine.score > HiScore)
-        {
-            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
-        }
+//        if(gameEngine.score > HiScore)
+//        {
+//            Toast.makeText(this, "New HighScore: "+gameEngine.score+" Good Job", Toast.LENGTH_LONG).show();
+//        }else {
+//            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
+//        }
         ws.close();
         send_score();
         Bundle extras = getIntent().getExtras();
