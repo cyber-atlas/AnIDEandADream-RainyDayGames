@@ -97,10 +97,7 @@ public class Snake {
 
     public void endSnake() {
         isAlive = false;
-        for (Tile t :
-                snake) {
-            t.setTileType(TileType.Apple);
-        }
+        coldWater();
         score = snake.size();
     }
 
@@ -144,5 +141,12 @@ public class Snake {
         this.name = s.name;
         this.score = s.score;
         desireRespawn = false;
+    }
+
+    /**
+     * *the snake shrivels from the harsh conditions*
+     */
+    public void coldWater(){
+        snake.clear();
     }
 }

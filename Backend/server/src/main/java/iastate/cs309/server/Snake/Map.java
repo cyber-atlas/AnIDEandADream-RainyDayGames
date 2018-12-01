@@ -69,8 +69,8 @@ public class Map implements Runnable {
     }
 
     //i was watching the office and wanted to implement something mindless while doing it
-    private void spawnMob(){
-        pileOfSnakes.add(new Mob("mob0",findSnakeSpawn()));
+    private void spawnMob() {
+        pileOfSnakes.add(new Mob("mob0", findSnakeSpawn()));
     }
 
     public void addSnake(Snake snake) {
@@ -144,39 +144,42 @@ public class Map implements Runnable {
     public void drawSnakes() {
         for (Snake snake :
                 pileOfSnakes) {
-            List<Tile> p = snake.getSnake();
-            for (int seg = 0; seg < p.size(); seg++) {
-                Tile snakeTile = p.get(seg);
-                int segX = snakeTile.getCoordinate().getX();
-                int segY = snakeTile.getCoordinate().getY();
+            if (snake.isAlive) {
+                List<Tile> p = snake.getSnake();
+                for (int seg = 0; seg < p.size(); seg++) {
+                    Tile snakeTile = p.get(seg);
+                    int segX = snakeTile.getCoordinate().getX();
+                    int segY = snakeTile.getCoordinate().getY();
 
-                if (isOnMap(segX, segY)) {
-                    //only consider interactions with the head of the snake
-                    if (seg == 0) {
-                        switch (map[segX][segY]) {
-                            case Nothing:
+                    if (isOnMap(segX, segY)) {
+                        //only consider interactions with the head of the snake
+                        if (seg == 0) {
+                            switch (map[segX][segY]) {
+                                case Nothing:
+                                    updateTile(snakeTile);
+                                    break;
+                                case Apple:
+                                    snake.feed();
+                                    updateTile(new Tile(snakeTile.getCoordinate(), TileType.Nothing));
+                                    updateTile(snakeTile);
+                                    break;
+                                case Wall:
+                                case SnakeHead:
+                                case SnakeTail:
+                                    //kill the snake if its head is in another block
+                                    appleBomb(snake.getSnake());
+                                    snake.endSnake();
+                                    //if (!isWall(snakeTile.getCoordinate()))
+                                    //    updateTile(snakeTile);
+                            }
+                        } else {
+                            if (!isWall(snakeTile.getCoordinate()))
                                 updateTile(snakeTile);
-                                break;
-                            case Apple:
-                                snake.feed();
-                                updateTile(new Tile(snakeTile.getCoordinate(),TileType.Nothing));
-                                updateTile(snakeTile);
-                                break;
-                            case Wall:
-                            case SnakeHead:
-                            case SnakeTail:
-                                //kill the snake if its head is in another block
-                                snake.endSnake();
-                                //if (!isWall(snakeTile.getCoordinate()))
-                                //    updateTile(snakeTile);
                         }
                     } else {
-                        if (!isWall(snakeTile.getCoordinate()))
-                            updateTile(snakeTile);
+                        //cheaters get the boot
+                        snake.endSnake();
                     }
-                } else {
-                    //cheaters get the boot
-                    snake.endSnake();
                 }
             }
         }
