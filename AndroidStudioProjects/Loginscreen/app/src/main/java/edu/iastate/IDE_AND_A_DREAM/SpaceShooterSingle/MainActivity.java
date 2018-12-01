@@ -2,7 +2,9 @@ package edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //Image button is just a button that has an image and changes color
     private ImageButton buttonPlay;
     private ImageButton buttonScore;
+
+    static MediaPlayer startSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //add a click listener to the play and high score buttons
         buttonPlay.setOnClickListener(this);
         buttonScore.setOnClickListener(this);
+
+        startSound = MediaPlayer.create(this,R.raw.space_shooter_start);
+        startSound.start();
     }
 
     @Override
@@ -44,5 +51,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(v == buttonScore){
             startActivity(new Intent(this,ShooterLeaderboard.class));
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        startSound.stop();
     }
 }
