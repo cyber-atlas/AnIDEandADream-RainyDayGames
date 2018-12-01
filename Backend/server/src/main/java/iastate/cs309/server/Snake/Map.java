@@ -86,6 +86,9 @@ public class Map implements Runnable {
         pileOfSnakes.add(snake);
     }
 
+    public void removeSnake (Snake snake){
+        pileOfSnakes.remove(snake);
+    }
     private void killSnake(Snake snake) {
         appleBomb(snake.getSnake());
         snake.endSnake();
@@ -267,7 +270,9 @@ public class Map implements Runnable {
         for (Snake snake :
                 pileOfSnakes) {
             snake.endSnake();
+
         }
+        pileOfSnakes.clear();
         drawStarterMap();
     }
 }

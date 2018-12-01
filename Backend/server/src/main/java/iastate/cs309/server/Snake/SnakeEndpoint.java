@@ -196,6 +196,7 @@ public class SnakeEndpoint {
         if (ssnake != null) {
             map.appleBomb(ssnake.getSnake());
             ssnake.endSnake();
+            map.removeSnake(ssnake);
             sessionSnakes.remove(session.getId());
         }
         snakeEndpoints.remove(this);
