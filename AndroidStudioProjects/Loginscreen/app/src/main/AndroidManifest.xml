@@ -12,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name="edu.iastate.IDE_AND_A_DREAM.GlobalUser.User"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <uses-library
@@ -32,6 +33,13 @@
         <activity android:name=".Leaderbrd" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup" />
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake.SnakeMainActivity" />
+
+
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeStartup" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeMainActivity" />
+        <activity android:name="edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash" />
+
+
         <activity android:name="edu.iastate.IDE_AND_A_DREAM.Login.WelcomeSplashScreen" />
 
         <meta-data

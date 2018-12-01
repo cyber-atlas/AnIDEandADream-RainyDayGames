@@ -23,13 +23,17 @@ import org.json.JSONObject;
 
 import edu.iastate.loginscreen.R;
 import edu.iastate.IDE_AND_A_DREAM.secondpage;
-
+import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextViewResult;
     private TextView passcode;
     private RequestQueue mQueue;
+
+    String username;
+    int id;
+    String email;
 
 
 
@@ -58,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 jsonParse();
+
+
             }
 
         });
@@ -75,36 +81,35 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
 
                         if(response == null){
-                            Toast.makeText(getApplication(), "You are a liar", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(getApplication(), "Something happened", Toast.LENGTH_SHORT).show();
                         }
-
                         try {
+                            User globaluser = (User)getApplicationContext();
+
                             JSONObject user;
                             user = response;
+                            username = user.getString("username");
+                            email = user.getString("email");
+                            id = user.getInt("id");
+                            globaluser.setEmail(email);
+                            globaluser.setUsername(username);
+                            globaluser.setId(id);
 
-
-                            String username = user.getString("username");
-                            String email = user.getString("email");
-                            String id = user.getString("id");
-
+                            Log.d("username", globaluser.getUsername());
 
                             if (email.equals(em)) {
                                 Log.d("tag", "equals");
                                 Intent i = new Intent(MainActivity.this, WelcomeSplashScreen.class);
-                                i.putExtra("userid",id);
-                                i.putExtra("username",username);
+                                i.putExtra("userid",user.getString("id"));
+                                i.putExtra("username",user.getString("username"));
                                 startActivity(i);
                             }
                             else {
                                 Log.d("tag", "not connected");
                             }
                         } catch (JSONException e1) {
-
                             e1.printStackTrace();
-
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -114,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-
 
         mQueue.add(request);
     }

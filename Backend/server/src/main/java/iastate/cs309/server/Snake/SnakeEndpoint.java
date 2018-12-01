@@ -4,6 +4,10 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import iastate.cs309.server.Chat.Message;
 import iastate.cs309.server.Snake.SnakeEnums.Direction;
+<<<<<<< HEAD
+=======
+import iastate.cs309.server.Snake.SnakeEnums.TileType;
+>>>>>>> SnakeMultiplayer
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -12,17 +16,26 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.Optional;
+=======
+import java.util.HashMap;
+>>>>>>> SnakeMultiplayer
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Component
+<<<<<<< HEAD
 @ServerEndpoint(value = "/snake/{username}/{isSnake}")
+=======
+@ServerEndpoint(value = "/snake/{username}")
+>>>>>>> SnakeMultiplayer
 public class SnakeEndpoint {
     private static Set<SnakeEndpoint> snakeEndpoints
             = new CopyOnWriteArraySet<>();
     private static Logger logger = LoggerFactory.getLogger(iastate.cs309.server.Snake.SnakeEndpoint.class);
     private static HashBiMap<String, String> users = HashBiMap.create();
+<<<<<<< HEAD
     private static HashBiMap<String, Snake> sessionSnakes = HashBiMap.create();
     private static Map map = new Map();
     private static Gson gson = new Gson();
@@ -37,6 +50,28 @@ public class SnakeEndpoint {
                         endpoint.session.getBasicRemote().
                                 sendText(gson.toJson(map));
                     }
+=======
+    private static HashMap<String, Snake> sessionSnakes = new HashMap<>();
+    private static Map map = new Map();
+    private static Gson gson = new Gson();
+    private Session session;
+    private boolean isRunning;
+
+    public static void broadcastMap(){
+        snakeEndpoints.forEach(endpoint -> {
+            synchronized (endpoint) {
+                try {
+                    endpoint.session.getBasicRemote().
+                            sendText(gson.toJson(map));
+
+                    //send the snakes to client, they may get score for when snake dies.
+//                    for (Snake snake :
+//                            sessionSnakes.values()) {
+//                        endpoint.session.getBasicRemote().
+//                                sendText(gson.toJson(snake));
+//                    }
+
+>>>>>>> SnakeMultiplayer
                 } catch (IOException e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
@@ -45,6 +80,7 @@ public class SnakeEndpoint {
         });
     }
 
+<<<<<<< HEAD
     private static void broadcast(Message message) {
         snakeEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
@@ -53,6 +89,16 @@ public class SnakeEndpoint {
                         endpoint.session.getBasicRemote().
                                 sendText(message.getFrom() + ": " + message.getContent());
                     }
+=======
+
+    private static void broadcast(Message message) {
+
+        snakeEndpoints.forEach(endpoint -> {
+            synchronized (endpoint) {
+                try {
+                    endpoint.session.getBasicRemote().
+                            sendText(message.getFrom() + ": " + message.getContent());
+>>>>>>> SnakeMultiplayer
                 } catch (IOException e) {
                     e.printStackTrace();
                     logger.error(e.getMessage());
@@ -86,6 +132,7 @@ public class SnakeEndpoint {
         }
     }
 
+<<<<<<< HEAD
     private Optional<Snake> snakeMatchingUsername(String username) {
         for (Snake snake :
                 sessionSnakes.values()) {
@@ -93,6 +140,11 @@ public class SnakeEndpoint {
                 return Optional.of(snake);
         }
         return Optional.empty();
+=======
+
+    public Map getMap() {
+        return map;
+>>>>>>> SnakeMultiplayer
     }
 
     private void run() {
@@ -106,6 +158,7 @@ public class SnakeEndpoint {
     @OnOpen
     public void onOpen(
             Session session,
+<<<<<<< HEAD
             @PathParam("username") String username, @PathParam("isSnake") Boolean isSnake) throws IOException, EncodeException {
 
         this.session = session;
@@ -123,10 +176,20 @@ public class SnakeEndpoint {
             }
 
         }
+=======
+            @PathParam("username") String username) throws IOException, EncodeException {
+
+        this.session = session;
+        snakeEndpoints.add(this);
+        Snake snake = new Snake(username, map.findSnakeSpawn());
+        sessionSnakes.put(session.getId(), snake);
+        map.addSnake(snake);
+>>>>>>> SnakeMultiplayer
 
         //When the first snake connects run.
         run();
 
+<<<<<<< HEAD
         if (!isSnake) {
             users.put(session.getId(), username);
 
@@ -135,12 +198,16 @@ public class SnakeEndpoint {
             message.setContent("Connected!");
             broadcast(message);
         }
+=======
+
+>>>>>>> SnakeMultiplayer
         logger.info(username + " connected");
     }
 
     @OnMessage
     public void onMessage(Session session, String message)
             throws IOException, EncodeException {
+<<<<<<< HEAD
         //format: dir <N/S/E/W>
         if (sessionSnakes.containsKey(session.getId())) {
             Snake ourSnake = sessionSnakes.get(session.getId());
@@ -188,10 +255,33 @@ public class SnakeEndpoint {
             }
         }
 
+=======
+
+        //Todo: this but in json
+        //format: dir <N/S/E/W>
+        if (message.contains("dir")) {
+            String[] parts = message.split("\\s");
+            switch (parts[1]) {
+                case "N":
+                    sessionSnakes.get(session.getId()).updateDirection(Direction.North);
+                    break;
+                case "S":
+                    sessionSnakes.get(session.getId()).updateDirection(Direction.South);
+                    break;
+                case "E":
+                    sessionSnakes.get(session.getId()).updateDirection(Direction.East);
+                    break;
+                case "W":
+                    sessionSnakes.get(session.getId()).updateDirection(Direction.West);
+                    break;
+            }
+        }
+>>>>>>> SnakeMultiplayer
     }
 
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
+<<<<<<< HEAD
         Snake ssnake = sessionSnakes.get(session.getId());
         if (ssnake != null) {
             map.appleBomb(ssnake.getSnake());
@@ -203,6 +293,15 @@ public class SnakeEndpoint {
 
         if (sessionSnakes.size() == 0) {
             map.reset();
+=======
+        if (sessionSnakes.get(session.getId()) != null)
+            sessionSnakes.get(session.getId()).endSnake();
+        snakeEndpoints.remove(this);
+
+
+        if (sessionSnakes.size() == 0) {
+            //cleanup the game
+>>>>>>> SnakeMultiplayer
         }
         ;
         //broadcastMap(message);
@@ -212,7 +311,10 @@ public class SnakeEndpoint {
     public void onError(Session session, Throwable throwable) {
         logger.error(session.toString());
         logger.error(throwable.getMessage());
+<<<<<<< HEAD
         map.reset();
+=======
+>>>>>>> SnakeMultiplayer
     }
 }
 
