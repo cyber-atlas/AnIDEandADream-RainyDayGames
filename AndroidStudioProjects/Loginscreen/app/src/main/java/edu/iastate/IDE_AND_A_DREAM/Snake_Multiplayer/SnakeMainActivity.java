@@ -119,15 +119,27 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         try {
             snakejsonobj = new JSONObject(data);
             snake_map = gson.fromJson(snakejsonobj.toString(),Map.class);
-            Log.d("name", snake_map.getSnakes().get(0).getName());
-            //String uname = globaluser.getUsername();
+           // Log.d("name", snake_map.getSnakes().get(0).getName());
+            String uname = globaluser.getUsername();
             List<Snake> snakesinmap = snake_map.getSnakes();
+            int i = 0;
+            for(Snake snake: snakesinmap)
+            {
+                Log.d("no", String.valueOf(i));
+                Log.d("name",snake.getName());
+                Log.d("is alive", snake.isAliveDebug());
+                i++;
+                if(snake.getName().equalsIgnoreCase(uname) && snake.isAliveDebug().equalsIgnoreCase("false"))
+                {
+                    Log.d("Found it and is dead", uname);
+                    OnGameLost();
+                }
+            }
 
-            //Snake currentSnake = snake_map.current_snake(globaluser.getUsername());
+            //Log.d("current snake name", currentSnake.getName());
 
             snakeView.setSnakeViewMap(snake_map.getMap());
             snakeView.invalidate();
-
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: \"" + data + "\"");
             t.printStackTrace();
@@ -139,10 +151,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         ws.close();
         Log.d("CDA", "onBackPressed Called");
         OnGameLost();
-//        Intent setIntent = new Intent(Intent.ACTION_MAIN);
-//        setIntent.addCategory(Intent.CATEGORY_HOME);
-//        setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(setIntent);
     }
 
     public void getGetMapFromAPI()
@@ -158,11 +166,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 }
                 @Override
                 public void onMessage(final String message) {
-                    Log.d("", "run() returned: " + message);
+                   // Log.d("", "run() returned: " + message);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Log.d("Map object", message);
+                            //Log.d("Map object", message);
                             UpdateGameMap(message);
                         }
                     });
@@ -191,6 +199,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 //        }else {
 //            Toast.makeText(this, "Score: " + gameEngine.score, Toast.LENGTH_LONG).show();
 //        }
+        ws.close();
         send_score();
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");

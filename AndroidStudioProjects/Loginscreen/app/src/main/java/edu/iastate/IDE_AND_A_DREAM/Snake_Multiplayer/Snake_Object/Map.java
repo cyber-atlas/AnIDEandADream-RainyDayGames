@@ -44,17 +44,11 @@ public class Map {
     }
 
 
-    public Snake current_snake(String name)
-    {
-        for(Snake snake: pileOfSnakes)
-        {
-            if(snake.getName() == name)
-            {
-                return snake;
-            }
-        }
-        return null;
-    }
+//    public Snake current_snake(String name)
+//    {
+//
+//        return null;
+//    }
 
 
     public void addSnake(Snake snake) {

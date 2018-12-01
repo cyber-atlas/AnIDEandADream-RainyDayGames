@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Snake;
+
 public class SnakeView extends View{
 
 
