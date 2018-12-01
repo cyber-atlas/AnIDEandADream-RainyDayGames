@@ -10,7 +10,7 @@ public class Mob extends Snake {
     protected transient Random psudo = new Random();
 
     public Mob(String name, Coordinate coord) {
-        super(name,coord);
+        super(name, coord);
     }
 
     //snake slithers in the direction set in the class
@@ -18,7 +18,7 @@ public class Mob extends Snake {
     public void slither() {
         if (isAlive) {
             //pop directional queue
-            Integer iDir = Math.abs(psudo.nextInt()) % 4;
+            Integer iDir = Math.abs(psudo.nextInt()) % 6;
             shuffleTowardHead();
 
             //Need a second check to isalive because shuffle could kill the snake
@@ -37,9 +37,25 @@ public class Mob extends Snake {
                     case 3:
                         head.setX(head.getX() - 1);
                         break;
+                    default:
+                            switch (dir)
+                            {
+                                case North:
+                                    head.setY(head.getY() - 1);
+                                    break;
+                                case South:
+                                    head.setY(head.getY() + 1);
+                                    break;
+                                case East:
+                                    head.setX(head.getX() + 1);
+                                    break;
+                                case West:
+                                    head.setX(head.getX() - 1);
+                                    break;
+                            }
                 }
             }
-        }else{
+        } else {
             desireRespawn = true;
         }
     }
