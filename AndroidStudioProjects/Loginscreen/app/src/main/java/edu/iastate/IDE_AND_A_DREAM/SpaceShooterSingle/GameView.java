@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
+import edu.iastate.loginscreen.R;
 
 public class GameView extends SurfaceView implements Runnable {
 
@@ -50,13 +53,11 @@ public class GameView extends SurfaceView implements Runnable {
     private Blast blast;
     //indicator if game is over
     private boolean isOver;
-    //TODO make work for blaster
-//    private Button btnShoot;
     private int score;
     private int crashes;
-
-    //    private ArrayList<Rect> shotsList = new ArrayList<>();
     private LinkedList<Shots> shotsList = new LinkedList<>();
+
+//    final MediaPlayer shootSound;
 
 
     //Class constructor
@@ -97,6 +98,9 @@ public class GameView extends SurfaceView implements Runnable {
         score = 0;
         //The max number of allowed crashes
         crashes = 5;
+
+//        MediaPlayer hi;
+//        hi = MediaPlayer.create(context, R.raw.space_shooter_start);
 
     }
 
