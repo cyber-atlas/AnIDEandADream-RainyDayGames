@@ -27,16 +27,33 @@ public class Snake {
         for (int offset = 0; offset <= spawnHeight; offset++) {
             switch (offset) {
                 case 0:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeHead));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.SnakeHead));
                     break;
                 case spawnHeight:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.Nothing)); // paint a trail of nothing behind the snake
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.Nothing)); // paint a trail of nothing behind the snake
                     break;
                 default:
-                    snake.add(new Tile(new Coordinate(startingLocation.getX() + offset, startingLocation.getY()), TileType.SnakeTail));
+                    snake.add(new Tile(new Coordinate(startingLocation.getX(), startingLocation.getY() + offset), TileType.SnakeTail));
             }
         }
     }
+
+    private static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
+        ArrayList<Tile> outSnake = new ArrayList<>();
+        for (int i = 0; i < inSnake.size(); i++) {
+            Coordinate curCoord = inSnake.get(i).getCoordinate();
+            int endTail = inSnake.size() - 1;
+            if (i == 0)
+                outSnake.add(new Tile(curCoord, TileType.SnakeHead));
+            else if (i == endTail)
+                outSnake.add(new Tile(curCoord, TileType.Nothing)); // paint a trail of nothing behind the snake
+            else
+                outSnake.add(new Tile(curCoord, TileType.SnakeTail));
+        }
+        return outSnake;
+    }
+
+
 
     public String getName() {
         return name;
@@ -62,10 +79,10 @@ public class Snake {
                 Coordinate head = snake.get(0).getCoordinate();
                 switch (dir) {
                     case North:
-                        head.setY(head.getY() + 1);
+                        head.setY(head.getY() - 1);
                         break;
                     case South:
-                        head.setY(head.getY() - 1);
+                        head.setY(head.getY() + 1);
                         break;
                     case East:
                         head.setX(head.getX() + 1);
@@ -101,7 +118,6 @@ public class Snake {
         queuedDir = nextDir;
     }
 
-
     private void shuffleTowardHead() {
         //Move each body part from tail to head
         if (justAte) {
@@ -115,6 +131,7 @@ public class Snake {
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }
+        snake = snakeFix(snake);
     }
 
     public void respawn(Coordinate spawn) {
