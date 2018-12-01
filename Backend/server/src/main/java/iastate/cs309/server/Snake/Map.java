@@ -1,11 +1,14 @@
 package iastate.cs309.server.Snake;
 
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
+import jdk.nashorn.internal.runtime.regexp.joni.constants.OPCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class Map implements Runnable {
@@ -54,8 +57,16 @@ public class Map implements Runnable {
         }
     }
 
-    public synchronized void update() {
+    public void update() {
         if (readyToSpawnFood()) spawnFood();
+        if (readyToDespawnFood()) {
+            Optional<Tile> t = findTile(TileType.Apple);
+
+            if (t.isPresent()) {
+                Coordinate c = t.get().getCoordinate();
+                updateTile(c.getX(), c.getY(), TileType.Nothing);
+            }
+        }
         for (Snake snake :
                 pileOfSnakes) {
             if (snake.desireRespawn) {
@@ -98,6 +109,25 @@ public class Map implements Runnable {
         return true;
     }
 
+    /**
+     * Optionals are pretty neat. Hibernate uses them a lot but I hadn't used them prior.
+     *
+     * @param tileType desired tile to find
+     * @return Tile, maybe. return.isPresent()
+     */
+    private Optional<Tile> findTile(TileType tileType) {
+        //dont want procedural looking cleaning.
+        int dartX = Math.abs(psudo.nextInt()) % width;
+        int dartY = Math.abs(psudo.nextInt()) % height;
+        Coordinate c = new Coordinate(dartX, dartY);
+        if (countTiles(TileType.Apple) < 5 * pileOfSnakes.size())
+            return Optional.empty();
+        if (map[dartX][dartY].equals(tileType))
+            return Optional.of(new Tile(new Coordinate(dartX, dartY), tileType));
+        //implicit else
+        return findTile(tileType);
+    }
+
     private int countTiles(TileType tileType) {
         int count = 0;
         //not really sure if this does by rows or columns, doesn't really matter tho
@@ -115,6 +145,11 @@ public class Map implements Runnable {
 
     private boolean readyToSpawnFood() {
         return countTiles(TileType.Apple) < pileOfSnakes.size() * 3;
+
+    }
+
+    private boolean readyToDespawnFood() {
+        return countTiles(TileType.Apple) > pileOfSnakes.size() * 6;
     }
 
     private void spawnFood() {
