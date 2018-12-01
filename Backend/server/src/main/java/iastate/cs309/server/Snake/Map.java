@@ -23,7 +23,7 @@ public class Map implements Runnable {
 
     public void run() {
         long lastLoopTime = System.nanoTime();
-        final int TARGET_FPS = 1;
+        final int TARGET_FPS = 3;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS; //nanoseconds per second / target fps
         long lastFpsTime = 0;
         while (true) {
