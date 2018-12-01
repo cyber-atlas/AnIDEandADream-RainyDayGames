@@ -54,7 +54,6 @@ public class Snake {
     }
 
 
-
     public String getName() {
         return name;
     }
@@ -76,22 +75,27 @@ public class Snake {
 
             //Need a second check to isalive because shuffle could kill the snake
             if (isAlive) {
-                Coordinate head = snake.get(0).getCoordinate();
-                switch (dir) {
-                    case North:
-                        head.setY(head.getY() - 1);
-                        break;
-                    case South:
-                        head.setY(head.getY() + 1);
-                        break;
-                    case East:
-                        head.setX(head.getX() + 1);
-                        break;
-                    case West:
-                        head.setX(head.getX() - 1);
-                        break;
-                }
+                moveHead(dir);
+
             }
+        }
+    }
+
+    protected void moveHead(Direction direction) {
+        Coordinate head = snake.get(0).getCoordinate();
+        switch (direction) {
+            case North:
+                head.setY(head.getY() - 1);
+                break;
+            case South:
+                head.setY(head.getY() + 1);
+                break;
+            case East:
+                head.setX(head.getX() + 1);
+                break;
+            case West:
+                head.setX(head.getX() - 1);
+                break;
         }
     }
 
@@ -115,8 +119,13 @@ public class Snake {
         queuedDir = nextDir;
     }
 
+
+    /**
+     * Move each body part from tail to head
+     */
     protected void shuffleTowardHead() {
-        //Move each body part from tail to head
+        if (!isAlive)
+            return;
         if (justAte) {
             snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first
             score = snake.size();
@@ -146,7 +155,7 @@ public class Snake {
     /**
      * *the snake shrivels from the harsh conditions*
      */
-    public void coldWater(){
+    public void coldWater() {
         snake.clear();
     }
 }

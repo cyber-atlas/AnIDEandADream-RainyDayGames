@@ -2,7 +2,6 @@ package iastate.cs309.server.Snake;
 
 import iastate.cs309.server.Snake.SnakeEnums.Direction;
 
-import javax.print.DocFlavor;
 import java.util.Random;
 
 public class Mob extends Snake {
@@ -26,34 +25,19 @@ public class Mob extends Snake {
                 Coordinate head = snake.get(0).getCoordinate();
                 switch (iDir) {
                     case 0:
-                        head.setY(head.getY() - 1);
+                        updateDirection(Direction.North);
                         break;
                     case 1:
-                        head.setY(head.getY() + 1);
+                        updateDirection(Direction.South);
                         break;
                     case 2:
-                        head.setX(head.getX() + 1);
+                        updateDirection(Direction.East);
                         break;
                     case 3:
-                        head.setX(head.getX() - 1);
+                        updateDirection(Direction.West);
                         break;
-                    default:
-                            switch (dir)
-                            {
-                                case North:
-                                    head.setY(head.getY() - 1);
-                                    break;
-                                case South:
-                                    head.setY(head.getY() + 1);
-                                    break;
-                                case East:
-                                    head.setX(head.getX() + 1);
-                                    break;
-                                case West:
-                                    head.setX(head.getX() - 1);
-                                    break;
-                            }
                 }
+                moveHead(dir);
             }
         } else {
             desireRespawn = true;
