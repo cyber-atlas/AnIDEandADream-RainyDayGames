@@ -86,9 +86,10 @@ public class Map implements Runnable {
         pileOfSnakes.add(snake);
     }
 
-    public void removeSnake (Snake snake){
+    public void removeSnake(Snake snake) {
         pileOfSnakes.remove(snake);
     }
+
     private void killSnake(Snake snake) {
         appleBomb(snake.getSnake());
         snake.endSnake();
@@ -150,11 +151,16 @@ public class Map implements Runnable {
     }
 
     private boolean readyToSpawnFood() {
-        return countTiles(TileType.Apple) < (countTiles(TileType.SnakeTail)+ 3 )/ (pileOfSnakes.size() +1 );
+        return countTiles(TileType.Apple) < foodMath(1);
     }
 
     private boolean readyToDespawnFood() {
-        return countTiles(TileType.Apple) > (pileOfSnakes.size() + 1) * 6 ;
+        return countTiles(TileType.Apple) > foodMath(3);
+    }
+
+    private int foodMath(int mFactor) {
+        final int baseFoodAmount = 3;
+        return baseFoodAmount + ((countTiles(TileType.SnakeTail) / (pileOfSnakes.size() + 1)) * mFactor);
     }
 
     private void spawnFood() {

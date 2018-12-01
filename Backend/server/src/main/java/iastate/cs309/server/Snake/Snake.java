@@ -100,7 +100,6 @@ public class Snake {
 
     public void endSnake() {
         isAlive = false;
-        score = snake.size();
         coldWater();
     }
 
@@ -126,8 +125,8 @@ public class Snake {
         if (!isAlive)
             return;
         if (justAte) {
-            snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first
-            score = snake.size();
+            snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset in the following loop
+            score = snake.size() - 1;
             justAte = false;
         }
         for (int seg = snake.size() - 1; seg > 0; seg--) {
