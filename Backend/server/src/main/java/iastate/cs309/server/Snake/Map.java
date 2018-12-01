@@ -20,7 +20,7 @@ public class Map implements Runnable {
     public Map() {
         map = new TileType[width][height];
         drawStarterMap();
-        spawnMob();
+        //spawnMob();
     }
 
     public void run() {

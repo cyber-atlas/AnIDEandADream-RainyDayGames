@@ -4,7 +4,6 @@ import com.google.common.collect.HashBiMap;
 import com.google.gson.Gson;
 import iastate.cs309.server.Chat.Message;
 import iastate.cs309.server.Snake.SnakeEnums.Direction;
-import iastate.cs309.server.Snake.SnakeEnums.TileType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,7 +12,7 @@ import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -24,7 +23,7 @@ public class SnakeEndpoint {
             = new CopyOnWriteArraySet<>();
     private static Logger logger = LoggerFactory.getLogger(iastate.cs309.server.Snake.SnakeEndpoint.class);
     private static HashBiMap<String, String> users = HashBiMap.create();
-    private static HashMap<String, Snake> sessionSnakes = new HashMap<>();
+    private static HashBiMap<String, Snake> sessionSnakes = HashBiMap.create();
     private static Map map = new Map();
     private static Gson gson = new Gson();
     private static boolean isRunning = false;
@@ -87,6 +86,15 @@ public class SnakeEndpoint {
         }
     }
 
+    private Optional<Snake> snakeMatchingUsername(String username) {
+        for (Snake snake :
+                sessionSnakes.values()) {
+            if (snake.name.equals(username))
+                return Optional.of(snake);
+        }
+        return Optional.empty();
+    }
+
     private void run() {
         if (!isRunning) {
             Thread t = new Thread(map);
@@ -105,8 +113,15 @@ public class SnakeEndpoint {
 
         if (isSnake) {
             Snake snake = new Snake(username, map.findSnakeSpawn());
-            sessionSnakes.put(session.getId(), snake);
-            map.addSnake(snake);
+            Optional<Snake> o = snakeMatchingUsername(username);
+            if (o.isPresent()) {
+                sessionSnakes.inverse().put(o.get(), session.getId());
+                o.get().desireRespawn=true;
+            } else {
+                sessionSnakes.put(session.getId(), snake);
+                map.addSnake(snake);
+            }
+
         }
 
         //When the first snake connects run.
@@ -178,7 +193,7 @@ public class SnakeEndpoint {
     @OnClose
     public void onClose(Session session) throws IOException, EncodeException {
         Snake ssnake = sessionSnakes.get(session.getId());
-        if (ssnake!= null){
+        if (ssnake != null) {
             map.appleBomb(ssnake.getSnake());
             ssnake.endSnake();
             sessionSnakes.remove(session.getId());
