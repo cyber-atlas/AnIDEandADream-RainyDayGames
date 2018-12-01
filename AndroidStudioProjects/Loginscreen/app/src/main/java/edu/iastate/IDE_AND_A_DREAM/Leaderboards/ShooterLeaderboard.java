@@ -1,5 +1,6 @@
 package edu.iastate.IDE_AND_A_DREAM.Leaderboards;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,6 +27,8 @@ public class ShooterLeaderboard extends AppCompatActivity{
 
     private ListView simpleList;
     private RequestQueue mQueue;
+
+    static MediaPlayer leaderBoardMusic;
 
     ArrayList<Integer> scorelist = new ArrayList<>();
     ArrayList<Integer> userids = new ArrayList<>();
@@ -118,7 +121,8 @@ public class ShooterLeaderboard extends AppCompatActivity{
 
         mQueue.add(request);
 
-
+        leaderBoardMusic = MediaPlayer.create(this, R.raw.leader_board_sound);
+        leaderBoardMusic.start();
 
 
     }
