@@ -101,8 +101,8 @@ public class Snake {
 
     public void endSnake() {
         isAlive = false;
-        coldWater();
         score = snake.size();
+        coldWater();
     }
 
     public void updateDirection(Direction nextDir) {
