@@ -150,7 +150,7 @@ public class Map implements Runnable {
     }
 
     private boolean readyToSpawnFood() {
-        return countTiles(TileType.Apple) < countTiles(TileType.SnakeTail) / pileOfSnakes.size() ;
+        return countTiles(TileType.Apple) < (countTiles(TileType.SnakeTail)+ 3 )/ pileOfSnakes.size() +1 ;
 
     }
 
