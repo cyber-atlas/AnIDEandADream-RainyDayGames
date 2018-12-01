@@ -77,16 +77,14 @@ public class Messaging extends ListActivity{
             public void onClick(View v) {
                 Draft[] drafts = {new Draft_6455()};
 
-                final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/rude/" + editTextDest.getText().toString().trim();
+                final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/snake/" + editTextDest.getText().toString().trim() + "/false";
                 try {
                     //TODO why are we adding a draft?
                     ws = new WebSocketClient(new URI(serverAddy), drafts[0]) {
                         @Override
                         public void onOpen(ServerHandshake serverHandshake) {
                             Log.d("OPEN", "run() returned: " + "is connecting");
-                            listItems.add("Conencted: " + serverAddy);
-
-
+                            listItems.add("Connected: " + serverAddy);
                         }
 
                         @Override

@@ -17,6 +17,12 @@ gradle-build:
   script:
     - cd Backend/server
     - ./gradlew assemble
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - Backend/server/build
+      - Backend/server/.gradle
 
 gradle-test:
   stage: gradletest
@@ -28,6 +34,13 @@ gradle-test:
   script:
     - cd Backend/server
     - ./gradlew test
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - Backend/server/build
+      - Backend/server/.gradle
+
 
 auto-deploy:
   stage: autodeploy
@@ -41,7 +54,13 @@ auto-deploy:
     - ./gradlew build
     - sudo mv build/libs/*.jar /target/spring-demo.jar
     - sudo systemctl stop system-spring-demo
-    - sudo systemctl start system-spring-demo
+    - sudo systemctl start system-spring-demo 
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - Backend/server/build
+      - Backend/server/.gradle
  
 # To build android projects
 # Notice that we cd into Android_test folder which contains all Android files before building apk.    
