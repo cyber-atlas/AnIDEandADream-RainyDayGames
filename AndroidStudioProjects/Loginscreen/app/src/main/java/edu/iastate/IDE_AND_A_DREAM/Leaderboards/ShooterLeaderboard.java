@@ -59,6 +59,50 @@ public class ShooterLeaderboard extends AppCompatActivity{
                         names.put(id, name);
 
 
+                        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+
+                                    for (int i = 0; i < response.length(); i++) {
+                                        Log.d("tag", "in response");
+                                        JSONObject user;
+                                        user = response.getJSONObject(i);
+
+                                        int score = user.getInt("score");
+                                        int name = user.getInt("userid");
+                                        Log.d("Tag", user.toString());
+                                        scorelist.add(score);
+                                        userids.add(name);
+                                    }
+
+                                } catch (JSONException e1) {
+                                    e1.printStackTrace();
+                                }
+
+
+
+                                ArrayList<String> shortList = new ArrayList<>();
+
+                                for(int i = 0; i < 10; i++){
+                                    shortList.add(scorelist.get(i) + " - "+ names.get(userids.get(i)));
+
+                                }
+
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ShooterLeaderboard.this, R.layout.activity_text_view, shortList);
+                                ListView listView = findViewById(R.id.simpleListView);
+                                listView.setAdapter(adapter);
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        });
+
+                        mQueue.add(request);
 
                     }
                 }catch (JSONException e1) {
@@ -74,60 +118,6 @@ public class ShooterLeaderboard extends AppCompatActivity{
         });
 
         mQueue.add(req);
-
-        for(int i = 0; i < 10000; i ++){
-            int x = 0;
-            int y = 1;
-            int z = x + y;
-        }
-
-        mQueue.start();
-
-
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-
-                    for (int i = 0; i < response.length(); i++) {
-                        Log.d("tag", "in response");
-                        JSONObject user;
-                        user = response.getJSONObject(i);
-
-                        int score = user.getInt("score");
-                        int name = user.getInt("userid");
-                        Log.d("Tag", user.toString());
-                        scorelist.add(score);
-                        userids.add(name);
-                    }
-
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-
-
-                ArrayList<String> shortList = new ArrayList<>();
-
-                for(int i = 0; i < 10; i++){
-                    shortList.add(scorelist.get(i) + " - "+ names.get(userids.get(i)));
-
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(ShooterLeaderboard.this, R.layout.activity_text_view, shortList);
-                ListView listView = findViewById(R.id.simpleListView);
-                listView.setAdapter(adapter);
-
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
-
-        mQueue.add(request);
         //leaderBoardMusic = MediaPlayer.create(this, R.raw.leader_board_sound);
         //leaderBoardMusic.start();
     }
