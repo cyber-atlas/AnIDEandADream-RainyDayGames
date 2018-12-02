@@ -292,7 +292,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             }
         });
         mQueue.add(request);
-
     }
 
     public void send_score(int score) {
