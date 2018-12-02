@@ -47,7 +47,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private TextView HighScore;
     private TextView CurrentScore;
 
-
     private final Handler handler = new Handler();
 
     private SnakeEngine gameEngine;
@@ -79,7 +78,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         gameEngine = new SnakeEngine();
         gameEngine.initGame(numMon);
         mQueue = Volley.newRequestQueue(this);
-
 
         Log.d("Update Valley",String.valueOf(updateDelay));
 

@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -40,6 +41,7 @@ import org.json.JSONException;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Random;
 
 import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Map;
@@ -73,6 +75,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private WebSocketClient ws;
     User globaluser;
     private final Handler handler = new Handler();
+    Random rnd = new Random();
 
     private SnakeEngine gameEngine;
     private SnakeView snakeView;
@@ -80,6 +83,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     int updateDelay;
     int numMon;
     int prevScore = 0;
+    int SnakeHeadColor;
 
     private RequestQueue mQueue;
     private float prevX, prevY;
@@ -95,6 +99,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         CurrentPlayers = findViewById(R.id.currentplayers);
 
         CurrentScore.setText("Current Score: "+prevScore);
+        SnakeHeadColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("M/d/yy hh:mm a");
@@ -130,6 +135,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             List<Snake> snakesinmap = snake_map.getSnakes();
             int i = 1;
             int HighestScore = 0;
+            int indexofSnake;
             String players = "Players On Line: "+"\n";
             for(Snake snake: snakesinmap)
             {
@@ -143,6 +149,8 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 if(snake.getName().equalsIgnoreCase(uname))
                 {
                     snakeScore = snake.getScore();
+                    indexofSnake = snakesinmap.indexOf(snake);
+                    Log.d("My Index", String.valueOf(indexofSnake));
                 }
                 updateScore(snakeScore);
                 CurrentPlayers.setText(players);
@@ -155,7 +163,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                     OnGameLost(snakeScore);
                 }
             }
-            snakeView.setSnakeViewMap(snake_map.getMap());
+            snakeView.setSnakeViewMap(snake_map.getMap(), snake_map, uname);
             snakeView.invalidate();
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: \"" + data + "\"");

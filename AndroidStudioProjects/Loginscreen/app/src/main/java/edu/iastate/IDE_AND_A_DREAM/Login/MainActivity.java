@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         try {
                             User globaluser = (User)getApplicationContext();
-
                             JSONObject user;
                             user = response;
                             username = user.getString("username");
