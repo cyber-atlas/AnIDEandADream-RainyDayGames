@@ -115,7 +115,6 @@ public class Snake {
         queuedDir = nextDir;
     }
 
-
     /**
      * Move each body part from tail to head
      */

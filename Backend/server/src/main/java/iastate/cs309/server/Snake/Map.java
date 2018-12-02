@@ -57,8 +57,9 @@ public class Map implements Runnable {
 
     public void update() {
         int foodCount = countTiles(TileType.Apple);
+        int slowDespawn = psudo.nextInt();
         if (readyToSpawnFood(foodCount)) spawnFood();
-        if (readyToDespawnFood(foodCount)) {
+        if (readyToDespawnFood(foodCount) && slowDespawn % 5 == 0) {
             Optional<Tile> t = findTile(TileType.Apple);
 
             if (t.isPresent()) {
@@ -281,4 +282,6 @@ public class Map implements Runnable {
         pileOfSnakes.clear();
         drawStarterMap();
     }
+
+
 }
