@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class Map implements Runnable {
@@ -19,7 +20,7 @@ public class Map implements Runnable {
     public Map() {
         map = new TileType[width][height];
         drawStarterMap();
-        spawnMob();
+        //spawnMob();
     }
 
     public void run() {
@@ -54,8 +55,18 @@ public class Map implements Runnable {
         }
     }
 
-    public synchronized void update() {
-        if (readyToSpawnFood()) spawnFood();
+    public void update() {
+        int foodCount = countTiles(TileType.Apple);
+        int slowDespawn = psudo.nextInt();
+        if (readyToSpawnFood(foodCount)) spawnFood();
+        if (readyToDespawnFood(foodCount) && slowDespawn % 5 == 0) {
+            Optional<Tile> t = findTile(TileType.Apple);
+
+            if (t.isPresent()) {
+                Coordinate c = t.get().getCoordinate();
+                updateTile(c.getX(), c.getY(), TileType.Nothing);
+            }
+        }
         for (Snake snake :
                 pileOfSnakes) {
             if (snake.desireRespawn) {
@@ -69,12 +80,21 @@ public class Map implements Runnable {
     }
 
     //i was watching the office and wanted to implement something mindless while doing it
-    private void spawnMob(){
-        pileOfSnakes.add(new Mob("mob0",findSnakeSpawn()));
+    private void spawnMob() {
+        pileOfSnakes.add(new Mob("mob0", findSnakeSpawn()));
     }
 
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
+    }
+
+    public void removeSnake(Snake snake) {
+        pileOfSnakes.remove(snake);
+    }
+
+    private void killSnake(Snake snake) {
+        appleBomb(snake.getSnake());
+        snake.endSnake();
     }
 
     //finds a place with a contiguous snake sized spawn area
@@ -98,6 +118,25 @@ public class Map implements Runnable {
         return true;
     }
 
+    /**
+     * Optionals are pretty neat. Hibernate uses them a lot but I hadn't used them prior.
+     *
+     * @param tileType desired tile to find
+     * @return Tile, maybe. return.isPresent()
+     */
+    private Optional<Tile> findTile(TileType tileType) {
+        //dont want procedural looking cleaning.
+        int dartX = Math.abs(psudo.nextInt()) % width;
+        int dartY = Math.abs(psudo.nextInt()) % height;
+        Coordinate c = new Coordinate(dartX, dartY);
+        if (countTiles(TileType.Apple) < 5 * pileOfSnakes.size())
+            return Optional.empty();
+        if (map[dartX][dartY].equals(tileType))
+            return Optional.of(new Tile(new Coordinate(dartX, dartY), tileType));
+        //implicit else
+        return findTile(tileType);
+    }
+
     private int countTiles(TileType tileType) {
         int count = 0;
         //not really sure if this does by rows or columns, doesn't really matter tho
@@ -113,8 +152,17 @@ public class Map implements Runnable {
         return count;
     }
 
-    private boolean readyToSpawnFood() {
-        return countTiles(TileType.Apple) < pileOfSnakes.size() * 3;
+    private boolean readyToSpawnFood(int appleCount) {
+        return appleCount < foodMath(1);
+    }
+
+    private boolean readyToDespawnFood(int appleCount) {
+        return appleCount > foodMath(3);
+    }
+
+    private int foodMath(int mFactor) {
+        final int baseFoodAmount = 3;
+        return baseFoodAmount + ((pileOfSnakes.size() + 1) * mFactor);
     }
 
     private void spawnFood() {
@@ -144,39 +192,41 @@ public class Map implements Runnable {
     public void drawSnakes() {
         for (Snake snake :
                 pileOfSnakes) {
-            List<Tile> p = snake.getSnake();
-            for (int seg = 0; seg < p.size(); seg++) {
-                Tile snakeTile = p.get(seg);
-                int segX = snakeTile.getCoordinate().getX();
-                int segY = snakeTile.getCoordinate().getY();
+            if (snake.isAlive) {
+                List<Tile> p = snake.getSnake();
+                for (int seg = 0; seg < p.size(); seg++) {
+                    Tile snakeTile = p.get(seg);
+                    int segX = snakeTile.getCoordinate().getX();
+                    int segY = snakeTile.getCoordinate().getY();
 
-                if (isOnMap(segX, segY)) {
-                    //only consider interactions with the head of the snake
-                    if (seg == 0) {
-                        switch (map[segX][segY]) {
-                            case Nothing:
+                    if (isOnMap(segX, segY)) {
+                        //only consider interactions with the head of the snake
+                        if (seg == 0) {
+                            switch (map[segX][segY]) {
+                                case Nothing:
+                                    updateTile(snakeTile);
+                                    break;
+                                case Apple:
+                                    snake.feed();
+                                    updateTile(new Tile(snakeTile.getCoordinate(), TileType.Nothing));
+                                    updateTile(snakeTile);
+                                    break;
+                                case Wall:
+                                case SnakeHead:
+                                case SnakeTail:
+                                    //kill the snake if its head is in another block
+                                    killSnake(snake);
+                                    //if (!isWall(snakeTile.getCoordinate()))
+                                    //    updateTile(snakeTile);
+                            }
+                        } else {
+                            if (!isWall(snakeTile.getCoordinate()))
                                 updateTile(snakeTile);
-                                break;
-                            case Apple:
-                                snake.feed();
-                                updateTile(new Tile(snakeTile.getCoordinate(),TileType.Nothing));
-                                updateTile(snakeTile);
-                                break;
-                            case Wall:
-                            case SnakeHead:
-                            case SnakeTail:
-                                //kill the snake if its head is in another block
-                                snake.endSnake();
-                                //if (!isWall(snakeTile.getCoordinate()))
-                                //    updateTile(snakeTile);
                         }
                     } else {
-                        if (!isWall(snakeTile.getCoordinate()))
-                            updateTile(snakeTile);
+                        //cheaters get the boot
+                        killSnake(snake);
                     }
-                } else {
-                    //cheaters get the boot
-                    snake.endSnake();
                 }
             }
         }
@@ -227,7 +277,11 @@ public class Map implements Runnable {
         for (Snake snake :
                 pileOfSnakes) {
             snake.endSnake();
+
         }
+        pileOfSnakes.clear();
         drawStarterMap();
     }
+
+
 }

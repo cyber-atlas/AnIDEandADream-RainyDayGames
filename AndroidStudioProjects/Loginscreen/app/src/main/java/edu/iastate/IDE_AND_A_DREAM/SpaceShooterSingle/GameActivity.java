@@ -63,6 +63,7 @@ public class GameActivity extends AppCompatActivity {
         super.onPause();
         //uses the pause that we defined in GameView
         gameView.pause();
+
     }
 
     //runs the game when the activity is resumed

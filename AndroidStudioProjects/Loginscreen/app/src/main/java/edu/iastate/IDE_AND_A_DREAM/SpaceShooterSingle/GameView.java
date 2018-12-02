@@ -5,18 +5,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+
+import edu.iastate.loginscreen.R;
 
 public class GameView extends SurfaceView implements Runnable {
 
@@ -50,13 +49,13 @@ public class GameView extends SurfaceView implements Runnable {
     private Blast blast;
     //indicator if game is over
     private boolean isOver;
-    //TODO make work for blaster
-//    private Button btnShoot;
     private int score;
     private int crashes;
-
-    //    private ArrayList<Rect> shotsList = new ArrayList<>();
     private LinkedList<Shots> shotsList = new LinkedList<>();
+
+    final MediaPlayer shootSound;
+    final MediaPlayer bgSound;
+    final MediaPlayer endSound;
 
 
     //Class constructor
@@ -64,11 +63,7 @@ public class GameView extends SurfaceView implements Runnable {
         super(context);
 
         //initialize the player context
-//        player = new Player(context);
         player = new Player(context, screenX, screenY);
-
-//        btn = new Rect(200, screenY / 2, screenY, 275);
-
         //initialize the drawing objects
         surfaceHolder = getHolder();
         paint = new Paint();
@@ -98,7 +93,16 @@ public class GameView extends SurfaceView implements Runnable {
         //The max number of allowed crashes
         crashes = 5;
 
+//        MediaPlayer hi;
+//        hi = MediaPlayer.create(context, R.raw.space_shooter_start);
+
+        shootSound = MediaPlayer.create(context,R.raw.space_shooter_shoot);
+        endSound = MediaPlayer.create(context, R.raw.space_shooter_end_sound);
+        bgSound = MediaPlayer.create(context, R.raw.space_shooter_bg_music);
+
+        startSound("bgSound");
     }
+
 
     @Override
     public void run() {
@@ -243,6 +247,7 @@ public class GameView extends SurfaceView implements Runnable {
 
             //draw game Over when the game is over
             if(isOver){
+                startSound("endSound");
                 paint.setTextSize(150);
                 paint.setTextAlign(Paint.Align.CENTER);
 
@@ -252,8 +257,6 @@ public class GameView extends SurfaceView implements Runnable {
                 //Done playing
                 playing = false;
             }
-
-
             //Unlocking the canvas
             surfaceHolder.unlockCanvasAndPost(canvas);
         }
@@ -278,6 +281,13 @@ public class GameView extends SurfaceView implements Runnable {
         try {
             gameThread.join();
         } catch (InterruptedException e) {
+        }
+
+        if(bgSound.isPlaying()) {
+            bgSound.stop();
+        }
+        if (endSound.isPlaying()) {
+            endSound.stop();
         }
     }
 
@@ -367,6 +377,8 @@ public class GameView extends SurfaceView implements Runnable {
 //                        shotsList.add(new Shots(newShotTop, newShotLeft, screenX));
                         shotsList.add(new Shots(newShotLeft, newShotTop, screenX));
 
+                        startSound("shoot");
+
 //                        Log.d("motion shooting touch ", String.valueOf(player.isShooting()));
                         break;
                     }
@@ -408,6 +420,25 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
     }
+    
+    void startSound(String sound){
 
+        switch (sound) {
+            case("shoot"):
+                shootSound.start();
+                break;
+            
+            case("bgSound"):
+
+//                bgSound.setLooping(true);
+                bgSound.start();
+                bgSound.setLooping(true);
+                break;
+            case("endSound"):
+                bgSound.stop();
+                endSound.start();
+                endSound.setLooping(true);
+        }
+    }
 
 }

@@ -38,21 +38,18 @@ public class Snake {
         }
     }
 
-    protected static ArrayList<Tile> snakeFix(ArrayList<Tile> inSnake) {
-        ArrayList<Tile> outSnake = new ArrayList<>();
+    protected static void snakeFix(ArrayList<Tile> inSnake) {
         for (int i = 0; i < inSnake.size(); i++) {
-            Coordinate curCoord = inSnake.get(i).getCoordinate();
+            Tile curTile = inSnake.get(i);
             int endTail = inSnake.size() - 1;
             if (i == 0)
-                outSnake.add(new Tile(curCoord, TileType.SnakeHead));
+                curTile.setTileType(TileType.SnakeHead);
             else if (i == endTail)
-                outSnake.add(new Tile(curCoord, TileType.Nothing)); // paint a trail of nothing behind the snake
+                curTile.setTileType( TileType.Nothing); // paint a trail of nothing behind the snake
             else
-                outSnake.add(new Tile(curCoord, TileType.SnakeTail));
+                curTile.setTileType( TileType.SnakeTail);
         }
-        return outSnake;
     }
-
 
 
     public String getName() {
@@ -76,32 +73,32 @@ public class Snake {
 
             //Need a second check to isalive because shuffle could kill the snake
             if (isAlive) {
-                Coordinate head = snake.get(0).getCoordinate();
-                switch (dir) {
-                    case North:
-                        head.setY(head.getY() - 1);
-                        break;
-                    case South:
-                        head.setY(head.getY() + 1);
-                        break;
-                    case East:
-                        head.setX(head.getX() + 1);
-                        break;
-                    case West:
-                        head.setX(head.getX() - 1);
-                        break;
-                }
+                moveHead(dir);
             }
+        }
+    }
+
+    protected void moveHead(Direction direction) {
+        Coordinate head = snake.get(0).getCoordinate();
+        switch (direction) {
+            case North:
+                head.setY(head.getY() - 1);
+                break;
+            case South:
+                head.setY(head.getY() + 1);
+                break;
+            case East:
+                head.setX(head.getX() + 1);
+                break;
+            case West:
+                head.setX(head.getX() - 1);
+                break;
         }
     }
 
     public void endSnake() {
         isAlive = false;
-        for (Tile t :
-                snake) {
-            t.setTileType(TileType.Apple);
-        }
-        score = snake.size();
+        coldWater();
     }
 
     public void updateDirection(Direction nextDir) {
@@ -118,11 +115,15 @@ public class Snake {
         queuedDir = nextDir;
     }
 
+    /**
+     * Move each body part from tail to head
+     */
     protected void shuffleTowardHead() {
-        //Move each body part from tail to head
+        if (!isAlive)
+            return;
         if (justAte) {
-            snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset on first
-            score = snake.size();
+            snake.add(new Tile(new Coordinate(0, 0), TileType.SnakeTail)); //Position doesn't matter; will get reset in the following loop
+            score = snake.size() - 1;
             justAte = false;
         }
         for (int seg = snake.size() - 1; seg > 0; seg--) {
@@ -131,7 +132,7 @@ public class Snake {
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }
-        snake = snakeFix(snake);
+        snakeFix(snake);
     }
 
     public void respawn(Coordinate spawn) {
@@ -144,5 +145,12 @@ public class Snake {
         this.name = s.name;
         this.score = s.score;
         desireRespawn = false;
+    }
+
+    /**
+     * *the snake shrivels from the harsh conditions*
+     */
+    public void coldWater() {
+        snake.clear();
     }
 }

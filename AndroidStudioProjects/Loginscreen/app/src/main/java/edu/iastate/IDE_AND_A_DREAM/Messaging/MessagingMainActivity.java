@@ -18,18 +18,14 @@ public class MessagingMainActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging_main);
 
-
         //Getting the pass button
         buttonPass  =  (Button) findViewById(R.id.buttonPass);
-
         buttonPass.setOnClickListener(this);
 
     }
 
     public void onClick(View v){
-
         startActivity(new Intent(this, Messaging.class ));
     }
-
 
 }

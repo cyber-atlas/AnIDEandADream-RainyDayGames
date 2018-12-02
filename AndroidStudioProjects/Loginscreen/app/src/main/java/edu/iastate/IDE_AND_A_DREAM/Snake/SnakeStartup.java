@@ -44,7 +44,6 @@ public class SnakeStartup extends AppCompatActivity {
         Easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle extras = getIntent().getExtras();
                 if (extras != null) {
                     String value = extras.getString("userid");
@@ -93,5 +92,15 @@ public class SnakeStartup extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.d("CDA", "onBackPressed Called");
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent BackToList = new Intent(SnakeStartup.this, GamesList.class);
+        BackToList.putExtra("userid",value);
+        SnakeStartup.this.startActivity(BackToList);
     }
 }
