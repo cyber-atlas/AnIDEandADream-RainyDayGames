@@ -74,7 +74,15 @@ public class ShooterLeaderboard extends AppCompatActivity{
         });
 
         mQueue.add(req);
+
+        for(int i = 0; i < 10000; i ++){
+            int x = 0;
+            int y = 1;
+            int z = x + y;
+        }
+
         mQueue.start();
+
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
@@ -120,11 +128,8 @@ public class ShooterLeaderboard extends AppCompatActivity{
         });
 
         mQueue.add(request);
-
-        leaderBoardMusic = MediaPlayer.create(this, R.raw.leader_board_sound);
-        leaderBoardMusic.start();
-
-
+        //leaderBoardMusic = MediaPlayer.create(this, R.raw.leader_board_sound);
+        //leaderBoardMusic.start();
     }
 }
 
