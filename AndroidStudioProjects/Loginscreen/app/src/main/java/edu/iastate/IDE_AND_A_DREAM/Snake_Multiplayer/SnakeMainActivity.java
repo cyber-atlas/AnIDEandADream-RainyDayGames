@@ -163,6 +163,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
             String uname = globaluser.getUsername();
             int snakeScore = 0;
             List<Snake> snakesinmap = snake_map.getSnakes();
+
             int i = 1;
             int HighestScore = 0;
             int indexofSnake;
