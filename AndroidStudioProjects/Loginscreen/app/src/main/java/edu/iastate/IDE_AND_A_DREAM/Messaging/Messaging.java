@@ -257,7 +257,7 @@ public class Messaging extends ListActivity{
      */
     public void updateList(String message){
 
-            listItems.add("server: " +  "\n" + message);
+            listItems.add(message);
             adapter.notifyDataSetChanged();
 
         }
