@@ -16,19 +16,44 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Map;
 import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Snake;
 
+/**
+ * The type Snake view.
+ */
 public class SnakeView extends View{
 
+    /**
+     * The Snakes.
+     */
     List<Snake> Snakes;
+    /**
+     * The Snake no.
+     */
     int snakeNo;
+    /**
+     * The Myname.
+     */
     String myname;
     private Paint mPaint = new Paint();
 
     private TileType SnakeViewMap[][];
 
+    /**
+     * Instantiates a new Snake view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public SnakeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * Set snake view map.
+     *
+     * @param map     the map
+     * @param gameMap the game map
+     * @param uname   the uname
+     */
     public void setSnakeViewMap(TileType[][] map, Map gameMap, String uname){
         this.SnakeViewMap = map;
         this.Snakes = gameMap.getSnakes();

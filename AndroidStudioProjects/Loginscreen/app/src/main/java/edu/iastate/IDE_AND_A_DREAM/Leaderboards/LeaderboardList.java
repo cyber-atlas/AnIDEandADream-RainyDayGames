@@ -10,6 +10,10 @@ import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Merin Mundt. Activity that holds list to all leader boards in the game.
+ * The type Leaderboard list.
+ */
 public class LeaderboardList extends AppCompatActivity {
 
 

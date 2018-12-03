@@ -7,6 +7,9 @@ import android.graphics.BitmapFactory;
 import edu.iastate.loginscreen.R;
 
 
+/**@Author Alexander Stevenson
+ * The type Blast.
+ */
 public class Blast {
         //bitmap object
         private Bitmap bitmap;
@@ -15,7 +18,12 @@ public class Blast {
         private int x;
         private int y;
 
-        //constructor
+    /**
+     * Instantiates a new Blast.
+     *
+     * @param context the context
+     */
+//constructor
         public Blast(Context context) {
             //get image
             bitmap = BitmapFactory.decodeResource
@@ -29,29 +37,59 @@ public class Blast {
             y = -250;
         }
 
-        //sets x and y to collision
+    /**
+     * Sets x.
+     *
+     * @param x the x
+     */
+//sets x and y to collision
         public void setX(int x) {
             this.x = x;
         }
 
-        public void setY(int y) {
+    /**
+     * Sets y.
+     *
+     * @param y the y
+     */
+    public void setY(int y) {
             this.y = y;
         }
 
-        //getters
+    /**
+     * Gets bitmap.
+     *
+     * @return the bitmap
+     */
+//getters
         public Bitmap getBitmap() {
             return bitmap;
         }
 
-        public void setBitmap(Bitmap bitmap) {
+    /**
+     * Sets bitmap.
+     *
+     * @param bitmap the bitmap
+     */
+    public void setBitmap(Bitmap bitmap) {
             this.bitmap = bitmap;
         }
 
-        public int getX() {
+    /**
+     * Gets x.
+     *
+     * @return the x
+     */
+    public int getX() {
             return x;
         }
 
-        public int getY() {
+    /**
+     * Gets y.
+     *
+     * @return the y
+     */
+    public int getY() {
             return y;
         }
 }

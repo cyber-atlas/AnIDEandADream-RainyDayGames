@@ -64,6 +64,10 @@ import edu.iastate.loginscreen.R;
      \__\/         \__\/         \__\/                  \__\/         \__\/         \__\/
  */
 
+/**
+ * @Author Uma Abu, Main snake activity for multiplayer snake
+ * The type Snake main activity.
+ */
 public class SnakeMainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private TextView HighScore;
@@ -73,16 +77,37 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     private Gson gson;
 
     private WebSocketClient ws;
+    /**
+     * The Globaluser.
+     */
     User globaluser;
     private final Handler handler = new Handler();
+    /**
+     * The Rnd.
+     */
     Random rnd = new Random();
 
     private SnakeEngine gameEngine;
     private SnakeView snakeView;
+    /**
+     * The Hi score.
+     */
     int HiScore;
+    /**
+     * The Update delay.
+     */
     int updateDelay;
+    /**
+     * The Num mon.
+     */
     int numMon;
+    /**
+     * The Prev score.
+     */
     int prevScore = 0;
+    /**
+     * The Snake head color.
+     */
     int SnakeHeadColor;
 
     private RequestQueue mQueue;
@@ -123,6 +148,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
     }
 
+    /**
+     * Update game map.
+     *
+     * @param data the data
+     */
     public void UpdateGameMap(String data)
     {
         JSONObject snakejsonobj;
@@ -182,6 +212,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         SnakeMainActivity.this.startActivity(EndGame);
     }
 
+    /**
+     * Gets get map from api.
+     */
     public void getGetMapFromAPI()
     {
         final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/snake/"+globaluser.getUsername()+"/true";
@@ -267,12 +300,27 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
 
+    /**
+     * Update score.
+     *
+     * @param score the score
+     */
     public void updateScore(int score)
     {
         CurrentScore.setText("Score: "+ score);
     }
+
+    /**
+     * Update high score.
+     *
+     * @param score the score
+     * @param name  the name
+     */
     public void updateHighScore(int score, String name) {HighScore.setText("High Score:\n"+name+ " "+ score ); }
 
+    /**
+     * Gets personal best.
+     */
     public void get_personal_best()
     {
         Bundle extras = getIntent().getExtras();
@@ -302,6 +350,11 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         mQueue.add(request);
     }
 
+    /**
+     * Send score.
+     *
+     * @param score the score
+     */
     public void send_score(int score) {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

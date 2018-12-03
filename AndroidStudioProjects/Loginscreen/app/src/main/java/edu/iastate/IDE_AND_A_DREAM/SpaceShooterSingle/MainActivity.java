@@ -19,11 +19,18 @@ import edu.iastate.IDE_AND_A_DREAM.Leaderboards.ShooterLeaderboard;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Alexander Stevenson
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Image button is just a button that has an image and changes color
     private ImageButton buttonPlay;
     private ImageButton buttonScore;
+    /**
+     * The Start sound.
+     */
     static MediaPlayer startSound;
     private RequestQueue mQueue;
 

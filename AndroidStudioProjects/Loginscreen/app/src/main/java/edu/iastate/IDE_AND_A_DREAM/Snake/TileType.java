@@ -1,8 +1,29 @@
 package edu.iastate.IDE_AND_A_DREAM.Snake;
 
+/**
+ * The enum Tile type.
+ */
 public enum TileType {
-    Nothing, Wall,
+    /**
+     * Nothing tile type.
+     */
+    Nothing, /**
+     * Wall tile type.
+     */
+    Wall,
+    /**
+     * Snake head tile type.
+     */
     SnakeHead,
-    SnakeTail,Apple,
+    /**
+     * Snake tail tile type.
+     */
+    SnakeTail, /**
+     * Apple tile type.
+     */
+    Apple,
+    /**
+     * Monster tile type.
+     */
     Monster;
 }

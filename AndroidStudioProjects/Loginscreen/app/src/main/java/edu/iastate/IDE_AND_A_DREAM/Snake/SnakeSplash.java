@@ -8,6 +8,9 @@ import android.util.Log;
 
 import edu.iastate.loginscreen.R;
 
+/** @Author Uma Abu - Snake splash screen for the snake game
+ * The type Snake splash.
+ */
 public class SnakeSplash extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 1000;

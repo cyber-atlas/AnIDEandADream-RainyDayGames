@@ -8,6 +8,11 @@ import android.widget.Button;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Alexander Stevenson
+ * Main messaging activity
+ * The type Messaging main activity.
+ */
 public class MessagingMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Setting the Pass button

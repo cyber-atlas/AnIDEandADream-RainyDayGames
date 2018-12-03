@@ -12,14 +12,38 @@ import edu.iastate.IDE_AND_A_DREAM.Leaderboards.SnakeppLeaderboard;
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
 import edu.iastate.loginscreen.R;
 
+/**
+ * The type Snake startup.
+ */
 public class SnakeStartup extends AppCompatActivity {
 
+    /**
+     * The Easy.
+     */
     Button Easy;
+    /**
+     * The Medium.
+     */
     Button Medium;
+    /**
+     * The Hard.
+     */
     Button Hard;
+    /**
+     * The Leaderboard.
+     */
     Button Leaderboard;
+    /**
+     * The Easy level.
+     */
     int EasyLevel = 300;
+    /**
+     * The Medium level.
+     */
     int MediumLevel = 150;
+    /**
+     * The Hard level.
+     */
     int HardLevel = 50;
 
     @Override

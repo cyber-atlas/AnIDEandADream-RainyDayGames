@@ -8,6 +8,9 @@ import android.util.Log;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * The type Snake splash.
+ */
 public class SnakeSplash extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 1000;

@@ -13,6 +13,10 @@ import android.widget.Toast;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Alexander Stevenson
+ * The type Game activity.
+ */
 public class GameActivity extends AppCompatActivity {
 
     //Declaring the gameview

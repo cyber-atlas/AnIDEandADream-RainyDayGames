@@ -22,13 +22,26 @@ import java.util.HashMap;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Snake++ leader board for the snake++ game
+ * The type Snakepp leaderboard.
+ */
 public class SnakeppLeaderboard extends AppCompatActivity {
 
     private ListView simpleList;
     private RequestQueue mQueue;
 
+    /**
+     * The Scorelist.
+     */
     ArrayList<Integer> scorelist = new ArrayList<>();
+    /**
+     * The Userids.
+     */
     ArrayList<Integer> userids = new ArrayList<>();
+    /**
+     * The Names.
+     */
     HashMap<Integer, String> names = new HashMap<>();
 
     @Override

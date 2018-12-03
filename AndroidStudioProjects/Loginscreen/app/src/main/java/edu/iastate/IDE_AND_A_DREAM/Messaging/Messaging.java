@@ -24,34 +24,56 @@ import edu.iastate.loginscreen.R;
 
 
 /**
- public class Messaging extends AppCompatActivity {
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-super.onCreate(savedInstanceState);
-setContentView(R.layout.activity_messaging);
-}
-}
-
- **/
+ * public class Messaging extends AppCompatActivity {
+ *
+ * @Override protected void onCreate(Bundle savedInstanceState) {
+ * super.onCreate(savedInstanceState);
+ * setContentView(R.layout.activity_messaging);
+ * }
+ * }*
+ */
 public class Messaging extends ListActivity{
-    //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
+    /**
+     * The List items.
+     */
+//LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
     ArrayList<String> listItems=new ArrayList<String>();
 
-    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
+    /**
+     * The Adapter.
+     */
+//DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
     ArrayAdapter<String> adapter;
 
 
+    /**
+     * The Edit text dest.
+     */
     EditText editTextDest;
+    /**
+     * The Button dest.
+     */
     Button buttonDest;
 
     private WebSocketClient ws;
 
+    /**
+     * The Button send.
+     */
     Button buttonSend;
+    /**
+     * The Edit text input.
+     */
     EditText editTextInput;
+    /**
+     * The List view list.
+     */
     ListView listViewList;
 
-    //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
+    /**
+     * The Click counter.
+     */
+//RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
     int clickCounter=0;
 
     @Override
@@ -225,7 +247,12 @@ public class Messaging extends ListActivity{
 
 //    runOnUiThread(new Runnable(){
 
-        public void updateList(String message){
+    /**
+     * Update list.
+     *
+     * @param message the message
+     */
+    public void updateList(String message){
 
             listItems.add("server: " +  "\n" + message);
             adapter.notifyDataSetChanged();

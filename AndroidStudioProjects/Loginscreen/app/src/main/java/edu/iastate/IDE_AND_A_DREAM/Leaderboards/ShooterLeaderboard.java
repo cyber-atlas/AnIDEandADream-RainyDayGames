@@ -23,15 +23,31 @@ import java.util.HashMap;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Merin Mundt Leader Board for the space shooter game.
+ * The type Shooter leaderboard.
+ */
 public class ShooterLeaderboard extends AppCompatActivity{
 
     private ListView simpleList;
     private RequestQueue mQueue;
 
+    /**
+     * The Leader board music.
+     */
     static MediaPlayer leaderBoardMusic;
 
+    /**
+     * The Scorelist.
+     */
     ArrayList<Integer> scorelist = new ArrayList<>();
+    /**
+     * The Userids.
+     */
     ArrayList<Integer> userids = new ArrayList<>();
+    /**
+     * The Names.
+     */
     HashMap<Integer, String> names = new HashMap<>();
 
     @Override

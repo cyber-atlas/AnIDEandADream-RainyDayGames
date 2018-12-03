@@ -2,6 +2,10 @@ package edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle;
 
 import java.util.Random;
 
+/**
+ * @Author Alexander Stevenson
+ * The type Star.
+ */
 public class Star {
     private int x;
     private int y;
@@ -12,7 +16,13 @@ public class Star {
     private int minX;
     private int minY;
 
-    //Constructor for the star
+    /**
+     * Instantiates a new Star.
+     *
+     * @param screenX the screen x
+     * @param screenY the screen y
+     */
+//Constructor for the star
     public Star(int screenX, int screenY){
         //sets the the max X and Y value
         maxX =  screenX;
@@ -30,6 +40,11 @@ public class Star {
 
     }
 
+    /**
+     * Update.
+     *
+     * @param playerSpeed the player speed
+     */
     public void update(int playerSpeed){
         //animating the star along the x axis, by decreasing x with player speed
         x -= playerSpeed;
@@ -45,6 +60,11 @@ public class Star {
 
     }
 
+    /**
+     * Get star width float.
+     *
+     * @return the float
+     */
     public float getStarWidth(){
        //Making the star width randdom
         float minX = 1.0f;
@@ -54,10 +74,20 @@ public class Star {
         return finalX;
     }
 
+    /**
+     * Gets x.
+     *
+     * @return the x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Gets y.
+     *
+     * @return the y
+     */
     public int getY() {
         return y;
     }

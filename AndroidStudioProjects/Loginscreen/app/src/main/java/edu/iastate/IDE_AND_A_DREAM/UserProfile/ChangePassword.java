@@ -18,11 +18,17 @@ import com.android.volley.toolbox.Volley;
 
 import edu.iastate.loginscreen.R;
 
+/** @Author Uma Abu
+ * The type Change password.
+ */
 public class ChangePassword extends AppCompatActivity {
 
     private TextView Old_Password;
     private TextView New_Password;
     private RequestQueue mQueue;
+    /**
+     * The Update password.
+     */
     Button Update_Password;
 
 
@@ -54,6 +60,9 @@ public class ChangePassword extends AppCompatActivity {
     }
 
 
+    /**
+     * Update password.
+     */
     public void Update_Password()
     {
         Bundle extras = getIntent().getExtras();
