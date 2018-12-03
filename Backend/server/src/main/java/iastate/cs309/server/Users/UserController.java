@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * the user controller maps urls to user lookup functions
+ * can create and update users
+ */
 @RestController
 @RequestMapping("/users") //http://proj309-vc-04.misc.iastate.edu:8080/users?username=jim&password=jojjojjoj
 public class UserController {
@@ -78,7 +82,9 @@ __/\\\\\\\\\\\\\_________/\\\\\__________/\\\\\\\\\\\____/\\\\\\\\\\\\\\\_______
         */
 
 
-    //Used to update a users the password. Can be used by any user on themselves.
+    /**
+     * Used to update a users the password. Can be used by any user on themselves.
+     */
     @Transactional
     @RequestMapping(method = RequestMethod.POST, path = "/edit", params = {"id", "username", "new_role_id"})
     public ResponseEntity updateUserRoleById(@RequestParam Integer id, @RequestParam String username, @RequestParam Integer new_role_id) {

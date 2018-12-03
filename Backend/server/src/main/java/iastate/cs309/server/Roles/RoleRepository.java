@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+/**
+ * describes a join table of role types and users
+ */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
     Boolean findByRoleidAndUserid(@Param("roleid") Integer roleid, @Param("userid") Integer userid);

@@ -106,7 +106,8 @@ public class Messaging extends ListActivity{
                         @Override
                         public void onOpen(ServerHandshake serverHandshake) {
                             Log.d("OPEN", "run() returned: " + "is connecting");
-                            listItems.add("Connected: " + serverAddy);
+//                            listItems.add("Connected: " + serverAddy);
+                            listItems.add("Connected: ");
                         }
 
                         @Override
@@ -159,6 +160,8 @@ public class Messaging extends ListActivity{
 
                 try{
                     ws.send(editTextInput.getText().toString());
+                    //Clears the messagebox
+                    editTextInput.getText().clear();
                 }
                 catch(Exception e){
                     Log.d("ExceptionSendMessage:", e.getMessage());

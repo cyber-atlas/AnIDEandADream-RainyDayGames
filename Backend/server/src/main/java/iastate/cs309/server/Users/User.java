@@ -9,6 +9,9 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * this entity stores user information
+ */
 @Entity
 @Table(name = "users")
 public class User {

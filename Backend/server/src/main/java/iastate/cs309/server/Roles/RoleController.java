@@ -10,12 +10,20 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * provides api acesss to roles for users
+ */
 @RestController
 @RequestMapping("/roles")
 public class RoleController {
     @Autowired
     RoleRepository repo;
 
+    /**
+     *
+     * @param userid the id to lookup the user role by
+     * @return a role for the given user
+     */
     @RequestMapping(method = RequestMethod.GET, params = "userid")
     public List<Role> getRolesByUserid(@RequestParam Integer userid) {
         List<Role> results = repo.findByUserid(userid);
