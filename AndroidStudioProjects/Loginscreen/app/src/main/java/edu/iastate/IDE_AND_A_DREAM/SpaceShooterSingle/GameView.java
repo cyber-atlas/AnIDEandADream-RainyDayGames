@@ -149,6 +149,7 @@ public class GameView extends SurfaceView implements Runnable {
         bgSound = MediaPlayer.create(context, R.raw.space_shooter_bg_music);
 
         startSound("bgSound");
+
     }
 
 
@@ -501,7 +502,12 @@ public class GameView extends SurfaceView implements Runnable {
                 endSound.start();
                 endSound.setLooping(true);
         }
+
     }
+
+    public int getScore(){
+            return score;
+        }
 
     //public void sendScore() {
     //    Bundle extras = activity.getIntent().getExtras();

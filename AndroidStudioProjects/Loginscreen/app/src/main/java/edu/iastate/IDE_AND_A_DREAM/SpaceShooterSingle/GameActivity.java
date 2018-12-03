@@ -1,5 +1,6 @@
 package edu.iastate.IDE_AND_A_DREAM.SpaceShooterSingle;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 import edu.iastate.loginscreen.R;
 
 
@@ -22,8 +31,13 @@ public class GameActivity extends AppCompatActivity {
     //Declaring the gameview
     private GameView gameView;
     private Button btn;
+    private RequestQueue mQueue;
+    User u;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        u =  (User)getApplicationContext();
+        mQueue= Volley.newRequestQueue(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_spaceshooter_game);
@@ -64,9 +78,21 @@ public class GameActivity extends AppCompatActivity {
     //pauses the game when the activity is paused
     @Override
     protected void onPause(){
+
         super.onPause();
         //uses the pause that we defined in GameView
         gameView.pause();
+        try {
+            send_score();
+        }catch (Exception e){
+            Log.d("error", e.toString());
+        }
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
 
     }
 
@@ -77,6 +103,66 @@ public class GameActivity extends AppCompatActivity {
         //uses the resume that we defined in Gameview
         gameView.resume();
 
+    }
+
+/**
+
+    public void sendScore() {
+        Bundle extras = getIntent().getExtras();
+       if (extras != null) {
+            String value = extras.getString("userid");
+        Log.d("Final User ID", value);
+        }
+
+        int score = gameView.getScore();
+        String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+extras.getString("userid")+"&game=1&score="+ score;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
+
+           @Override
+            public void onResponse(String response) {
+                // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+                Log.d("msg", "here");
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+             public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mQueue.add(stringRequest);
+    }
+ **/
+
+
+ public void send_score() {
+//        Bundle extras = getIntent().getExtras();
+
+        int id = u.getId();
+        Log.d("userid ss", Integer.valueOf(id).toString());
+        /**
+        if (extras != null) {
+            String value = extras.getString("userid");
+            Log.d("Final User ID", value);
+        }
+         **/
+
+//        String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+ extras.getString("userid")+"&game=4&score="+ gameView.getScore();
+     String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+ Integer.valueOf(id).toString() +"&game=1&score="+ gameView.getScore();
+     Log.d("server", server_url_post);
+     StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+               // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mQueue.add(stringRequest);
     }
 
 }
