@@ -24,6 +24,10 @@ public class SnakeView extends View {
     public void setSnakeViewMap(TileType[][] map){
          this.SnakeViewMap = map;
     }
+	
+//	public void setSnakeViewColors(Color[][] overlay){
+//		this.SnakeViewColors = overlay;
+//	}
 
 
     String olamide = "Opadokun" ;
