@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ * The map describes a view of a plane holding apples wall snakes and blank spaces
+ */
 public class Map implements Runnable {
     private static final int width = 42;
     private static final int height = 42;
@@ -23,6 +26,10 @@ public class Map implements Runnable {
         //spawnMob();
     }
 
+    /**
+     * The method run by the thread controlling the game state
+     * This is a blocking call that will ensure reliable periodic updates to the map and snakes within.
+     */
     public void run() {
         long lastLoopTime = System.nanoTime();
         final int TARGET_FPS = 3;
@@ -55,6 +62,10 @@ public class Map implements Runnable {
         }
     }
 
+    /**
+     * ticks an update to the map, draws all contents that need to be redrawn
+     * Handles creation and removal of food contents
+     */
     public void update() {
         int foodCount = countTiles(TileType.Apple);
         int slowDespawn = psudo.nextInt();
@@ -84,20 +95,35 @@ public class Map implements Runnable {
         pileOfSnakes.add(new Mob("mob0", findSnakeSpawn()));
     }
 
+    /**
+     * adds a snake to the map
+     * @param snake to be added to map
+     */
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
     }
 
+    /**
+     * removes a snake from the map
+     * @param snake the snake to be removed
+     */
     public void removeSnake(Snake snake) {
         pileOfSnakes.remove(snake);
     }
 
+    /**
+     * wrapper to make killing the snake easier
+     * @param snake the snake to be turned into apples
+     */
     private void killSnake(Snake snake) {
         appleBomb(snake.getSnake());
         snake.endSnake();
     }
 
-    //finds a place with a contiguous snake sized spawn area
+    /**
+     * finds a place with a contiguous snake sized spawn area
+     *
+     */
     public Coordinate findSnakeSpawn() {
         int dartX = Math.abs(psudo.nextInt()) % width;
         // pad the top and bottom snake heights to prevent spawning into a wall 1 move after spawning
@@ -110,6 +136,13 @@ public class Map implements Runnable {
         return findSnakeSpawn();
     }
 
+    /**
+     * helper to determine where a valid snake spawn is
+     * @param x x coord
+     * @param y y coord
+     * @param n how tall a space we need of nothing tiles
+     * @return
+     */
     private boolean isNTallNothing(int x, int y, int n) {
         for (int i = 0; i < n; i++) {
             if (isOnMap(x, y + i) && map[x][y + i] != TileType.Nothing)
@@ -137,6 +170,11 @@ public class Map implements Runnable {
         return findTile(tileType);
     }
 
+    /**
+     * counts the tiles of a given type
+     * @param tileType the type to count
+     * @return an integer count of the given type
+     */
     private int countTiles(TileType tileType) {
         int count = 0;
         //not really sure if this does by rows or columns, doesn't really matter tho
@@ -152,19 +190,35 @@ public class Map implements Runnable {
         return count;
     }
 
+    /**
+     * @param appleCount number of apples on map
+     * @return true when ready to spawn food based on some math
+     */
     private boolean readyToSpawnFood(int appleCount) {
         return appleCount < foodMath(1);
     }
 
+    /**
+     * @param appleCount number of apples on the map
+     * @return true when ready to despawn food
+     */
     private boolean readyToDespawnFood(int appleCount) {
         return appleCount > foodMath(5);
     }
 
+    /**
+     * get a ratio of apples to number of snakes
+     * @param mFactor
+     * @return
+     */
     private int foodMath(int mFactor) {
         final int baseFoodAmount = 3;
         return baseFoodAmount + ((pileOfSnakes.size() + 1) * mFactor);
     }
 
+    /**
+     * spawns the food on the map
+     */
     private void spawnFood() {
         //Throw a random dart at the gameboard; put food there if you didn't poke a thing
         int dartX = Math.abs(psudo.nextInt()) % width;
@@ -189,6 +243,9 @@ public class Map implements Runnable {
         }
     }
 
+    /**
+     * draws each snake on the map object
+     */
     public void drawSnakes() {
         for (Snake snake :
                 pileOfSnakes) {
@@ -232,6 +289,12 @@ public class Map implements Runnable {
         }
     }
 
+    /**
+     * determine if the coordinate is in the map
+     * @param x
+     * @param y
+     * @return true when the coord exists on the playing field
+     */
     private boolean isOnMap(int x, int y) {
         if (x >= 0 && y >= 0 && x < width && y < height)
             return true;
@@ -239,10 +302,20 @@ public class Map implements Runnable {
         return false;
     }
 
+    /**
+     * determine if the coordinate is in the map
+     * @param coord the position to look
+     * @return true when the coord exists on the playing field
+     */
     private boolean isOnMap(Coordinate coord) {
         return isOnMap(coord.getX(), coord.getY());
     }
 
+    /**
+     * find if the given coord is a wall
+     * @param coord
+     * @return true when the coord is a wall
+     */
     private boolean isWall(Coordinate coord) {
         if (isOnMap(coord)) {
             return map[coord.getX()][coord.getY()].equals(TileType.Wall);
@@ -250,19 +323,32 @@ public class Map implements Runnable {
         return true;
     }
 
+    /**
+     * updates the given tile on the map
+     * @param tile the tile to update on the map
+     */
     private void updateTile(Tile tile) {
         if (isOnMap(tile.getCoordinate())) {
             map[tile.getCoordinate().getX()][tile.getCoordinate().getY()] = tile.getTileType();
         }
     }
 
-    //wrapper for map
+    /**
+     * updates the given tile on the map
+     * @param x
+     * @param y
+     * @param tile the tile to update on the map
+     */
     private void updateTile(int x, int y, TileType tileType) {
         if (isOnMap(x, y)) {
             map[x][y] = tileType;
         }
     }
 
+    /**
+     * drops apples on the given tiles
+     * @param area where to place the apples
+     */
     public void appleBomb(List<Tile> area) {
         for (Tile t :
                 area) {
@@ -273,6 +359,9 @@ public class Map implements Runnable {
         }
     }
 
+    /**
+     * remove all the snakes from the map and redraw it
+     */
     public void reset() {
         for (Snake snake :
                 pileOfSnakes) {
@@ -282,6 +371,4 @@ public class Map implements Runnable {
         pileOfSnakes.clear();
         drawStarterMap();
     }
-
-
 }

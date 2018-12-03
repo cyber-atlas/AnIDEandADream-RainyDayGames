@@ -1,6 +1,5 @@
 package iastate.cs309.server.Users;
 
-import iastate.cs309.server.Roles.Role;
 import iastate.cs309.server.Roles.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

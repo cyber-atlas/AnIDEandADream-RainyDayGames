@@ -5,6 +5,10 @@ import iastate.cs309.server.Snake.SnakeEnums.TileType;
 
 import java.util.ArrayList;
 
+/**
+ * Snake contains location details on where to draw a snake
+ * Handles moving, feeding and dying
+ */
 public class Snake {
     public static final int spawnHeight = 5;
     public transient Boolean desireRespawn;
@@ -24,6 +28,8 @@ public class Snake {
         this.isAlive = true;
         this.score = spawnHeight;
         this.desireRespawn = false;
+
+        //spawn the snake parts
         for (int offset = 0; offset <= spawnHeight; offset++) {
             switch (offset) {
                 case 0:
@@ -38,10 +44,14 @@ public class Snake {
         }
     }
 
-    protected static void snakeFix(ArrayList<Tile> inSnake) {
-        for (int i = 0; i < inSnake.size(); i++) {
-            Tile curTile = inSnake.get(i);
-            int endTail = inSnake.size() - 1;
+
+    /**
+     * Corrects placement of snake parts
+     */
+    protected void beautifySnake() {
+        for (int i = 0; i < snake.size(); i++) {
+            Tile curTile = snake.get(i);
+            int endTail = snake.size() - 1;
             if (i == 0)
                 curTile.setTileType(TileType.SnakeHead);
             else if (i == endTail)
@@ -64,7 +74,10 @@ public class Snake {
         justAte = true;
     }
 
-    //snake slithers in the direction set in the class
+    /**
+     * Ticks the snake one spot forward in the direction set by its member variable.
+     * Brings the tail bits along with it
+     */
     public void slither() {
         if (isAlive) {
             //pop directional queue
@@ -78,6 +91,10 @@ public class Snake {
         }
     }
 
+    /**
+     * Moves the head of the snake in the direction given
+     * @param direction North, South, East, or West
+     */
     protected void moveHead(Direction direction) {
         Coordinate head = snake.get(0).getCoordinate();
         switch (direction) {
@@ -96,11 +113,18 @@ public class Snake {
         }
     }
 
+    /**
+     * prepares the snake object for death. it shrivels on the sidewalk
+     */
     public void endSnake() {
         isAlive = false;
         coldWater();
     }
 
+    /**
+     * Validates directional movement to prevent suicide
+     * @param nextDir North, south, east or west
+     */
     public void updateDirection(Direction nextDir) {
         //Make sure the move is legal
         if ((dir == Direction.North && nextDir == Direction.South)
@@ -132,9 +156,13 @@ public class Snake {
             bodyPart.setX(nextBodyPart.getX());
             bodyPart.setY(nextBodyPart.getY());
         }
-        snakeFix(snake);
+        beautifySnake();
     }
 
+    /**
+     * Recreates the snake object from nearly scratch
+     * @param spawn The location the snake should respawn at
+     */
     public void respawn(Coordinate spawn) {
         Snake s = new Snake(name, spawn);
         this.snake = s.snake;
