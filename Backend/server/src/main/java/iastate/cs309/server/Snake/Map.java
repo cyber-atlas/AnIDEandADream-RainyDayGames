@@ -13,12 +13,13 @@ import java.util.Random;
  * The map describes a view of a plane holding apples wall snakes and blank spaces
  */
 public class Map implements Runnable {
-    private static final int width = 42;
-    private static final int height = 42;
+    private static final int width = 32;
+    private static final int height = 32;
     private static Logger logger = LoggerFactory.getLogger(Map.class);
     private TileType[][] map; //could convert to tile object
     private List<Snake> pileOfSnakes = new ArrayList<>();
     private transient Random psudo = new Random();
+    private transient boolean everyOther = false;
 
     public Map() {
         map = new TileType[width][height];
@@ -32,10 +33,9 @@ public class Map implements Runnable {
      */
     public void run() {
         long lastLoopTime = System.nanoTime();
-        final int TARGET_FPS = 6;
+        final int TARGET_FPS = 3;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS; //nanoseconds per second / target fps
         long lastFpsTime = 0;
-        boolean everyOther = true;
         while (true) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
@@ -47,10 +47,7 @@ public class Map implements Runnable {
                 lastFpsTime = 0;
             }
 
-            if (everyOther)
-                this.update();
-
-            everyOther = !everyOther;
+            this.update();
 
             try {
                 SnakeEndpoint.broadcastMap();
@@ -71,17 +68,21 @@ public class Map implements Runnable {
      * Handles creation and removal of food contents
      */
     public void update() {
-        int foodCount = countTiles(TileType.Apple);
-        int slowDespawn = psudo.nextInt();
-        if (readyToSpawnFood(foodCount)) spawnFood();
-        if (readyToDespawnFood(foodCount) && slowDespawn % 5 == 0) {
-            Optional<Tile> t = findTile(TileType.Apple);
+        if (everyOther) {
+            int foodCount = countTiles(TileType.Apple);
+            int slowDespawn = psudo.nextInt();
+            if (readyToSpawnFood(foodCount)) spawnFood();
+            if (readyToDespawnFood(foodCount) && slowDespawn % 3 == 0) {
+                Optional<Tile> t = findTile(TileType.Apple);
 
-            if (t.isPresent()) {
-                Coordinate c = t.get().getCoordinate();
-                updateTile(c.getX(), c.getY(), TileType.Nothing);
+                if (t.isPresent()) {
+                    Coordinate c = t.get().getCoordinate();
+                    updateTile(c.getX(), c.getY(), TileType.Nothing);
+                }
             }
         }
+        everyOther = !everyOther;
+
         for (Snake snake :
                 pileOfSnakes) {
             if (snake.desireRespawn) {
