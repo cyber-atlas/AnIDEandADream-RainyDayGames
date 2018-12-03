@@ -83,7 +83,8 @@ public class Leaderbrd extends AppCompatActivity {
 
                                 ArrayList<String> shortList = new ArrayList<>();
                                 for(int i = 0; i < 10; i++){
-                                    shortList.add(scorelist.get(i) + " - "+ names.get(userids.get(i)));
+//                                    shortList.add(scorelist.get(i) + " - "+ names.get(userids.get(i)));
+                                    shortList.add( names.get(userids.get(i)) +  "\t \t \t" + scorelist.get(i));
                                 }
 
                                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(Leaderbrd.this, R.layout.activity_text_view, shortList);
