@@ -32,9 +32,10 @@ public class Map implements Runnable {
      */
     public void run() {
         long lastLoopTime = System.nanoTime();
-        final int TARGET_FPS = 3;
+        final int TARGET_FPS = 6;
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS; //nanoseconds per second / target fps
         long lastFpsTime = 0;
+        boolean everyOther = true;
         while (true) {
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
@@ -46,7 +47,10 @@ public class Map implements Runnable {
                 lastFpsTime = 0;
             }
 
-            this.update();
+            if (everyOther)
+                this.update();
+
+            everyOther = !everyOther;
 
             try {
                 SnakeEndpoint.broadcastMap();
@@ -97,6 +101,7 @@ public class Map implements Runnable {
 
     /**
      * adds a snake to the map
+     *
      * @param snake to be added to map
      */
     public void addSnake(Snake snake) {
@@ -105,6 +110,7 @@ public class Map implements Runnable {
 
     /**
      * removes a snake from the map
+     *
      * @param snake the snake to be removed
      */
     public void removeSnake(Snake snake) {
@@ -113,6 +119,7 @@ public class Map implements Runnable {
 
     /**
      * wrapper to make killing the snake easier
+     *
      * @param snake the snake to be turned into apples
      */
     private void killSnake(Snake snake) {
@@ -122,7 +129,6 @@ public class Map implements Runnable {
 
     /**
      * finds a place with a contiguous snake sized spawn area
-     *
      */
     public Coordinate findSnakeSpawn() {
         int dartX = Math.abs(psudo.nextInt()) % width;
@@ -138,6 +144,7 @@ public class Map implements Runnable {
 
     /**
      * helper to determine where a valid snake spawn is
+     *
      * @param x x coord
      * @param y y coord
      * @param n how tall a space we need of nothing tiles
@@ -172,6 +179,7 @@ public class Map implements Runnable {
 
     /**
      * counts the tiles of a given type
+     *
      * @param tileType the type to count
      * @return an integer count of the given type
      */
@@ -208,6 +216,7 @@ public class Map implements Runnable {
 
     /**
      * get a ratio of apples to number of snakes
+     *
      * @param mFactor
      * @return
      */
@@ -291,6 +300,7 @@ public class Map implements Runnable {
 
     /**
      * determine if the coordinate is in the map
+     *
      * @param x
      * @param y
      * @return true when the coord exists on the playing field
@@ -304,6 +314,7 @@ public class Map implements Runnable {
 
     /**
      * determine if the coordinate is in the map
+     *
      * @param coord the position to look
      * @return true when the coord exists on the playing field
      */
@@ -313,6 +324,7 @@ public class Map implements Runnable {
 
     /**
      * find if the given coord is a wall
+     *
      * @param coord
      * @return true when the coord is a wall
      */
@@ -325,6 +337,7 @@ public class Map implements Runnable {
 
     /**
      * updates the given tile on the map
+     *
      * @param tile the tile to update on the map
      */
     private void updateTile(Tile tile) {
@@ -335,9 +348,10 @@ public class Map implements Runnable {
 
     /**
      * updates the given tile on the map
+     *
      * @param x
      * @param y
-     * @param tile the tile to update on the map
+     * @param tileType the tile to update on the map
      */
     private void updateTile(int x, int y, TileType tileType) {
         if (isOnMap(x, y)) {
@@ -347,6 +361,7 @@ public class Map implements Runnable {
 
     /**
      * drops apples on the given tiles
+     *
      * @param area where to place the apples
      */
     public void appleBomb(List<Tile> area) {
