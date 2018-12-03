@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * boiler plate repository with methods that help find users based on inputs
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 

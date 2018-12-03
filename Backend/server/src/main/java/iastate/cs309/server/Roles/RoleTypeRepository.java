@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * repository for access to roletype descriptions
+ */
 @Repository
 public interface RoleTypeRepository extends JpaRepository<RoleType, Integer> {
     Optional<RoleType> findByRoleid(Integer roleid);

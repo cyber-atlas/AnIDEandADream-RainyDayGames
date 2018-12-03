@@ -3,6 +3,9 @@ package iastate.cs309.server.Chat;
 import javax.persistence.Column;
 import javax.persistence.Id;
 
+/**
+ * a message describes a sender, recipient and the text content they shared
+ */
 public class Message {
 
     @Id

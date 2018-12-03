@@ -16,6 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+/**
+ * The component controlling the snake and chat endpoints which have been merged into one
+ */
 @Component
 @ServerEndpoint(value = "/snake/{username}/{isSnake}")
 public class SnakeEndpoint {
