@@ -6,10 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.android.volley.RequestQueue;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -48,14 +51,17 @@ public class GameView extends SurfaceView implements Runnable {
     //Add a blast object
     private Blast blast;
     //indicator if game is over
-    private boolean isOver;
-    private int score;
+    public boolean isOver;
+    public int score;
     private int crashes;
     private LinkedList<Shots> shotsList = new LinkedList<>();
 
     final MediaPlayer shootSound;
     final MediaPlayer bgSound;
     final MediaPlayer endSound;
+    private RequestQueue mQueue;
+    private AppCompatActivity activity;
+
 
 
     //Class constructor
@@ -81,6 +87,8 @@ public class GameView extends SurfaceView implements Runnable {
             enemies[i] = new Enemy(context, screenX, screenY);
         }
 
+        //set activity
+        activity = (AppCompatActivity) context;
 
         //Initialize the blast
         blast = new Blast(context);
@@ -247,6 +255,7 @@ public class GameView extends SurfaceView implements Runnable {
 
             //draw game Over when the game is over
             if(isOver){
+                //sendScore();
                 startSound("endSound");
                 paint.setTextSize(150);
                 paint.setTextAlign(Paint.Align.CENTER);
@@ -440,5 +449,30 @@ public class GameView extends SurfaceView implements Runnable {
                 endSound.setLooping(true);
         }
     }
+
+    //public void sendScore() {
+    //    Bundle extras = activity.getIntent().getExtras();
+    //   if (extras != null) {
+    //        String value = extras.getString("userid");
+    //    Log.d("Final User ID", value);
+    //    }
+
+    //    String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+extras.getString("userid")+"&game=1&score="+ score;
+    //    StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
+     //       @Override
+    //        public void onResponse(String response) {
+    //            // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+    //            Log.d("msg", "here");
+
+    //        }
+    //    }, new Response.ErrorListener() {
+    //        @Override
+   //         public void onErrorResponse(VolleyError error) {
+    //            //Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+    //        }
+    //    });
+    //    mQueue.add(stringRequest);
+    //}
+
 
 }

@@ -118,8 +118,9 @@ public class ShooterLeaderboard extends AppCompatActivity{
         });
 
         mQueue.add(req);
+
         //leaderBoardMusic = MediaPlayer.create(this, R.raw.leader_board_sound);
-        //leaderBoardMusic.start();
+       // leaderBoardMusic.start();
     }
 }
 
