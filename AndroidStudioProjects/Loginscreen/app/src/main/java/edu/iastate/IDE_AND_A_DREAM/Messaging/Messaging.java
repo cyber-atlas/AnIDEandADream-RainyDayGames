@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import org.java_websocket.client.WebSocketClient;
@@ -60,7 +61,8 @@ public class Messaging extends ListActivity{
     /**
      * The Button send.
      */
-    Button buttonSend;
+//    Button buttonSend;
+    ImageButton buttonSend;
     /**
      * The Edit text input.
      */
@@ -107,7 +109,7 @@ public class Messaging extends ListActivity{
                         public void onOpen(ServerHandshake serverHandshake) {
                             Log.d("OPEN", "run() returned: " + "is connecting");
 //                            listItems.add("Connected: " + serverAddy);
-                            listItems.add("Connected: ");
+                            listItems.add("Connected!");
                         }
 
                         @Override
@@ -128,7 +130,6 @@ public class Messaging extends ListActivity{
                                }
                            });
 //                            updateList(message);
-
                         }
 
                         @Override
@@ -147,108 +148,31 @@ public class Messaging extends ListActivity{
                     Log.d("Excpetion: ", e.getMessage());
                     e.printStackTrace();
                 }
-
                 ws.connect();
             }
 
         });
-
         buttonSend = findViewById(R.id.addBtn);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try{
-                    ws.send(editTextInput.getText().toString());
+                    if (editTextInput.getText().toString().trim() == "" ){return;}
+                    ws.send(editTextInput.getText().toString().trim());
                     //Clears the messagebox
                     editTextInput.getText().clear();
                 }
                 catch(Exception e){
                     Log.d("ExceptionSendMessage:", e.getMessage());
                 }
-
             }
         });
-
-
 
         //TODO what and why is this?!
 //        Draft[] drafts = {new Draft_6455()};
 
-
     }
-
-
-
-//    @Override
-//    public void onClick(View v) {
-//
-//        if(v == buttonDest) {
-//
-////            Draft[] drafts = {new Draft_6455()};
-////
-////            final String serverAddy = "ws://proj309-vc-04.misc.iastate.edu:8080/rude/" + editTextDest.getText().toString().trim();
-////            try {
-////                //TODO why are we adding a draft?
-////                ws = new WebSocketClient(new URI(serverAddy), (Draft) drafts[0]) {
-////                    @Override
-////                    public void onOpen(ServerHandshake serverHandshake) {
-////                        Log.d("OPEN", "run() returned: " + "is connecting");
-////                        listItems.add("Conencted: " + serverAddy);
-////
-////
-////                    }
-////
-////                    @Override
-////                    public void onMessage(String message) {
-////                        Log.d("", "run() returned: " + message);
-////
-////                        String s = editTextDest.getText().toString();
-//////                        editTextDest.setText(s + " Server: " + message);
-////
-//////                        listItems.add("server: " + s + "\n" + message);
-//////                        adapter.notifyDataSetChanged();
-////
-////                        updateList(message);
-////
-////                    }
-////
-////                    @Override
-////                    public void onClose(int code, String reason, boolean remote) {
-////                        Log.d("CLOSE", "OnClose() returned: " + reason);
-////                    }
-////
-////                    @Override
-////                    public void onError(Exception e) {
-////                        Log.d("Exception:", e.toString());
-////
-////                    }
-////                };
-////            }
-////            catch (URISyntaxException e){
-////                Log.d("Excpetion: ", e.getMessage().toString());
-////                e.printStackTrace();
-////            }
-////
-////            ws.connect();
-////        }
-//        }
-//        if(v == buttonSend){
-//            try{
-//                ws.send(editTextInput.getText().toString());
-//            }
-//            catch(Exception e){
-//                Log.d("ExceptionSendMessage:", e.getMessage());
-//            }
-//        }
-//    }
-
-//    new Handler().
-
-//    Messaging(new Runnable(){
-//        @Override
-
-//    runOnUiThread(new Runnable(){
 
     /**
      * Update list.
@@ -256,13 +180,17 @@ public class Messaging extends ListActivity{
      * @param message the message
      */
     public void updateList(String message){
-
-            listItems.add("server: " +  "\n" + message);
+            listItems.add(message);
             adapter.notifyDataSetChanged();
-
         }
 
-//    });
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        try {
+            ws.close();
+        }catch (Exception e){
+            Log.d("ExceptionSendMessage:", e.getMessage());
+        }
+    }
 }

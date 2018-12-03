@@ -1,58 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!---
-<android.supportc.onstraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Messaging">
-
-</android.supportc.onstraint.ConstraintLayo
-
--->
-<!--
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    >
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ListView>
-
-
-</RelativeLayout>
--->
-
-<!---
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
-
-    <Button
-        android:id="@+id/addBtn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:onClick="addItems"
-        android:text="Add New Item" />
-
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="end"
-        android:stackFromBottom="true"
-        android:drawSelectorOnTop="false" />
-</LinearLayout>
-
--->
-
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -60,50 +6,59 @@
     android:id="@+id/overallLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
 
+    >
+
+    <!--android:background="#000000"-->
 
     <!--TODO figure out why it is forcing me to call it list-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/destGroup"
-        android:layout_width="352dp"
+        android:layout_width="0dp"
         android:layout_height="69dp"
 
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.055">
+
+
+        >
 
         <EditText
             android:id="@+id/editDest"
             android:layout_width="285dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginBottom="16dp"
-            android:hint="Type message Here"
+            android:layout_marginTop="8dp"
+            android:hint="Type alias here"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
             app:layout_constraintWidth_percent=".85" />
 
         <Button
             android:id="@+id/destBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_height="43dp"
             android:layout_marginBottom="8dp"
-            android:gravity="top"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical|center_horizontal|center"
             android:onClick="addItems"
-            android:text="Go"
+            android:text="@string/go"
+            android:textColor="@color/sendColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent=".15" />
 
     </android.support.constraint.ConstraintLayout>
@@ -111,24 +66,29 @@
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
-        android:layout_height="116dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="2dp"
 
         android:drawSelectorOnTop="false"
 
+        android:textColor = "@android:color/holo_red_dark"
         android:stackFromBottom="true"
         android:transcriptMode="normal"
         app:layout_constraintBottom_toTopOf="@+id/sendgroup"
         app:layout_constraintTop_toBottomOf="@+id/destGroup"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:ignore="MissingConstraints" />
+
+
+
+        />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/sendgroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
 
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -136,34 +96,54 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+
+        >
 
         <EditText
             android:id="@+id/editTextInput"
-            android:layout_width="285dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:hint="Type message Here"
+            android:layout_width="320dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="fill|start"
+            android:hint="@string/type_message_here"
             android:inputType="text|textMultiLine|textLongMessage"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent=".85" />
 
-        <Button
+            />
+
+        <ImageButton
             android:id="@+id/addBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="39dp"
+            android:layout_height="35dp"
+
             android:layout_marginBottom="8dp"
+
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:background="@android:drawable/ic_menu_send"
+            android:contentDescription="@string/send"
+            android:gravity="center"
             android:onClick="addItems"
-            android:text="Add New Item"
+            android:shadowRadius="1"
+            android:text="@string/send"
+            android:textColor="@color/sendColor"
+            android:tint="@color/sendColor"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent=".15" />
+            app:layout_constraintHorizontal_bias="0.88"
+
+            app:layout_constraintStart_toEndOf="@+id/editTextInput"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintWidth_percent=".15"
+            app:srcCompat="@android:drawable/ic_menu_send" />
+            <!--tools:srcCompat="@android:color/holo_green_dark"-->
+
+
 
     </android.support.constraint.ConstraintLayout>
 
