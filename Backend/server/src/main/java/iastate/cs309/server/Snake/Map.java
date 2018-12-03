@@ -157,7 +157,7 @@ public class Map implements Runnable {
     }
 
     private boolean readyToDespawnFood(int appleCount) {
-        return appleCount > foodMath(3);
+        return appleCount > foodMath(5);
     }
 
     private int foodMath(int mFactor) {
