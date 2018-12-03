@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Login screen</string>
     <string name="title_activity_leaderboard_list">LeaderboardList</string>
+    <string name="send">Send</string>
+    <!--<string name="send">Send</string>-->
+    <!--<string name="type_message_here">Type message Here</string>-->
+    <string name="go">Go</string>
+    <string name="type_message_here">Type message Here</string>
 </resources>
