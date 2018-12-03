@@ -23,11 +23,27 @@ import org.json.JSONObject;
 import edu.iastate.IDE_AND_A_DREAM.RegisterRequest;
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Merin Mundt- This is the activity for signing up a new user.
+ * The type Sign up.
+ */
 public class signUp extends AppCompatActivity {
 
+    /**
+     * The Email.
+     */
     TextView email;
+    /**
+     * The Password.
+     */
     TextView password;
+    /**
+     * The Username.
+     */
     TextView username;
+    /**
+     * The Signup button.
+     */
     Button Signup_button;
 
     private RequestQueue mQueue;
@@ -56,6 +72,10 @@ public class signUp extends AppCompatActivity {
 
     }
 
+    /**
+     * Signup user.
+     * Called to sign up the user.
+     */
     public void signup_user()
     {
         String Email = email.getText().toString();

@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * this repository provides functions to call the database and return scores based on input criteria
+ */
 @Repository
 public interface ScoreRepository extends JpaRepository<Score, Integer> {
 

@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 
+/**
+ * this entity provides access to score metadata
+ */
 @Entity
 @Table(name = "scores")
 public class Score {

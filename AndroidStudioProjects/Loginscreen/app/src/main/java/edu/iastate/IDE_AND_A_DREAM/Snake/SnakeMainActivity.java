@@ -42,19 +42,34 @@ import edu.iastate.loginscreen.R;
  */
 
 
+/**
+ * @Author Main snake activity
+ * The type Snake main activity.
+ */
 public class SnakeMainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private TextView HighScore;
     private TextView CurrentScore;
 
-
     private final Handler handler = new Handler();
 
     private SnakeEngine gameEngine;
     private SnakeView snakeView;
+    /**
+     * The Hi score.
+     */
     int HiScore;
+    /**
+     * The Update delay.
+     */
     int updateDelay;
+    /**
+     * The Num mon.
+     */
     int numMon;
+    /**
+     * The Prev score.
+     */
     int prevScore = 0;
 
     private RequestQueue mQueue;
@@ -79,7 +94,6 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         gameEngine = new SnakeEngine();
         gameEngine.initGame(numMon);
         mQueue = Volley.newRequestQueue(this);
-
 
         Log.d("Update Valley",String.valueOf(updateDelay));
 
@@ -158,6 +172,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         return true;
     }
 
+    /**
+     * Checkupdate score.
+     */
     public void checkupdateScore()
     {
         if(prevScore < gameEngine.score)
@@ -167,12 +184,20 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         }
     }
 
+    /**
+     * Update score.
+     *
+     * @param score the score
+     */
     public void updateScore(int score)
     {
         CurrentScore.setText("Current Score: "+ score);
     }
 
 
+    /**
+     * Gets high score.
+     */
     public void get_high_score()
     {
         Bundle extras = getIntent().getExtras();
@@ -206,6 +231,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     }
 
 
+    /**
+     * Send score.
+     */
     public void send_score() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

@@ -9,9 +9,18 @@ import java.util.Random;
 import edu.iastate.loginscreen.R;
 
 
+/** @Author Uma Abu - The snake engine that runs the whole game
+ * The type Snake engine.
+ */
 public class SnakeEngine  {
 
+    /**
+     * The constant GameWidth.
+     */
     public static final int GameWidth = 28;
+    /**
+     * The constant GameHeight.
+     */
     public static final int GameHeight = 42;
 
 
@@ -31,14 +40,25 @@ public class SnakeEngine  {
 
     private GameState currentGameState = GameState.Running;
 
+    /**
+     * The Score.
+     */
     int score = 0;
 
     private Coordinate getSnakeHead(){
         return snake.get(0);
     }
 
+    /**
+     * Instantiates a new Snake engine.
+     */
     public SnakeEngine(){}
 
+    /**
+     * Init game.
+     *
+     * @param monst the monst
+     */
     public void initGame(int monst){
         Addsnake();
         AddWalls();
@@ -46,6 +66,11 @@ public class SnakeEngine  {
         AddMonster( monst);
     }
 
+    /**
+     * Update direction.
+     *
+     * @param newDirection the new direction
+     */
     public void updateDirection(Direction newDirection){
 
         if(Math.abs(newDirection.ordinal() - currentDirection.ordinal()) % 2 == 1){
@@ -53,6 +78,9 @@ public class SnakeEngine  {
         }
     }
 
+    /**
+     * Update.
+     */
     public void Update(){
 
         //UMA ABu update the snale
@@ -111,6 +139,11 @@ public class SnakeEngine  {
 
     }
 
+    /**
+     * Getmap tile type [ ] [ ].
+     *
+     * @return the tile type [ ] [ ]
+     */
     public TileType[][] getmap(){
         TileType[][] map =  new TileType[GameWidth][GameHeight];
 
@@ -190,6 +223,11 @@ public class SnakeEngine  {
         snake.add(new Coordinate(2,7));
     }
 
+    /**
+     * Add monster.
+     *
+     * @param num the num
+     */
     public void AddMonster(int num){
         for (int i = 0; i < num; i++)
         {
@@ -227,6 +265,11 @@ public class SnakeEngine  {
     }
 
 
+    /**
+     * Get current game state game state.
+     *
+     * @return the game state
+     */
     public GameState getCurrentGameState(){
         return currentGameState;
     }

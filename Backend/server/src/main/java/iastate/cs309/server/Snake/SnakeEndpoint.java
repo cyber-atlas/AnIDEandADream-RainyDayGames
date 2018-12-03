@@ -16,6 +16,9 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+/**
+ * The component controlling the snake and chat endpoints which have been merged into one
+ */
 @Component
 @ServerEndpoint(value = "/snake/{username}/{isSnake}")
 public class SnakeEndpoint {
@@ -29,6 +32,9 @@ public class SnakeEndpoint {
     private static boolean isRunning = false;
     private Session session;
 
+    /**
+     * Sends the map to every snake client simultaneously
+     */
     public static void broadcastMap() {
         snakeEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
@@ -45,6 +51,10 @@ public class SnakeEndpoint {
         });
     }
 
+    /**
+     * Sends a message to every chat client simultaneously
+     * @param message describes the content, to, and from for a message
+     */
     private static void broadcast(Message message) {
         snakeEndpoints.forEach(endpoint -> {
             synchronized (endpoint) {
@@ -61,6 +71,11 @@ public class SnakeEndpoint {
         });
     }
 
+    /**
+     * Messages only the desired target username matching
+     * @param session
+     * @param msg the msg.to should be the username of the recipient
+     */
     private static void sendMessageToAnotherUser(Session session, Message msg) {
         try {
             String toId = users.inverse().get(msg.getTo());
@@ -146,6 +161,7 @@ public class SnakeEndpoint {
             Snake ourSnake = sessionSnakes.get(session.getId());
             if (message.contains("dir")) {
                 String[] parts = message.split("\\s");
+                //parse for direction and update snake accordingly
                 switch (parts[1].toLowerCase()) {
                     case "n":
                     case "u":
@@ -165,17 +181,16 @@ public class SnakeEndpoint {
                         break;
                 }
             } else if (message.contains("respawn")) {
-                //kill the snake if its not dead already, and replace its lifeless soul with apples :)
-                //ourSnake.endSnake();
-                //map.appleBomb(ourSnake.getSnake());
                 ourSnake.desireRespawn = true;
             }
         } else {
+            //No snake exists for this target, probably a message user instead
             Message msg = new Message();
             msg.setFrom(users.get(session.getId()));
             msg.setContent(message);
 
             if (message.startsWith("/whisper")) {
+                //parse content
                 String[] from = message.split(" ");
                 if (from.length > 1) {
                     msg.setTo(from[1]);

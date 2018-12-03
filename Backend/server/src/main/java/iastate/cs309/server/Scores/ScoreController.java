@@ -9,6 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * provides rest API for calls to scores table
+ * returns list of all scores for a particular game or user
+ * you may also post scores to the list using api calls
+ */
 @RestController
 @RequestMapping("/scores")
 public class ScoreController {

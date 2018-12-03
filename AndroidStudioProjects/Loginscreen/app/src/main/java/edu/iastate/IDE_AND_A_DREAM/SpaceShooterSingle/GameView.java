@@ -6,10 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import com.android.volley.RequestQueue;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,19 +20,38 @@ import java.util.ListIterator;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Alexander Stevenson
+ * The type Game view.
+ */
 public class GameView extends SurfaceView implements Runnable {
 
-    //    public Rect btn;
+    /**
+     * The Playing.
+     */
+//    public Rect btn;
     // a volatile variable will guarantee that changes made in one thread will be visible to others
     //Used to keep track if the game is playing or not
     volatile boolean playing;
-    //TODO
+    /**
+     * The Screen x.
+     */
+//TODO
     //ScreenX
     int screenX;
-    //number of misses
+    /**
+     * The Num misses.
+     */
+//number of misses
     int numMisses;
-    //indicate that enemy has just entered the game screen
+    /**
+     * The Flag.
+     */
+//indicate that enemy has just entered the game screen
     boolean flag;
+    /**
+     * The Tester.
+     */
     volatile Boolean tester = false;
     //The game thread
     private Thread gameThread = null;
@@ -47,18 +69,42 @@ public class GameView extends SurfaceView implements Runnable {
     private ArrayList<Star> stars = new ArrayList<>();
     //Add a blast object
     private Blast blast;
-    //indicator if game is over
-    private boolean isOver;
-    private int score;
+    /**
+     * The Is over.
+     */
+//indicator if game is over
+    public boolean isOver;
+    /**
+     * The Score.
+     */
+    public int score;
     private int crashes;
     private LinkedList<Shots> shotsList = new LinkedList<>();
 
+    /**
+     * The Shoot sound.
+     */
     final MediaPlayer shootSound;
+    /**
+     * The Bg sound.
+     */
     final MediaPlayer bgSound;
+    /**
+     * The End sound.
+     */
     final MediaPlayer endSound;
+    private RequestQueue mQueue;
+    private AppCompatActivity activity;
 
 
-    //Class constructor
+    /**
+     * Instantiates a new Game view.
+     *
+     * @param context the context
+     * @param screenX the screen x
+     * @param screenY the screen y
+     */
+//Class constructor
     public GameView(Context context, int screenX, int screenY) {
         super(context);
 
@@ -81,6 +127,8 @@ public class GameView extends SurfaceView implements Runnable {
             enemies[i] = new Enemy(context, screenX, screenY);
         }
 
+        //set activity
+        activity = (AppCompatActivity) context;
 
         //Initialize the blast
         blast = new Blast(context);
@@ -247,6 +295,7 @@ public class GameView extends SurfaceView implements Runnable {
 
             //draw game Over when the game is over
             if(isOver){
+                //sendScore();
                 startSound("endSound");
                 paint.setTextSize(150);
                 paint.setTextAlign(Paint.Align.CENTER);
@@ -271,6 +320,9 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
+    /**
+     * Pause.
+     */
     public void pause() {
         //To pause the game
         //Set the playing variable to false
@@ -291,6 +343,9 @@ public class GameView extends SurfaceView implements Runnable {
         }
     }
 
+    /**
+     * Resume.
+     */
     public void resume() {
         //To resume the game
         //Start the game thread again
@@ -322,11 +377,13 @@ public class GameView extends SurfaceView implements Runnable {
         return true;
     }
 
-/**Gets the touch from the user
-         * applies a bitmask to it so
-         * we only deal with the bits we care about
-         */
-
+    /**
+     * Gets the touch from the user
+     * applies a bitmask to it so
+     * we only deal with the bits we care about
+     *
+     * @param m the m
+     */
     void touchLogic(MotionEvent m) {
 
 //        //TODO Trying with a for loop
@@ -420,7 +477,12 @@ public class GameView extends SurfaceView implements Runnable {
         }
 
     }
-    
+
+    /**
+     * Start sound.
+     *
+     * @param sound the sound
+     */
     void startSound(String sound){
 
         switch (sound) {
@@ -440,5 +502,30 @@ public class GameView extends SurfaceView implements Runnable {
                 endSound.setLooping(true);
         }
     }
+
+    //public void sendScore() {
+    //    Bundle extras = activity.getIntent().getExtras();
+    //   if (extras != null) {
+    //        String value = extras.getString("userid");
+    //    Log.d("Final User ID", value);
+    //    }
+
+    //    String server_url_post = "http://proj309-vc-04.misc.iastate.edu:8080/scores/new?userid="+extras.getString("userid")+"&game=1&score="+ score;
+    //    StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url_post, new Response.Listener<String>() {
+     //       @Override
+    //        public void onResponse(String response) {
+    //            // Toast.makeText(getApplication(), response, Toast.LENGTH_SHORT).show();
+    //            Log.d("msg", "here");
+
+    //        }
+    //    }, new Response.ErrorListener() {
+    //        @Override
+   //         public void onErrorResponse(VolleyError error) {
+    //            //Toast.makeText(getApplication(), error+"", Toast.LENGTH_SHORT).show();
+    //        }
+    //    });
+    //    mQueue.add(stringRequest);
+    //}
+
 
 }

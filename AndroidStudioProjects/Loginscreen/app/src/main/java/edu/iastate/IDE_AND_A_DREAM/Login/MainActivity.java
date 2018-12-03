@@ -25,14 +25,28 @@ import edu.iastate.loginscreen.R;
 import edu.iastate.IDE_AND_A_DREAM.secondpage;
 import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
 
+/**
+ * @Author Merin Mundt This is first page user sees after logging into the game. prompts for user name and
+ * password so they log in
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextViewResult;
     private TextView passcode;
     private RequestQueue mQueue;
 
+    /**
+     * The Username.
+     */
     String username;
+    /**
+     * The Id.
+     */
     int id;
+    /**
+     * The Email.
+     */
     String email;
 
 
@@ -69,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Json parse.
+     * This method calls an api to the server to authenticate the user before starting the next activity
+     */
     @TargetApi(19)
     public void jsonParse() {
         final String em = mTextViewResult.getText().toString();
@@ -85,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         try {
                             User globaluser = (User)getApplicationContext();
-
                             JSONObject user;
                             user = response;
                             username = user.getString("username");

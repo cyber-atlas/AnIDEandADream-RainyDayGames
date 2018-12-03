@@ -2,6 +2,9 @@ package iastate.cs309.server.Snake;
 
 import iastate.cs309.server.Snake.SnakeEnums.TileType;
 
+/**
+ * describes a location in space along with tile type data
+ */
 public class Tile {
 
     private Coordinate coordinate;

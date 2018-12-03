@@ -30,19 +30,44 @@ import edu.iastate.IDE_AND_A_DREAM.secondpage;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Uma Abu
+ * The type User profile main.
+ */
 public class User_Profile_Main extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE = 1;
 
     private TextView Email;
     private TextView Username;
     private RequestQueue mQueue;
+    /**
+     * The Update username.
+     */
     Button Update_Username ;
+    /**
+     * The Update password.
+     */
     Button Update_Password;
+    /**
+     * The Exit profile.
+     */
     Button Exit_Profile;
+    /**
+     * The Logout.
+     */
     Button Logout;
+    /**
+     * The Role.
+     */
     String Role;
+    /**
+     * The Rolename.
+     */
     String Rolename;
 
+    /**
+     * The Profile picture.
+     */
     ImageView ProfilePicture;
 
     @Override
@@ -124,7 +149,11 @@ public class User_Profile_Main extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Gets role.
+     *
+     * @return the role
+     */
     public String get_role()
     {
         Bundle extras = getIntent().getExtras();
@@ -184,6 +213,9 @@ public class User_Profile_Main extends AppCompatActivity {
         return Rolename;
     }
 
+    /**
+     * Populate profile.
+     */
     public void populate_profile()
     {
         Bundle extras = getIntent().getExtras();

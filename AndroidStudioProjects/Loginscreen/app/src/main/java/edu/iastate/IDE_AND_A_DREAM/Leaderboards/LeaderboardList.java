@@ -2,17 +2,20 @@ package edu.iastate.IDE_AND_A_DREAM.Leaderboards;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.support.v7.app.AppCompatActivity;
 
-
-import edu.iastate.IDE_AND_A_DREAM.secondpage;
 import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Merin Mundt. Activity that holds list to all leader boards in the game.
+ * The type Leaderboard list.
+ */
 public class LeaderboardList extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,8 @@ public class LeaderboardList extends AppCompatActivity {
         Button Snakepp = findViewById(R.id.snakeplus);
         Button Shooter = findViewById(R.id.shooter);
 
-       Snake.setOnClickListener(new View.OnClickListener() {
+
+        Snake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent leader = new Intent(LeaderboardList.this, Leaderbrd.class);
@@ -47,6 +51,10 @@ public class LeaderboardList extends AppCompatActivity {
         });
 
     }
-
-
 }
+
+
+
+
+
+

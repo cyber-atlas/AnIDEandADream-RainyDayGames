@@ -23,11 +23,18 @@ import org.json.JSONObject;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Uma Abu
+ * The type Edit user name.
+ */
 public class EditUserName extends AppCompatActivity {
 
     private TextView OldUsername;
     private TextView NewUsername;
     private RequestQueue mQueue;
+    /**
+     * The Update username.
+     */
     Button Update_Username;
 
 
@@ -61,6 +68,9 @@ public class EditUserName extends AppCompatActivity {
     }
 
 
+    /**
+     * Populate username.
+     */
     public void populate_Username()
     {
         Bundle extras = getIntent().getExtras();
@@ -98,6 +108,9 @@ public class EditUserName extends AppCompatActivity {
         mQueue.add(request);
     }
 
+    /**
+     * Update username.
+     */
     public void Update_Username()
     {
         Bundle extras = getIntent().getExtras();

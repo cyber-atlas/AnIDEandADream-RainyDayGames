@@ -28,6 +28,9 @@ import edu.iastate.IDE_AND_A_DREAM.Snake.SnakeSplash;
 import edu.iastate.IDE_AND_A_DREAM.Snake.SnakeStartup;
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Uma Abu. Splash Screen for welcoming the user.
+ */
 public class WelcomeSplashScreen extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 6000;
     private TextView WelcomeName;
@@ -61,6 +64,9 @@ public class WelcomeSplashScreen extends AppCompatActivity {
         }, SPLASH_DISPLAY_LENGTH);
     }
 
+    /**
+     * Method calls a public api that returns a quote of the day. The quote is displayed to the user
+     */
     public void PublicAPICall() {
         final String url = "http://quotes.rest/qod.json?category=funny";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,

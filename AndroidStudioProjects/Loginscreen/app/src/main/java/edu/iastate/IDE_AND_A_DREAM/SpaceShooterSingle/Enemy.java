@@ -10,6 +10,10 @@ import java.util.Random;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Alexander Stevenson
+ * The type Enemy.
+ */
 public class Enemy {
 
     //Enemy Bitmap
@@ -32,7 +36,14 @@ public class Enemy {
     //rect object
     private Rect detectCollision;
 
-   public Enemy(Context context, int screenX, int screenY){
+    /**
+     * Instantiates a new Enemy.
+     *
+     * @param context the context
+     * @param screenX the screen x
+     * @param screenY the screen y
+     */
+    public Enemy(Context context, int screenX, int screenY){
        //Get the bitmap:w
        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.meteorite);
 
@@ -52,7 +63,12 @@ public class Enemy {
        detectCollision = new Rect(x, y, bitmap.getWidth(), bitmap.getHeight());
    }
 
-   public void update(int playerSpeed){
+    /**
+     * Update.
+     *
+     * @param playerSpeed the player speed
+     */
+    public void update(int playerSpeed){
 
        //decreasing x coordinate for the enemy motion
        x = x - playerSpeed;
@@ -73,27 +89,57 @@ public class Enemy {
        detectCollision.bottom = y+ bitmap.getHeight();
    }
 
-   //Setter to X coordinate to change after collision
+    /**
+     * Set x.
+     *
+     * @param x the x
+     */
+//Setter to X coordinate to change after collision
     public void setX(int x){
        this.x = x;
     }
 
+    /**
+     * Get detect collision rect.
+     *
+     * @return the rect
+     */
     public Rect getDetectCollision(){
        return detectCollision;
     }
 
+    /**
+     * Gets bitmap.
+     *
+     * @return the bitmap
+     */
     public Bitmap getBitmap() {
         return bitmap;
     }
 
+    /**
+     * Gets x.
+     *
+     * @return the x
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Gets y.
+     *
+     * @return the y
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Gets speed.
+     *
+     * @return the speed
+     */
     public int getSpeed() {
         return speed;
     }

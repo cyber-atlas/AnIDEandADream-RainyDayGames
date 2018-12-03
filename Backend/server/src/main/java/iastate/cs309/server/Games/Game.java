@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "games")
 public class Game {
 
-    //Must have a primary key otherwise Spring JPA is useless
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

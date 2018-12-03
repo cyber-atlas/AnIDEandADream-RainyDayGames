@@ -16,10 +16,21 @@ import edu.iastate.IDE_AND_A_DREAM.UserProfile.User_Profile_Main;
 import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
+
+/**
+ * @Author Merin Mundt
+ * The type Secondpage.
+ */
 public class secondpage extends AppCompatActivity {
 
 
+    /**
+     * The Profilebutton.
+     */
     Button Profilebutton;
+    /**
+     * The Chat room.
+     */
     Button Chat_room;
 
     @Override

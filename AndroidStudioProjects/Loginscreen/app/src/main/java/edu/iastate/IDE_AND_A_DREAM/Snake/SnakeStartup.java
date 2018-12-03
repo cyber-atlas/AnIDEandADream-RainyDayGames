@@ -13,14 +13,39 @@ import edu.iastate.loginscreen.Leaderbrd;
 
 import edu.iastate.loginscreen.R;
 
+/**
+ * @Author Uma ABu Landing page for snake game, allows the user to choose difficulty level
+ * The type Snake startup.
+ */
 public class SnakeStartup extends AppCompatActivity {
 
+    /**
+     * The Easy.
+     */
     Button Easy;
+    /**
+     * The Medium.
+     */
     Button Medium;
+    /**
+     * The Hard.
+     */
     Button Hard;
+    /**
+     * The Leaderboard.
+     */
     Button Leaderboard;
+    /**
+     * The Easy level.
+     */
     int EasyLevel = 300;
+    /**
+     * The Medium level.
+     */
     int MediumLevel = 150;
+    /**
+     * The Hard level.
+     */
     int HardLevel = 50;
 
     @Override

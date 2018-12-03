@@ -17,6 +17,9 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.SnakeSplash;
 
 import edu.iastate.loginscreen.R;
 
+/** @Author Uma Abu - List all the games in the application
+ * The type Games list.
+ */
 public class GamesList extends AppCompatActivity {
 
     @Override

@@ -9,8 +9,14 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Coordinate;
 
 import java.util.ArrayList;
 
+/**
+ * The type Snake.
+ */
 public class Snake {
 
+    /**
+     * The constant spawnHeight.
+     */
     public static final int spawnHeight = 5;
     private ArrayList<Tile> snake = new ArrayList<>();
     private String name;
@@ -24,6 +30,12 @@ public class Snake {
 
     private int score;
 
+    /**
+     * Instantiates a new Snake.
+     *
+     * @param name             the name
+     * @param startingLocation the starting location
+     */
     public Snake(String name, Coordinate startingLocation) {
         this.queuedDir = Direction.North;
         this.dir = this.queuedDir;
@@ -45,20 +57,40 @@ public class Snake {
         }
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets score.
+     *
+     * @return the score
+     */
     public int getScore()
     {
         return score;
     }
 
+    /**
+     * Is alive boolean.
+     *
+     * @return the boolean
+     */
     public boolean isAlive()
     {
         return isAlive;
     }
 
+    /**
+     * Is alive debug string.
+     *
+     * @return the string
+     */
     public String isAliveDebug()
     {
         if(isAlive)
@@ -68,15 +100,26 @@ public class Snake {
         return "false";
     }
 
+    /**
+     * Gets snake.
+     *
+     * @return the snake
+     */
     public ArrayList<Tile> getSnake() {
         return snake;
     }
 
+    /**
+     * Feed.
+     */
     public void feed() {
         justAte = true;
     }
 
-    //snake slithers in the direction set in the class
+    /**
+     * Slither.
+     */
+//snake slithers in the direction set in the class
     public void slither() {
         if (isAlive) {
             //pop directional queue
@@ -101,6 +144,9 @@ public class Snake {
         }
     }
 
+    /**
+     * End snake.
+     */
     public void endSnake() {
         for (Tile t :
                 snake) {
@@ -110,6 +156,11 @@ public class Snake {
         score = snake.size();
     }
 
+    /**
+     * Update direction.
+     *
+     * @param nextDir the next dir
+     */
     public void updateDirection(Direction nextDir) {
         //Make sure the move is legal
         if ((dir == Direction.North && nextDir == Direction.South)

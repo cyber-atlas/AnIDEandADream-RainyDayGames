@@ -14,6 +14,10 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Coordinate;
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.TileType;
 
 
+/**
+ * @Author Uma Abu and Lucas. The snake object of multiplayer being sent from server
+ * The type Map.
+ */
 public class Map {
 
     private static final int width = 42;
@@ -28,16 +32,29 @@ public class Map {
 
     private transient Random psudo = new Random();
 
+    /**
+     * Instantiates a new Map.
+     */
     public Map() {
         map = new TileType[width][height];
         //drawStarterMap();
     }
 
+    /**
+     * Get map tile type [ ] [ ].
+     *
+     * @return the tile type [ ] [ ]
+     */
     public TileType[][] getMap()
     {
         return this.map;
     }
 
+    /**
+     * Gets snakes.
+     *
+     * @return the snakes
+     */
     public List<Snake> getSnakes()
     {
         return  pileOfSnakes;
@@ -51,13 +68,22 @@ public class Map {
 //    }
 
 
+    /**
+     * Add snake.
+     *
+     * @param snake the snake
+     */
     public void addSnake(Snake snake) {
         pileOfSnakes.add(snake);
     }
 
 
-
-    //finds a place with a contiguous snake sized spawn area
+    /**
+     * Find snake spawn coordinate.
+     *
+     * @return the coordinate
+     */
+//finds a place with a contiguous snake sized spawn area
     public Coordinate findSnakeSpawn() {
         int dartX = Math.abs(psudo.nextInt()) % width;
         // pad the top and bottom snake heights to prevent spawning into a wall 1 move after spawning
@@ -177,6 +203,9 @@ public class Map {
         }
     }
 
+    /**
+     * Tos.
+     */
     public void tos()
     {
         for(int i = 0; i < pileOfSnakes.size(); i++)

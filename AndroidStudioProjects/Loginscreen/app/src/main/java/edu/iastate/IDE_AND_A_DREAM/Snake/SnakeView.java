@@ -9,6 +9,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
+/**
+ * @Author - Uma Abu Controls snake view of the whole game
+ * The type Snake view.
+ */
 public class SnakeView extends View{
 
 
@@ -17,10 +21,21 @@ public class SnakeView extends View{
     private TileType SnakeViewMap[][];
 
 
+    /**
+     * Instantiates a new Snake view.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public SnakeView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
+    /**
+     * Set snake view map.
+     *
+     * @param map the map
+     */
     public void setSnakeViewMap(TileType[][] map){
         this.SnakeViewMap = map;
     }

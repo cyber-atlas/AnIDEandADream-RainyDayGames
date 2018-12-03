@@ -8,18 +8,42 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import edu.iastate.IDE_AND_A_DREAM.Leaderboards.SnakeppLeaderboard;
 import edu.iastate.IDE_AND_A_DREAM.Snake.GamesList;
-import edu.iastate.loginscreen.Leaderbrd;
 import edu.iastate.loginscreen.R;
 
+/**
+ * The type Snake startup.
+ */
 public class SnakeStartup extends AppCompatActivity {
 
+    /**
+     * The Easy.
+     */
     Button Easy;
+    /**
+     * The Medium.
+     */
     Button Medium;
+    /**
+     * The Hard.
+     */
     Button Hard;
+    /**
+     * The Leaderboard.
+     */
     Button Leaderboard;
+    /**
+     * The Easy level.
+     */
     int EasyLevel = 300;
+    /**
+     * The Medium level.
+     */
     int MediumLevel = 150;
+    /**
+     * The Hard level.
+     */
     int HardLevel = 50;
 
     @Override
@@ -35,7 +59,7 @@ public class SnakeStartup extends AppCompatActivity {
         Leaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent leader = new Intent(SnakeStartup.this, Leaderbrd.class);
+                Intent leader = new Intent(SnakeStartup.this, SnakeppLeaderboard.class);
                 SnakeStartup.this.startActivity(leader);
             }
         });

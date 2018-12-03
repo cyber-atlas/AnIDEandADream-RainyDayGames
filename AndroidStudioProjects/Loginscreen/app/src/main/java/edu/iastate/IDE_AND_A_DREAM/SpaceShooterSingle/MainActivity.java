@@ -4,22 +4,35 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
 import edu.iastate.IDE_AND_A_DREAM.Leaderboards.ShooterLeaderboard;
 import edu.iastate.loginscreen.R;
 
 
+/**
+ * @Author Alexander Stevenson
+ * The type Main activity.
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Image button is just a button that has an image and changes color
     private ImageButton buttonPlay;
     private ImageButton buttonScore;
-
+    /**
+     * The Start sound.
+     */
     static MediaPlayer startSound;
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,4 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         startSound.stop();
     }
+
+
+
+
+
+
 }
