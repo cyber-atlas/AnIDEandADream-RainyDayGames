@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
+import java.util.Random;
 
 import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Map;
 import edu.iastate.IDE_AND_A_DREAM.GlobalUser.User;
@@ -17,6 +19,8 @@ import edu.iastate.IDE_AND_A_DREAM.Snake_Multiplayer.Snake_Object.Snake;
 public class SnakeView extends View{
 
     List<Snake> Snakes;
+    int snakeNo;
+    String myname;
     private Paint mPaint = new Paint();
 
     private TileType SnakeViewMap[][];
@@ -25,8 +29,11 @@ public class SnakeView extends View{
         super(context, attrs);
     }
 
-    public void setSnakeViewMap(TileType[][] map){
+    public void setSnakeViewMap(TileType[][] map, Map gameMap, String uname){
         this.SnakeViewMap = map;
+        this.Snakes = gameMap.getSnakes();
+        //this.snakeNo = mysnake;
+        this.myname = uname;
     }
 
     @Override
@@ -46,7 +53,7 @@ public class SnakeView extends View{
                             mPaint.setColor(Color.GREEN);
                             break;
                         case SnakeHead:
-                            mPaint.setColor(Color.RED);
+                            mPaint.setColor(Color.BLUE);
                             break;
                         case SnakeTail:
                             mPaint.setColor(Color.GREEN);
@@ -56,9 +63,7 @@ public class SnakeView extends View{
                             break;
                     }
                     canvas.drawCircle(x * tileSizeX +tileSizeX /2f + circleSize/ 2,y * tileSizeY +tileSizeY /2f + circleSize/ 2, circleSize, mPaint);
-
                 }
-
             }
         }
     }
