@@ -158,6 +158,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
         JSONObject snakejsonobj;
         Map snake_map;
         try {
+            Snake me = null;
             snakejsonobj = new JSONObject(data);
             snake_map = gson.fromJson(snakejsonobj.toString(),Map.class);
             String uname = globaluser.getUsername();
@@ -166,7 +167,7 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
 
             int i = 1;
             int HighestScore = 0;
-            int indexofSnake;
+            //int indexofSnake;
             String players = "Players On Line: "+"\n";
             for(Snake snake: snakesinmap)
             {
@@ -180,8 +181,9 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 if(snake.getName().equalsIgnoreCase(uname))
                 {
                     snakeScore = snake.getScore();
-                    indexofSnake = snakesinmap.indexOf(snake);
-                    Log.d("My Index", String.valueOf(indexofSnake));
+                    me = snake;
+                    //indexofSnake = snakesinmap.indexOf(snake);
+                    //Log.d("My Index", String.valueOf(indexofSnake));
                 }
                 updateScore(snakeScore);
                 CurrentPlayers.setText(players);
@@ -193,6 +195,10 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
                 {
                     OnGameLost(snakeScore);
                 }
+            }
+            if(me.getName() == null)
+            {
+                snake_null_err();
             }
             snakeView.setSnakeViewMap(snake_map.getMap(), snake_map, uname);
             snakeView.invalidate();
@@ -206,6 +212,18 @@ public class SnakeMainActivity extends AppCompatActivity implements View.OnTouch
     public void onBackPressed() {
         ws.close();
         Log.d("CDA", "onBackPressed Called");
+        Bundle extras = getIntent().getExtras();
+        String value = extras.getString("userid");
+        Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
+        EndGame.putExtra("userid",value);
+        SnakeMainActivity.this.startActivity(EndGame);
+    }
+
+
+    public void snake_null_err()
+    {
+        ws.close();
+        Toast.makeText(this, "Sorry an error occured, try again", Toast.LENGTH_LONG).show();
         Bundle extras = getIntent().getExtras();
         String value = extras.getString("userid");
         Intent EndGame = new Intent(SnakeMainActivity.this, SnakeStartup.class);
